@@ -2,7 +2,7 @@ import React from "react";
 
 function Nav() {
   return (
-    <div className='navbar bg-base-100 sticky top-0 z-40'>
+    <div className='navbar bg-base-100 sticky top-0 z-40 border-b-2'>
       <div className='navbar-start'>
         <div className='dropdown'>
           <label tabindex='0' className='btn btn-ghost lg:hidden'>

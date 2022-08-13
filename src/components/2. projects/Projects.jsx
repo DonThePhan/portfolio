@@ -5,7 +5,7 @@ function Projects() {
   return (
     <div
       id='projects'
-      className='flex flex-col lg:flex-row lg:flex-wrap lg:items-center lg:justify-around'
+      className='flex flex-col lg:flex-row lg:flex-wrap lg:items-center lg:justify-around w-full'
     >
       <Card
         imgURL='images/story.gif'

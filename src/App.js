@@ -6,9 +6,9 @@ import Contact from "./components/3. contact/Contact";
 
 function App() {
   return (
-    <div className='flex flex-col items-center'>
+    <div className='flex flex-col items-center w-full'>
       <Nav />
-      <div className='flex flex-col items-center'>
+      <div className='flex flex-col items-center w-full'>
         <AboutMe />
         <Projects />
         <Contact />

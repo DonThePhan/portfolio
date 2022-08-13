@@ -3,19 +3,24 @@ import Hero from "./Hero";
 
 function AboutMe() {
   return (
-    <div id='aboutme' className='flex flex-col lg:flex-row items-center'>
-      <div>
+    <div id='aboutme' className='bg-base-200 w-full flex justify-center'>
+      <div className='flex flex-col lg:flex-row items-center justify-center w-full'>
         <img
           src='images/profile_pic.jpeg'
-          className='max-w-sm rounded-lg shadow-2xl'
+          className='md:max-w-sm md:rounded-lg shadow-2xl w-full'
         />
-      </div>
-      <div>
-        <p className='text-5xl'>Hi! I'm Donny</p>
-        <p className='text-5xl'>I'm a Junior Web Developer</p>
-        <p>Currently Learning TypeScript</p>
-        <p>Based in Toronto</p>
-        <p>Recent Graduate from Lighthouse Labs</p>
+
+        <div className='flex flex-col justify-center items-center lg:text-left aspect-square text-center'>
+          <div className='text-3xl lg:text-5xl pb-4'>
+            <p className="text-4xl font-bold">Hi! I'm Donny</p>
+            <p>I'm a Junior Web Developer</p>
+          </div>
+          <div>
+            <p>Currently Learning TypeScript</p>
+            <p>Based in Toronto</p>
+            <p>Recent Graduate from Lighthouse Labs</p>
+          </div>
+        </div>
       </div>
     </div>
   );
