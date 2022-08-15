@@ -10,9 +10,9 @@ function AboutMe() {
           className='md:max-w-sm md:rounded-lg shadow-2xl w-full'
         />
 
-        <div className='flex flex-col justify-center items-center lg:text-left aspect-square text-center'>
+        <div className='flex flex-col justify-center items-center lg:text-left aspect-square text-center w-full'>
           <div className='text-3xl lg:text-5xl pb-4'>
-            <p className="text-4xl font-bold">Hi! I'm Donny</p>
+            <p className='text-4xl font-bold'>Hi! I'm Donny</p>
             <p>I'm a Junior Web Developer</p>
           </div>
           <div>
