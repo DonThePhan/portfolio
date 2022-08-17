@@ -1,39 +1,23 @@
 import "./App.css";
-import Nav from "./components/0. nav/Nav";
-import AboutMe from "./components/1. aboutMe/AboutMe";
-import Projects from "./components/2. projects/Projects";
-import Contact from "./components/3. contact/Contact";
+import { Route, Routes, Navigate } from "react-router-dom";
 
-import TagCloud from "TagCloud";
-
-const container = ".tagcloud";
-const texts = [
-  "3D",
-  "TagCloud",
-  "JavaScript",
-  "CSS3",
-  "Animation",
-  "Interactive",
-  "Mouse",
-  "Rolling",
-  "Sphere",
-  "6KB",
-  "v2.x",
-];
-const options = {};
-
-TagCloud(container, texts, options);
+import Nav from "./components/nav/Nav";
+import AboutMe from "./components/pages/1. aboutMe/AboutMe";
+import Projects from "./components/pages/2. projects/Projects";
+import Contact from "./components/pages/3. contact/Contact";
+import NotFound from "./components/pages/NotFound";
 
 function App() {
   return (
     <div className='flex flex-col items-center w-full'>
       <Nav />
-      <div className='flex flex-col items-center w-full'>
-        <AboutMe />
-        <div className='tagcloud aspect-square w-full'>hello</div>
-        <Projects />
-        <Contact />
-      </div>
+      <Routes>
+        <Route path='/' element={<Navigate to='/aboutme' />} />
+        <Route path='/aboutme' element={<AboutMe />} />
+        <Route path='/projects' element={<Projects />} />
+        <Route path='/contact' element={<Contact />} />
+        <Route path='*' element={<NotFound />} />
+      </Routes>
     </div>
   );
 }

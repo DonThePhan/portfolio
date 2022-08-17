@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Nav() {
   return (
@@ -26,13 +27,13 @@ function Nav() {
             className='menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52'
           >
             <li>
-              <a href='#aboutme'>About Me</a>
+              <Link to='/'>About Me</Link>
             </li>
             <li>
-              <a href='#projects'>Projects</a>
+              <Link to='/projects'>Projects</Link>
             </li>
             <li>
-              <a href='#contact'>Contact</a>
+              <Link to='/contact'>Contact</Link>
             </li>
           </ul>
         </div>
@@ -40,13 +41,13 @@ function Nav() {
       <div className='navbar-center hidden lg:flex'>
         <ul className='menu menu-horizontal p-0'>
           <li>
-            <a href='#aboutme'>About Me</a>
+            <Link to='/'>About Me</Link>
           </li>
           <li>
-            <a href='#projects'>Projects</a>
+            <Link to='/projects'>Projects</Link>
           </li>
           <li>
-            <a href='#contact'>Contact</a>
+            <Link to='/contact'>Contact</Link>
           </li>
         </ul>
       </div>

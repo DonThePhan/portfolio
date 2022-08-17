@@ -21,7 +21,17 @@ function Card(props) {
           title
         )}
       </div>
-      <img className='lg:rounded-xl w-full' src={imgURL} alt='' />
+      {appLink ? (
+        <a
+          className='lg:rounded-xl w-full'
+          href=''
+          onClick={() => openInNewTab(appLink)}
+        >
+          <img className='lg:rounded-xl w-full' src={imgURL} alt='' />
+        </a>
+      ) : (
+        <img className='lg:rounded-xl w-full' src={imgURL} alt='' />
+      )}
       <div>{/* <div>{children}</div> */}</div>
     </div>
   );
