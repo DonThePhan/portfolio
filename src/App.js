@@ -10,14 +10,16 @@ import NotFound from "./components/pages/NotFound";
 function App() {
   return (
     <div className='flex flex-col items-center w-full'>
-      <Nav />
-      <Routes>
-        <Route path='/' element={<Navigate to='/aboutme' />} />
-        <Route path='/aboutme' element={<AboutMe />} />
-        <Route path='/projects' element={<Projects />} />
-        <Route path='/contact' element={<Contact />} />
-        <Route path='*' element={<NotFound />} />
-      </Routes>
+      <div className='w-full md:w-2/3 lg:w-1/2'>
+        <Nav />
+        <Routes>
+          <Route path='/' element={<Navigate to='/aboutme' />} />
+          <Route path='/aboutme' element={<AboutMe />} />
+          <Route path='/projects' element={<Projects />} />
+          <Route path='/contact' element={<Contact />} />
+          <Route path='*' element={<NotFound />} />
+        </Routes>
+      </div>
     </div>
   );
 }

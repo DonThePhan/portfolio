@@ -13,13 +13,7 @@ function Card(props) {
         <a href='' onClick={() => openInNewTab(gitHubLink)}>
           <i className='fa-brands fa-github pr-4'></i>
         </a>
-        {appLink ? (
-          <a href='' onClick={() => openInNewTab(appLink)}>
-            {title}
-          </a>
-        ) : (
-          title
-        )}
+        {title}
       </div>
       {appLink ? (
         <a
