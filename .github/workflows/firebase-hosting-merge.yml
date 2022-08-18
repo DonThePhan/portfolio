@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: '16.14.0'
           check-latest: true
-      - run: rm -rf node_modules/
+      - run: npm ci --production
       - run: npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
