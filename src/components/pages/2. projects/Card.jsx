@@ -21,7 +21,7 @@ function Card(props) {
           href=''
           onClick={() => openInNewTab(appLink)}
         >
-          <img className='lg:rounded-xl w-full' src={imgURL} alt='' />
+          <img className='xs:rounded-b-xl lg:rounded-xl w-full' src={imgURL} alt='' />
         </a>
       ) : (
         <img className='lg:rounded-xl w-full' src={imgURL} alt='' />
