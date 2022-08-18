@@ -5,7 +5,7 @@ function Nav() {
   return (
     <div className='navbar bg-base-100 top-0 z-40 border-b-2 flex flex-row justify-center'>
       <div className='navbar-center lg:flex justify-center'>
-        <ul className='menu menu-horizontal p-0'>
+        <ul className='menu menu-horizontal p-0 lg:text-lg xl:text-xl'>
           <li>
             <Link to='/'>About Me</Link>
           </li>

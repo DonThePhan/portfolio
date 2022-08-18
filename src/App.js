@@ -10,7 +10,7 @@ import NotFound from "./components/pages/NotFound";
 function App() {
   return (
     <div className='flex flex-col items-center w-full'>
-      <div className='w-full md:w-2/3 lg:w-1/2'>
+      <div className='w-full md:w-4/5 lg:w-2/3 xl:w-1/2'>
         <Nav />
         <Routes>
           <Route path='/' element={<Navigate to='/aboutme' />} />
