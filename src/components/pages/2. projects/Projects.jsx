@@ -5,7 +5,7 @@ function Projects() {
   return (
     <div
       id='projects'
-      className='flex flex-col md:flex-row w-full'
+      className='flex flex-col w-full items-center sm:flex-row sm:flex-wrap sm:justify-around sm:py-6 2xl:py-8'
     >
       <Card
         imgURL='images/story.gif'
