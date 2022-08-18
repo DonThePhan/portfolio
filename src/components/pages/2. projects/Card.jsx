@@ -8,7 +8,7 @@ function Card(props) {
   };
 
   return (
-    <div className='flex flex-col justify-around md:rounded-xl w-full lg:w-3/8 aspect-square shadow-lg'>
+    <div className='flex flex-col justify-around md:rounded-xl w-full md:w-96 aspect-square shadow-lg'>
       <div className='flex flex-row text-3xl md:text-4xl lg:text-5xl py-2 w-full pl-4'>
         <a href='' onClick={() => openInNewTab(gitHubLink)}>
           <i className='fa-brands fa-github pr-4'></i>

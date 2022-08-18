@@ -25,10 +25,10 @@ function AboutMe() {
     "Mocha & Chai",
   ];
 
-  const h1Size = "text-3xl xs:text-4xl 2xl:text-5xl 3xl:text-6xl font-bold";
+  const h1Size = "text-3xl md:text-4xl font-bold";
 
   return (
-    <div className=' flex flex-col items-center justify-center w-full xs:text-lg lg:text-xl'>
+    <div className=' flex flex-col items-center justify-center w-full lg:text-lg'>
       {/** HERO */}
       <div className='flex flex-col items-center sm:flex-row'>
         {/** IMAGE */}
