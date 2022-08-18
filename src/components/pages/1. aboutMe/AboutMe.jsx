@@ -35,6 +35,7 @@ function AboutMe() {
         <img
           src='images/profile_pic.jpeg'
           className='shadow-2xl w-full aspect-square md:rounded-full sm:max-w-xs md:my-8'
+          alt="profile pic"
         />
         {/** BLURB */}
         <div className='flex flex-col justify-center md:text-left aspect-square xs:aspect-auto text-center w-full p-8 sm:py-0 xs:pt-16 '>

@@ -1,7 +1,7 @@
 import React from "react";
 
 function Card(props) {
-  const { imgURL, title, appLink, gitHubLink, description, children } = props;
+  const { imgURL, title, appLink, gitHubLink } = props;
 
   const openInNewTab = (url) => {
     window.open(url, "_blank", "noopener,noreferrer");
