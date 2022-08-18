@@ -72,7 +72,10 @@ function AboutMe() {
           <h1 className={h1Size}>Skills</h1>
           <div className='flex flex-row flex-wrap justify-center sm:justify-start'>
             {skills.map((skill) => (
-              <div className='p-4 sm:pl-0 sm:pr-8 md:py-2 text-center'>
+              <div
+                key={skill}
+                className='p-4 sm:pl-0 sm:pr-8 md:py-2 text-center'
+              >
                 {skill}
               </div>
             ))}
