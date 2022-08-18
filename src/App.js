@@ -12,6 +12,7 @@ function App() {
     <div className='flex flex-col items-center w-full'>
       <div className='w-full md:w-4/5 lg:w-2/3 xl:w-1/2'>
         <Nav />
+        test
         <Routes>
           <Route path='/' element={<Navigate to='/aboutme' />} />
           <Route path='/aboutme' element={<AboutMe />} />
