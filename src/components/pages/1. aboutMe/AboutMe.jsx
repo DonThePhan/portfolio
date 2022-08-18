@@ -49,20 +49,18 @@ function AboutMe() {
             <p>Recent Graduate from Lighthouse Labs</p>
           </div>
           <div className='w-full'>
-            <a
-              href=''
+            <button
               onClick={() =>
                 openInNewTab("https://www.linkedin.com/in/donnyphanmeceng/")
               }
             >
               <i className='fa-brands fa-linkedin-in fa-2x p-2' />
-            </a>
-            <a
-              href=''
+            </button>
+            <button
               onClick={() => openInNewTab("https://github.com/DonThePhan")}
             >
               <i className='fa-brands fa-github fa-2x p-2' />
-            </a>
+            </button>
           </div>
         </div>
       </div>
