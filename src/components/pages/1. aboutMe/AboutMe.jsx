@@ -32,7 +32,7 @@ function AboutMe() {
 
   const videoEnded = (state) => {
     console.log(state.data);
-    if (state.data == 0) {
+    if (state.data === 0) {
       setVideoPlayed(true);
     }
   };
