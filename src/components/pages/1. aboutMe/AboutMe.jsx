@@ -41,7 +41,7 @@ function AboutMe() {
     <div className=' flex flex-col items-center justify-center w-full lg:text-lg'>
       <YouTube
         videoId='4VcGzWd17SE'
-        className={`justify-center items-center aspect-video text-center w-full ${
+        className={`flex justify-center items-center aspect-video w-full ${
           videoPlayed && "opacity-0 animate-fade"
         }`}
         title='YouTube video player'
