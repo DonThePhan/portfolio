@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
+import YouTube from "react-youtube";
 
 function AboutMe() {
+  const [videoPlayed, setVideoPlayed] = useState(false);
+
   const openInNewTab = (url) => {
     window.open(url, "_blank", "noopener,noreferrer");
   };
@@ -27,15 +30,30 @@ function AboutMe() {
 
   const h1Size = "text-3xl md:text-4xl font-bold";
 
+  const videoEnded = (state) => {
+    console.log(state.data);
+    if (state.data == 0) {
+      setVideoPlayed(true);
+    }
+  };
+
   return (
     <div className=' flex flex-col items-center justify-center w-full lg:text-lg'>
+      <YouTube
+        videoId='4VcGzWd17SE'
+        className={`justify-center items-center aspect-video text-center w-full ${
+          videoPlayed && "opacity-0 animate-fade"
+        }`}
+        title='YouTube video player'
+        onStateChange={(state) => videoEnded(state)}
+      ></YouTube>
       {/** HERO */}
       <div className='flex flex-col items-center sm:flex-row'>
         {/** IMAGE */}
         <img
           src='images/profile_pic.jpeg'
           className='shadow-2xl w-full aspect-square md:rounded-full sm:max-w-xs md:my-8'
-          alt="profile pic"
+          alt='profile pic'
         />
         {/** BLURB */}
         <div className='flex flex-col justify-center md:text-left aspect-square xs:aspect-auto text-center w-full p-8 sm:py-0 xs:pt-16 '>
