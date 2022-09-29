@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Button from '../../UI/Button';
 
 function Card(props) {
-  const { imgURL, gifURL, title, appLink, gitHubLink, children } = props;
+  const { imgURL, gifURL, title, appLink, gitHubLink, children, tech } = props;
   const [hover, setHover] = useState(false);
 
   const openInNewTab = (url) => {
@@ -36,6 +36,11 @@ function Card(props) {
       </div>
       <div className='grow flex flex-col'>
         <h2 className='text-2xl font-bold mt-6'>{title}</h2>
+
+        <p>
+          <span className='font-bold my-4'>TECH USED: </span>
+          {tech}
+        </p>
         <p className='my-4'>{children}</p>
         <div className='flex justify-around mt-auto'>
           <Button onClick={() => openInNewTab(gitHubLink)}>Repo Link</Button>
