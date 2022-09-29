@@ -2,7 +2,7 @@ import React from 'react';
 
 const Contact = () => {
   return (
-    <div class='max-w-screen-xl mt-24 px-8 grid gap-8 grid-cols-1 md:grid-cols-2 md:px-12 lg:px-16 xl:px-32 py-16 mx-auto bg-gray-100 text-gray-900 rounded-lg shadow-lg'>
+    <div class='max-w-screen-xl mt-24 px-8 grid gap-8 grid-cols-1 md:grid-cols-2 md:px-12 lg:px-16 xl:px-32 py-16 mx-auto bg-bg-base-2 text-gray-900 rounded-lg shadow-lg'>
       <div class='flex flex-col justify-between'>
         <div>
           <h2 class='text-4xl lg:text-5xl font-bold leading-tight'>
