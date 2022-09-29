@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import YouTube from 'react-youtube';
 
-function AboutMe() {
+function AboutMe({ h1Size }) {
   const [videoPlayed, setVideoPlayed] = useState(false);
 
   const openInNewTab = (url) => {
@@ -27,8 +27,6 @@ function AboutMe() {
     'Cypress',
     'Mocha & Chai',
   ];
-
-  const h1Size = 'text-3xl md:text-4xl font-bold';
 
   const videoEnded = (state) => {
     console.log(state.data);
@@ -85,7 +83,7 @@ function AboutMe() {
       <div className='divider sm:hidden' />
       <div>
         {/** { SKILLS} */}
-        <div className=' flex flex-col justify-center items-center sm:items-start lg:text-left aspect-square xs:aspect-auto text-center w-full p-8 xs:px-16 md:px-0 md:my-8'>
+        <div className=' flex flex-col justify-center items-center aspect-square xs:aspect-auto text-center w-full p-8 xs:px-16 md:px-0 md:my-8'>
           <h1 className={h1Size}>Skills</h1>
           <div className='flex flex-row flex-wrap justify-center sm:justify-start'>
             {skills.map((skill) => (
@@ -102,7 +100,7 @@ function AboutMe() {
         <div className='divider sm:hidden' />
 
         {/** { ABOUT ME} */}
-        <div className='flex flex-col justify-center items-center sm:items-start lg:text-left aspect-square xs:aspect-auto text-center w-full p-8 xs:px-16 md:my-8 md:px-0'>
+        <div className='flex flex-col justify-center items-center aspect-square xs:aspect-auto text-center w-full p-8 xs:px-16 md:my-8 md:px-0'>
           <h1 className={h1Size}>About Me</h1>
           <div className='flex flex-col text-left'>
             <p className='py-2'>

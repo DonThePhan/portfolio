@@ -3,12 +3,12 @@ import AboutMe from './main/AboutMe';
 import Projects from './main/projects/Projects';
 import Contact from './main/Contact';
 
-const Main = () => {
+const Main = ({h1Size}) => {
   return (
     <div>
-      <AboutMe></AboutMe>
-      <Projects></Projects>
-      <Contact></Contact>
+      <AboutMe h1Size={h1Size}></AboutMe>
+      <Projects h1Size={h1Size}></Projects>
+      <Contact h1Size={h1Size}></Contact>
     </div>
   );
 };
