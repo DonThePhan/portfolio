@@ -1,16 +1,13 @@
 import React from 'react';
 
-const Contact = ({h1Size}) => {
+const Contact = ({ h1Size }) => {
   return (
     <div class='max-w-screen-xl mt-24 px-8 grid gap-8 grid-cols-1 md:grid-cols-2 md:px-12 lg:px-16 xl:px-32 py-16 m-3 bg-bg-base-2 text-gray-900 rounded-xl shadow-lg'>
       <div class='flex flex-col justify-between'>
         <div>
           <h2 class='text-4xl lg:text-5xl font-bold leading-tight'>
-            Lets talk about everything!
+            Contact Me
           </h2>
-          <div class='text-gray-700 mt-8'>
-            Hate forms? Send us an <span class='underline'>email</span> instead.
-          </div>
         </div>
         <div class='mt-8 text-center'></div>
       </div>

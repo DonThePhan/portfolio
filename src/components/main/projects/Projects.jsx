@@ -3,7 +3,7 @@ import Card from './Card';
 
 function Projects({ h1Size }) {
   return (
-    <div id='projects' className='flex flex-col w-full'>
+    <div id='projects' className='flex flex-col w-full items-center'>
       <h2 className={h1Size}>Projects</h2>
       <div className='flex flex-col w-full items-center sm:flex-row sm:flex-wrap sm:justify-around'>
         <Card
