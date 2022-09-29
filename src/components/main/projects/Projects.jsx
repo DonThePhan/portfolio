@@ -35,12 +35,8 @@ function Projects({ h1Size }) {
           gitHubLink='https://github.com/DonThePhan/E-Commerse'
           tech='React, Material UI, Firebase and Git/GitHub'
         >
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda
-          tenetur expedita repellendus odio! Neque aut architecto fugiat vel
-          fuga? Quidem nihil rem magni est sint. Natus voluptatem ut quas harum.
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit aperiam
-          nesciunt culpa necessitatibus quasi, ea ut cum nihil porro voluptatem
-          quo at quibusdam earum odio, magnam maiores totam fugit amet.
+          Interface connects to Paypal and includes responsive design.
+
         </Card>
         <Card
           imgURL='images/tweeter.png'
@@ -84,7 +80,8 @@ function Projects({ h1Size }) {
           gitHubLink='https://github.com/DonThePhan/Tetris'
           tech='Python, Pygame'
         >
-          Built in Python using Pygame
+          Combines Object Oriented Programming, GUI interface, game logic and matrix manipulation.
+
         </Card>
         <Card
           imgURL='images/scheduler.png'
@@ -95,7 +92,7 @@ function Projects({ h1Size }) {
           tech='React, Storybook, Cypress, Jest, API and Git/GitHub'
         >
           Appointment Scheduler that lets you Book, Edit, and Remove
-          appointments. Built with Express, React & Node
+          appointments.
         </Card>
       </div>
     </div>
