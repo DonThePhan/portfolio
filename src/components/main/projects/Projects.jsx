@@ -62,7 +62,7 @@ function Projects({ h1Size }) {
           path.
         </Card>
         <Card
-          imgURL='images/sudoku.gif'
+          imgURL='images/sudoku.png'
           gifURL='images/sudoku.gif'
           title='Sudoku Solver'
           appLink='https://web-sudoku-solver-13520.web.app'
@@ -73,7 +73,7 @@ function Projects({ h1Size }) {
           technology to just try every possible combination in under a second?
         </Card>
         <Card
-          imgURL='images/tetris.gif'
+          imgURL='images/tetris.png'
           gifURL='images/tetris.gif'
           title='Tetris'
           appLink=''
@@ -82,7 +82,7 @@ function Projects({ h1Size }) {
           Built in Python using Pygame
         </Card>
         <Card
-        imgURL='images/scheduler.gif'
+        imgURL='images/scheduler.png'
         gifURL='images/scheduler.gif'
         title='Scheduler'
         appLink=''
