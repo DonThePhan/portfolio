@@ -1,31 +1,31 @@
-import React, { useState } from 'react';
-import YouTube from 'react-youtube';
+import React, { useState } from "react";
+import YouTube from "react-youtube";
 
 function AboutMe({ h1Size }) {
   const [videoPlayed, setVideoPlayed] = useState(false);
 
   const openInNewTab = (url) => {
-    window.open(url, '_blank', 'noopener,noreferrer');
+    window.open(url, "_blank", "noopener,noreferrer");
   };
 
   const skills = [
-    'JavaScript',
-    'CSS',
-    'HTML',
-    'Node.js',
-    'Express',
-    'Python',
-    'SQL',
-    'Git',
-    'GitHub',
-    'React',
-    'Tailwind CSS',
-    'Bootstrap',
-    'jQuery',
-    'Sass',
-    'Jest',
-    'Cypress',
-    'Mocha & Chai',
+    "JavaScript",
+    "CSS",
+    "HTML",
+    "Node.js",
+    "Express",
+    "Python",
+    "SQL",
+    "Git",
+    "GitHub",
+    "React",
+    "Tailwind CSS",
+    "Bootstrap",
+    "jQuery",
+    "Sass",
+    "Jest",
+    "Cypress",
+    "Mocha & Chai",
   ];
 
   const videoEnded = (state) => {
@@ -36,11 +36,14 @@ function AboutMe({ h1Size }) {
   };
 
   return (
-    <div className=' flex flex-col items-center justify-center w-full lg:text-lg'>
+    <div
+      id='home'
+      className=' flex flex-col items-center justify-center w-full lg:text-lg'
+    >
       <YouTube
         videoId='4VcGzWd17SE'
         className={`flex justify-center items-center aspect-video w-full ${
-          videoPlayed && 'opacity-0 animate-fade'
+          videoPlayed && "opacity-0 animate-fade"
         }`}
         title='YouTube video player'
         onStateChange={(state) => videoEnded(state)}
@@ -67,13 +70,13 @@ function AboutMe({ h1Size }) {
           <div className='w-full'>
             <button
               onClick={() =>
-                openInNewTab('https://www.linkedin.com/in/donnyphanmeceng/')
+                openInNewTab("https://www.linkedin.com/in/donnyphanmeceng/")
               }
             >
               <i className='fa-brands fa-linkedin-in fa-2x p-2' />
             </button>
             <button
-              onClick={() => openInNewTab('https://github.com/DonThePhan')}
+              onClick={() => openInNewTab("https://github.com/DonThePhan")}
             >
               <i className='fa-brands fa-github fa-2x p-2' />
             </button>
@@ -101,7 +104,9 @@ function AboutMe({ h1Size }) {
 
         {/** { ABOUT ME} */}
         <div className='flex flex-col justify-center items-center aspect-square xs:aspect-auto text-center w-full p-8 xs:px-16 md:my-8 md:px-0'>
-          <h1 className={h1Size}>About Me</h1>
+          <h1 id='about' className={h1Size}>
+            About Me
+          </h1>
           <div className='flex flex-col text-left'>
             <p className='pb-2'>
               A Full-Stack Web Developer coming from 9 years of experience in

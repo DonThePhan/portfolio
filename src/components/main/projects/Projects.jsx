@@ -1,10 +1,12 @@
-import React from 'react';
-import Card from './Card';
+import React from "react";
+import Card from "./Card";
 
 function Projects({ h1Size }) {
   return (
-    <div id='projects' className='flex flex-col w-full items-center'>
-      <h2 className={h1Size}>Projects</h2>
+    <div className='flex flex-col w-full items-center'>
+      <h2 id='projects' className={h1Size}>
+        Projects
+      </h2>
       <div className='flex flex-col w-full items-center sm:flex-row sm:flex-wrap sm:justify-around'>
         <Card
           imgURL='images/story.png'
@@ -36,7 +38,6 @@ function Projects({ h1Size }) {
           tech='React, Material UI, Firebase and Git/GitHub'
         >
           Interface connects to Paypal and includes responsive design.
-
         </Card>
         <Card
           imgURL='images/tweeter.png'
@@ -80,8 +81,8 @@ function Projects({ h1Size }) {
           gitHubLink='https://github.com/DonThePhan/Tetris'
           tech='Python, Pygame'
         >
-          Combines Object Oriented Programming, GUI interface, game logic and matrix manipulation.
-
+          Combines Object Oriented Programming, GUI interface, game logic and
+          matrix manipulation.
         </Card>
         <Card
           imgURL='images/scheduler.png'

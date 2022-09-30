@@ -8,10 +8,10 @@ const Contact = ({ h1Size }) => {
   const [message, setMessage] = useState("");
 
   return (
-    <div className='max-w-screen-xl mt-24 px-8 grid gap-8 grid-cols-1 md:grid-cols-2 md:px-12 lg:px-16 xl:px-32 py-16 m-3 bg-bg-base-2 text-gray-900 rounded-xl shadow-lg'>
+    <div className='max-w-screen-xl my-24 px-8 grid gap-8 grid-cols-1 md:grid-cols-2 md:px-12 lg:px-16 xl:px-32 py-16 m-3 bg-bg-base-2 text-gray-900 rounded-xl shadow-lg'>
       <div className='flex flex-col justify-between'>
         <div>
-          <h2 className={h1Size}>
+          <h2 id='contact' className={h1Size}>
             Contact Me
           </h2>
         </div>
