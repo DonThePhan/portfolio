@@ -1,7 +1,15 @@
-import React from 'react';
+import React from "react";
 
-const Button = ({ children, onClick }) => {
-  return <div className='border bg-transparent hover:bg-text hover:text-bg-base-2 py-1 px-3 rounded-lg transition duration-150 hover:ease-in cursor-pointer' onClick={onClick}>{children}</div>;
+const Button = ({ children, onClick, type }) => {
+  return (
+    <div
+      className='border uppercase text-sm font-bold tracking-wide bg-indigo-500 text-gray-100 p-3 rounded-lg focus:outline-none focus:shadow-outline text-center cursor-pointer hover:bg-text hover:text-bg-base-2 duration-150 hover:ease-in'
+      onClick={onClick}
+      type={type}
+    >
+      {children}
+    </div>
+  );
 };
 
 export default Button;
