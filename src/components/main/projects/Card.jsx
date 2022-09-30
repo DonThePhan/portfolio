@@ -22,15 +22,15 @@ function Card(props) {
     >
       <div className='relative'>
         <img
-          className='w-full rounded-xl drop-shadow-xl border-base-100 absolute'
-          src={imgURL}
+          className={`absolute w-full rounded-xl drop-shadow-xl border-base-100 z-10 transition-opacity duration-300 ${
+            hover ? 'opacity-100' : 'opacity-0'
+          }`}
+          src={hover && gifURL}
           alt=''
         />
         <img
-          className={`w-full rounded-xl drop-shadow-xl border-base-100 z-10 transition-opacity duration-300 ${
-            hover ? 'opacity-100' : 'opacity-0'
-          }`}
-          src={gifURL}
+          className='w-full rounded-xl drop-shadow-xl border-base-100'
+          src={imgURL}
           alt=''
         />
       </div>
