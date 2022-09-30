@@ -4,7 +4,7 @@ import NotFound from './components/NotFound';
 import Main from './components/Main';
 
 function App() {
-  const h1Size = 'text-4xl lg:text-5xl font-bold leading-tight';
+  const h1Size = 'text-4xl lg:text-5xl font-bold leading-tight mb-6';
 
   return (
     <div className='flex flex-col items-center w-full bg-bg-base-1'>

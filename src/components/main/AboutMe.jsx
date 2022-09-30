@@ -83,13 +83,13 @@ function AboutMe({ h1Size }) {
       <div className='divider sm:hidden' />
       <div>
         {/** { SKILLS} */}
-        <div className=' flex flex-col justify-center items-center aspect-square xs:aspect-auto text-center w-full p-8 xs:px-16 md:px-0 md:my-8'>
+        <div className=' flex flex-col justify-center items-center aspect-square xs:aspect-auto text-center w-full xs:px-16 md:px-0 md:my-8'>
           <h1 className={h1Size}>Skills</h1>
           <div className='flex flex-row flex-wrap justify-center sm:justify-start'>
             {skills.map((skill) => (
               <div
                 key={skill}
-                className='p-4 sm:pl-0 sm:pr-8 md:py-2 text-center'
+                className='px-4 pb-8 sm:pl-0 sm:pr-8 md:py-2 text-center'
               >
                 {skill}
               </div>
@@ -103,7 +103,7 @@ function AboutMe({ h1Size }) {
         <div className='flex flex-col justify-center items-center aspect-square xs:aspect-auto text-center w-full p-8 xs:px-16 md:my-8 md:px-0'>
           <h1 className={h1Size}>About Me</h1>
           <div className='flex flex-col text-left'>
-            <p className='py-2'>
+            <p className='pb-2'>
               A Full-Stack Web Developer coming from 9 years of experience in
               Industrial Design and Project Management. I’m looking to create
               positive impacts via Coding, Art, Design, Animation, Music, Logic
