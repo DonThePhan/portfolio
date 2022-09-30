@@ -1,8 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import YouTube from "react-youtube";
+import TailwindContext from "../store/tailwind-context";
 
-function AboutMe({ h1Size }) {
+function AboutMe() {
   const [videoPlayed, setVideoPlayed] = useState(false);
+  const { h1Size, sectionPaddingX, sectionPaddingY } =
+    useContext(TailwindContext);
+
+  console.log("here");
+  console.log(h1Size);
 
   const openInNewTab = (url) => {
     window.open(url, "_blank", "noopener,noreferrer");
@@ -42,7 +48,7 @@ function AboutMe({ h1Size }) {
     >
       <YouTube
         videoId='4VcGzWd17SE'
-        className={`flex justify-center items-center aspect-video w-full ${
+        className={`flex justify-center items-center aspect-video w-screen p-0 m-0 ${
           videoPlayed && "opacity-0 animate-fade"
         }`}
         title='YouTube video player'
@@ -56,8 +62,10 @@ function AboutMe({ h1Size }) {
           className='shadow-2xl w-full aspect-square md:rounded-full sm:max-w-xs md:my-8'
           alt='profile pic'
         />
-        {/** BLURB */}
-        <div className='flex flex-col justify-center md:text-left aspect-square xs:aspect-auto text-center w-full p-8 sm:py-0 xs:pt-16 '>
+        {/** H!! I'M DONNY */}
+        <div
+          className={`flex flex-col justify-center md:text-left aspect-square xs:aspect-auto text-center w-full ${sectionPaddingX} ${sectionPaddingY} xs:pt-24`}
+        >
           <div className={h1Size}>
             <p className='font-bold'>Hi! I'm Donny</p>
             <p>I'm a Junior Web Developer</p>
@@ -83,27 +91,27 @@ function AboutMe({ h1Size }) {
           </div>
         </div>
       </div>
-      <div className='divider sm:hidden' />
+      <div className='divider xs:hidden py-0 my-0' />
       <div>
         {/** { SKILLS} */}
-        <div className=' flex flex-col justify-center items-center aspect-square xs:aspect-auto text-center w-full xs:px-16 md:px-0 md:my-8'>
+        <div
+          className={`flex flex-col justify-center items-center aspect-square xs:aspect-auto text-center w-full ${sectionPaddingX} ${sectionPaddingY}`}
+        >
           <h1 className={h1Size}>Skills</h1>
-          <div className='flex flex-row flex-wrap justify-center sm:justify-start'>
+          <div className='flex flex-row flex-wrap justify-around'>
             {skills.map((skill) => (
-              <div
-                key={skill}
-                className='px-4 pb-8 sm:pl-0 sm:pr-8 md:py-2 text-center'
-              >
+              <div key={skill} className='px-4 pb-3'>
                 {skill}
               </div>
             ))}
           </div>
         </div>
-
-        <div className='divider sm:hidden' />
+        <div className='divider xs:hidden py-0 my-0' />
 
         {/** { ABOUT ME} */}
-        <div className='flex flex-col justify-center items-center aspect-square xs:aspect-auto text-center w-full p-8 xs:px-16 md:my-8 md:px-0'>
+        <div
+          className={`flex flex-col justify-center items-center aspect-square xs:aspect-auto text-center w-full ${sectionPaddingX} ${sectionPaddingY}`}
+        >
           <h1 id='about' className={h1Size}>
             About Me
           </h1>
@@ -121,6 +129,7 @@ function AboutMe({ h1Size }) {
           </div>
         </div>
       </div>
+      <div className='divider xs:hidden py-0 my-0' />
     </div>
   );
 }

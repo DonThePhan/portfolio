@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Button from "../UI/Button";
+import TailwindContext from "../store/tailwind-context";
 
-const Contact = ({ h1Size }) => {
+const Contact = () => {
+  const { h1Size } = useContext(TailwindContext);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");

@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import Card from "./Card";
+import TailwindContext from "../../store/tailwind-context";
 
-function Projects({ h1Size }) {
+function Projects() {
+  const { h1Size, sectionPaddingY } = useContext(TailwindContext);
   return (
-    <div className='flex flex-col w-full items-center'>
+    <div className={`flex flex-col w-full items-center ${sectionPaddingY}`}>
       <h2 id='projects' className={h1Size}>
         Projects
       </h2>
