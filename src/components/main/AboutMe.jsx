@@ -1,14 +1,38 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef, useEffect } from "react";
 import YouTube from "react-youtube";
 import TailwindContext from "../store/tailwind-context";
 
 function AboutMe() {
+  /** YouTube video Logic - START */
+  const homeDiv = useRef();
+  const [opts, setOpts] = useState({});
+
+  // Whenever video container ('homeDiv') size changes, update video dims ('opts') to fit
+  const resizeObserver = new ResizeObserver(() => {
+    setOpts({
+      height: Math.floor((homeDiv.current.offsetWidth * 9) / 16),
+      width: homeDiv.current.offsetWidth,
+    });
+  });
+  useEffect(() => {
+    resizeObserver.observe(homeDiv.current);
+    return function cleanup() {
+      resizeObserver.disconnect();
+    };
+  }, []);
+
+  // make video vanish after ending
   const [videoPlayed, setVideoPlayed] = useState(false);
+  const videoEnded = (state) => {
+    console.log(state.data);
+    if (state.data === 0) {
+      setVideoPlayed(true);
+    }
+  };
+  /** YouTube video Logic - END */
+
   const { h1Size, sectionPaddingX, sectionPaddingY } =
     useContext(TailwindContext);
-
-  console.log("here");
-  console.log(h1Size);
 
   const openInNewTab = (url) => {
     window.open(url, "_blank", "noopener,noreferrer");
@@ -34,23 +58,16 @@ function AboutMe() {
     "Mocha & Chai",
   ];
 
-  const videoEnded = (state) => {
-    console.log(state.data);
-    if (state.data === 0) {
-      setVideoPlayed(true);
-    }
-  };
-
   return (
     <div
       id='home'
+      ref={homeDiv}
       className=' flex flex-col items-center justify-center w-full lg:text-lg'
     >
       <YouTube
+        opts={opts}
         videoId='4VcGzWd17SE'
-        className={`flex justify-center items-center aspect-video w-screen p-0 m-0 ${
-          videoPlayed && "opacity-0 animate-fade"
-        }`}
+        className={videoPlayed && "opacity-0 animate-fade"}
         title='YouTube video player'
         onStateChange={(state) => videoEnded(state)}
       ></YouTube>

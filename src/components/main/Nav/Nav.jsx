@@ -7,16 +7,16 @@ const Nav = () => {
   return (
     <div className='flex border p-1 rounded-full fixed bottom-8 backdrop-blur-sm z-20 bg-bg-base-3 bg-opacity-50'>
       <NavButton section={section} setSection={setSection} heading='home'>
-        <i class='fa-solid fa-house'></i>
+        <i className='fa-solid fa-house'></i>
       </NavButton>
       <NavButton section={section} setSection={setSection} heading='about'>
-        <i class='fa-solid fa-user'></i>
+        <i className='fa-solid fa-user'></i>
       </NavButton>
       <NavButton section={section} setSection={setSection} heading='projects'>
-        <i class='fa-solid fa-briefcase'></i>
+        <i className='fa-solid fa-briefcase'></i>
       </NavButton>
       <NavButton section={section} setSection={setSection} heading='contact'>
-        <i class='fa-solid fa-message'></i>
+        <i className='fa-solid fa-message'></i>
       </NavButton>
     </div>
   );
@@ -27,8 +27,7 @@ export default Nav;
 const NavButton = ({ children, heading, section, setSection }) => {
   return (
     <Link
-      activeClass='active'
-      // className='test1'
+      activeclassName='active'
       to={heading}
       spy={true}
       smooth={true}
