@@ -67,7 +67,7 @@ function AboutMe() {
       <YouTube
         opts={opts}
         videoId='4VcGzWd17SE'
-        className={videoPlayed ? "opacity-0 animate-fade" : ""}
+        className={`sm:mt-12 ${videoPlayed ? "opacity-0 animate-fade" : ""}`}
         title='YouTube video player'
         onStateChange={(state) => videoEnded(state)}
       ></YouTube>
