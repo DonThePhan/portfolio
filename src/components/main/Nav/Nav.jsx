@@ -27,7 +27,6 @@ export default Nav;
 const NavButton = ({ children, heading, section, setSection }) => {
   return (
     <Link
-      activeclassName='active'
       to={heading}
       spy={true}
       smooth={true}

@@ -1,17 +1,16 @@
-import React, { useState } from 'react';
-import Button from '../../UI/Button';
+import React, { useState } from "react";
+import Button from "../../UI/Button";
 
 function Card(props) {
   const { imgURL, gifURL, title, appLink, gitHubLink, children, tech } = props;
   const [hover, setHover] = useState(false);
 
   const openInNewTab = (url) => {
-    window.open(url, '_blank', 'noopener,noreferrer');
+    window.open(url, "_blank", "noopener,noreferrer");
   };
 
   const toggleHover = () => {
     setHover((prev) => !prev);
-    console.log('toggling');
   };
 
   return (
@@ -23,9 +22,9 @@ function Card(props) {
       <div className='relative'>
         <img
           className={`absolute w-full rounded-xl drop-shadow-xl border-base-100 z-10 transition-opacity duration-300 ${
-            hover ? 'opacity-100' : 'opacity-0'
+            hover ? "opacity-100" : "opacity-0"
           }`}
-          src={hover && gifURL}
+          src={hover ? gifURL : undefined}
           alt=''
         />
         <img
