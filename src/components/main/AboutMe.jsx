@@ -1,11 +1,18 @@
-import React, { useState, useContext, useRef, useEffect } from "react";
-import YouTube from "react-youtube";
-import TailwindContext from "../store/tailwind-context";
+import React, {
+  useState,
+  useContext,
+  useRef,
+  useEffect,
+  useCallback,
+} from 'react';
+import YouTube from 'react-youtube';
+import TailwindContext from '../store/tailwind-context';
 
 function AboutMe() {
   /** YouTube video Logic - START */
   const homeDiv = useRef();
   const [opts, setOpts] = useState({});
+  const [hideVideo, setHideVideo] = useState(false);
 
   // Whenever video container ('homeDiv') size changes, update video dims ('opts') to fit
   const resizeObserver = new ResizeObserver(() => {
@@ -19,43 +26,51 @@ function AboutMe() {
     return function cleanup() {
       resizeObserver.disconnect();
     };
-  }, []);
+  }, [resizeObserver]);
 
   // make video vanish after ending
   const [videoPlayed, setVideoPlayed] = useState(false);
   const videoEnded = (state) => {
-    console.log(state.data);
-    if (state.data === 0) {
+    if (state.data === 0 /* video ended */) {
       setVideoPlayed(true);
     }
   };
+
+  useEffect(() => {
+    if (videoPlayed) {
+      setTimeout(() => {
+        setHideVideo(true);
+      }, 1000);
+    }
+  }, [videoPlayed]);
+
   /** YouTube video Logic - END */
 
   const { h1Size, sectionPaddingX, sectionPaddingY } =
     useContext(TailwindContext);
 
   const openInNewTab = (url) => {
-    window.open(url, "_blank", "noopener,noreferrer");
+    window.open(url, '_blank', 'noopener,noreferrer');
   };
 
   const skills = [
-    "JavaScript",
-    "CSS",
-    "HTML",
-    "Node.js",
-    "Express",
-    "Python",
-    "SQL",
-    "Git",
-    "GitHub",
-    "React",
-    "Tailwind CSS",
-    "Bootstrap",
-    "jQuery",
-    "Sass",
-    "Jest",
-    "Cypress",
-    "Mocha & Chai",
+    'JavaScript',
+    'CSS',
+    'HTML',
+    'Node.js',
+    'Express',
+    'Python',
+    'SQL',
+    'Git',
+    'GitHub',
+    'React',
+    'Tailwind CSS',
+    'Bootstrap',
+    'jQuery',
+    'Sass',
+    'Jest',
+    'Cypress',
+    'Mocha & Chai',
   ];
 
   return (
@@ -64,13 +79,15 @@ function AboutMe() {
       ref={homeDiv}
       className=' flex flex-col items-center justify-center w-full lg:text-lg'
     >
-      <YouTube
-        opts={opts}
-        videoId='4VcGzWd17SE'
-        className={`sm:mt-12 ${videoPlayed ? "opacity-0 animate-fade" : ""}`}
-        title='YouTube video player'
-        onStateChange={(state) => videoEnded(state)}
-      ></YouTube>
+      {!hideVideo && (
+        <YouTube
+          opts={opts}
+          videoId='4VcGzWd17SE'
+          className={`sm:mt-12 ${videoPlayed ? 'opacity-0 animate-fade' : ''}`}
+          title='YouTube video player'
+          onStateChange={(state) => videoEnded(state)}
+        ></YouTube>
+      )}
       {/** HERO */}
       <div className='flex flex-col items-center sm:flex-row'>
         {/** IMAGE */}
@@ -95,13 +112,13 @@ function AboutMe() {
           <div className='w-full'>
             <button
               onClick={() =>
-                openInNewTab("https://www.linkedin.com/in/donnyphanmeceng/")
+                openInNewTab('https://www.linkedin.com/in/donnyphanmeceng/')
               }
             >
               <i className='fa-brands fa-linkedin-in fa-2x p-2' />
             </button>
             <button
-              onClick={() => openInNewTab("https://github.com/DonThePhan")}
+              onClick={() => openInNewTab('https://github.com/DonThePhan')}
             >
               <i className='fa-brands fa-github fa-2x p-2' />
             </button>
