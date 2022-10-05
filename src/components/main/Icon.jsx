@@ -1,6 +1,7 @@
-/** SOURCE: https://www.iconfinder.com/ */
+import React, { useState } from 'react';
 
-const icons = {
+/** SOURCE: https://www.iconfinder.com/ */
+export const iconsObj = {
   Javascript:
     'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/JavaScript-logo.png/240px-JavaScript-logo.png',
   HTML: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/240px-HTML5_logo_and_wordmark.svg.png',
@@ -27,7 +28,7 @@ const icons = {
   Cypress: 'https://upload.wikimedia.org/wikipedia/commons/a/a4/Cypress.png',
   Mocha:
     'https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Mocha_logo.svg/240px-Mocha_logo.svg.png',
-  Chai: 'https://camo.githubusercontent.com/7ecbd4531436e4f20c1dba52a4fd4ac367cfcc20a2f62cfe7a10f32da306afc6/687474703a2f2f636861696a732e636f6d2f696d672f636861692d6c6f676f2e706e67',
+  Chai: 'https://www.geekandjob.com/uploads/wiki/3f95fb8c6af2f506f11b253ea05ba694.png',
   Figma:
     'https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Figma-logo.svg/160px-Figma-logo.svg.png',
   // Canva:
@@ -36,4 +37,21 @@ const icons = {
   //   'https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Next.js_Logotype_Light_Background.svg/320px-Next.js_Logotype_Light_Background.svg.png',
 };
 
-export default icons;
+const Icon = ({ keyName, link }) => {
+  const [hovering, setHovering] = useState(false);
+  return (
+    <div
+      onMouseOver={() => setHovering(true)}
+      onMouseOut={() => setHovering(false)}
+    >
+      <img
+        className='m-2 xs:m-4 hover:m-0 h-12 xs:h-16 hover:h-16 xs:hover:h-24 aspect-square object-contain duration-300 ease-in-out drop-shadow-[3px_3px_2px_rgba(0,0,0,.5)]'
+        src={link}
+        alt='logo'
+      />
+      <span className={`opacity-0 duration-500 ease-in-out ${hovering && 'opacity-100'}`}>{keyName}</span>
+    </div>
+  );
+};
+
+export default Icon;
