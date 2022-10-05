@@ -1,7 +1,7 @@
 import React, { useState, useContext, useRef, useEffect } from 'react';
 import YouTube from 'react-youtube';
 import TailwindContext from '../store/tailwind-context';
-import Icon, {iconsObj} from './Icon';
+import Icon, { iconsObj } from './Icon';
 
 function AboutMe() {
   /** YouTube video Logic - START */
@@ -97,27 +97,29 @@ function AboutMe() {
             <p>Based in Toronto</p>
             <p>Recent Graduate from Lighthouse Labs</p>
           </div>
-          <div className='w-full flex flex-row justify-center md:justify-start'>
+          <div className='w-full flex flex-row items-center justify-center md:justify-start'>
             <button
-              className='border border-text rounded-full py-3 px-5 hover:py-5 hover:px-7 hover:m-2 hover:ml-0 duration-150 hover:ease-in bg-bg-base-2 hover:bg-white m-4 ml-0 font-extrabold text-xl'
+              className='border border-text rounded-full py-3 px-5 hover:py-5 hover:px-7 hover:m-2 hover:-ml-2 duration-150 hover:ease-in bg-bg-base-2 hover:bg-white m-4 ml-0 font-extrabold text-xl'
               onClick={() =>
                 openInNewTab('https://resume.creddle.io/resume/6inw2moecgd')
               }
             >
               Resume
             </button>
-            <button
+            <img
+              className='m-3 hover:m-1 h-10 hover:h-14 duration-300 ease-in-out cursor-pointer aspect-square object-contain'
               onClick={() =>
                 openInNewTab('https://www.linkedin.com/in/donnyphanmeceng/')
               }
-            >
-              <i className='fa-brands fa-linkedin-in fa-2x p-2' />
-            </button>
-            <button
+              src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Font_Awesome_5_brands_linkedin-in.svg/210px-Font_Awesome_5_brands_linkedin-in.svg.png'
+              alt=''
+            />
+            <img
+              className='m-3 hover:m-1 h-10 hover:h-14 duration-300 ease-in-out cursor-pointer aspect-square object-contain'
               onClick={() => openInNewTab('https://github.com/DonThePhan')}
-            >
-              <i className='fa-brands fa-github fa-2x p-2' />
-            </button>
+              src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/240px-Octicons-mark-github.svg.png'
+              alt=''
+            />
           </div>
         </div>
       </div>
