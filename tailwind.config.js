@@ -2,14 +2,14 @@
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
-    colors: {
-      'bg-base-1': '#d2c59d',
-      'bg-base-2': '#e4d8b4',
-      'bg-base-3': '#FFFBF0',
-      'bg-base-4': '#71C9CE',
-      text: '#282425',
-    },
     extend: {
+      colors: {
+        'bg-base-1': '#d2c59d',
+        'bg-base-2': '#e4d8b4',
+        'bg-base-3': '#FFFBF0',
+        'bg-base-4': '#71C9CE',
+        text: '#282425',
+      },
       spacing: {
         project: '42rem',
       },

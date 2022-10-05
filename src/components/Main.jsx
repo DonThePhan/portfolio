@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import AboutMe from "./main/AboutMe";
 import Projects from "./main/Projects/Projects";
 import Contact from "./main/Contact";

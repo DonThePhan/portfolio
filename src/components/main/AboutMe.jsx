@@ -90,7 +90,7 @@ function AboutMe() {
         <YouTube
           opts={opts}
           videoId='4VcGzWd17SE'
-          className={`sm:mt-12 ${videoPlayed ? 'opacity-0 animate-fade' : ''}`}
+          className={`sm:my-12 ${videoPlayed ? 'opacity-0 animate-fade' : ''}`}
           title='YouTube video player'
           onStateChange={(state) => videoEnded(state)}
         ></YouTube>
@@ -116,7 +116,15 @@ function AboutMe() {
             <p>Based in Toronto</p>
             <p>Recent Graduate from Lighthouse Labs</p>
           </div>
-          <div className='w-full'>
+          <div className='w-full flex flex-row justify-center md:justify-start'>
+            <button
+              className='border border-text rounded-full py-3 px-5 hover:py-5 hover:px-7 hover:m-2 hover:ml-0 duration-150 hover:ease-in bg-bg-base-2 hover:bg-white m-4 ml-0 font-extrabold text-xl'
+              onClick={() =>
+                openInNewTab('https://resume.creddle.io/resume/6inw2moecgd')
+              }
+            >
+              Resume
+            </button>
             <button
               onClick={() =>
                 openInNewTab('https://www.linkedin.com/in/donnyphanmeceng/')
