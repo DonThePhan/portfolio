@@ -61,26 +61,6 @@ function AboutMe() {
     window.open(url, '_blank', 'noopener,noreferrer');
   };
 
-  const skills = [
-    'JavaScript',
-    'CSS',
-    'HTML',
-    'Node.js',
-    'Express',
-    'Python',
-    'SQL',
-    'Git',
-    'GitHub',
-    'React',
-    'Tailwind CSS',
-    'Bootstrap',
-    'jQuery',
-    'Sass',
-    'Jest',
-    'Cypress',
-    'Mocha & Chai',
-  ];
-
   return (
     <div
       id='home'
@@ -148,22 +128,21 @@ function AboutMe() {
           className={`flex flex-col justify-center items-center aspect-square xs:aspect-auto text-center w-full ${sectionPaddingX} ${sectionPaddingY}`}
         >
           <h1 className={h1Size}>Skills</h1>
-          <div className='flex flex-row flex-wrap justify-around'>
-            {Object.values(icons).map((link) => {
+          <div className='flex flex-row flex-wrap justify-center'>
+            {Object.entries(icons).map(([key, link]) => {
               return (
                 <img
-                  // className='m-4 h-20 aspect-square object-contain hover:h-28 hover:m-0 duration-300 ease-in-out'
-                  className='m-2 h-12 aspect-square object-contain '
+                  className='m-2 xs:m-4 hover:m-0 h-12 xs:h-16 hover:h-16 xs:hover:h-24 aspect-square object-contain duration-300 ease-in-out drop-shadow-[3px_3px_2px_rgba(0,0,0,.5)]'
                   src={link}
                   alt='logo'
                 />
               );
             })}
-            {skills.map((skill) => (
+            {/* {skills.map((skill) => (
               <div key={skill} className='px-4 pb-3'>
                 {skill}
               </div>
-            ))}
+            ))} */}
           </div>
         </div>
         <div className='divider xs:hidden py-0 my-0' />

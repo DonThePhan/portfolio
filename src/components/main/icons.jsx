@@ -30,10 +30,10 @@ const icons = {
   Chai: 'https://camo.githubusercontent.com/7ecbd4531436e4f20c1dba52a4fd4ac367cfcc20a2f62cfe7a10f32da306afc6/687474703a2f2f636861696a732e636f6d2f696d672f636861692d6c6f676f2e706e67',
   Figma:
     'https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Figma-logo.svg/160px-Figma-logo.svg.png',
-  Canva:
-    'https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/Canva_Logo.png/800px-Canva_Logo.png',
-  'Next.js':
-    'https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Next.js_Logotype_Light_Background.svg/320px-Next.js_Logotype_Light_Background.svg.png',
+  // Canva:
+  //   'https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/Canva_Logo.png/800px-Canva_Logo.png',
+  // 'Next.js':
+  //   'https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Next.js_Logotype_Light_Background.svg/320px-Next.js_Logotype_Light_Background.svg.png',
 };
 
 export default icons;
