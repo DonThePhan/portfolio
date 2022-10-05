@@ -42,8 +42,8 @@ function Card(props) {
         </p>
         <p className='my-4'>{children}</p>
         <div className='flex justify-around mt-auto'>
-          <Button onClick={() => openInNewTab(gitHubLink)}>Repo Link</Button>
-          <Button onClick={() => openInNewTab(appLink)}>App Link</Button>
+          {gitHubLink && <Button onClick={() => openInNewTab(gitHubLink)}>Repo Link</Button>}
+          {appLink && <Button onClick={() => openInNewTab(appLink)}>App Link</Button>}
         </div>
       </div>
     </div>
