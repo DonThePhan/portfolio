@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  useContext,
-  useRef,
-  useEffect,
-  useCallback,
-} from 'react';
+import React, { useState, useContext, useRef, useEffect } from 'react';
 import YouTube from 'react-youtube';
 import TailwindContext from '../store/tailwind-context';
 
@@ -15,17 +9,30 @@ function AboutMe() {
   const [hideVideo, setHideVideo] = useState(false);
 
   // Whenever video container ('homeDiv') size changes, update video dims ('opts') to fit
-  const resizeObserver = new ResizeObserver(() => {
-    setOpts({
-      height: Math.floor((homeDiv.current.offsetWidth * 9) / 16),
-      width: homeDiv.current.offsetWidth,
-    });
-  });
+  const [resizeObserver, setResizeObserver] = useState();
+  // set resizeObserver on component mount
   useEffect(() => {
-    resizeObserver.observe(homeDiv.current);
-    return function cleanup() {
-      resizeObserver.disconnect();
-    };
+    setResizeObserver(
+      new ResizeObserver(
+        // this is a callback that executes if whatever is being observed changes
+        () => {
+          setOpts({
+            height: Math.floor((homeDiv.current.offsetWidth * 9) / 16),
+            width: homeDiv.current.offsetWidth,
+          });
+        },
+      ),
+    );
+  }, []);
+
+  useEffect(() => {
+    if (resizeObserver) {
+      // we check for changes in the page dims
+      resizeObserver.observe(homeDiv.current);
+      return function cleanup() {
+        resizeObserver.disconnect();
+      };
+    }
   }, [resizeObserver]);
 
   // make video vanish after ending
