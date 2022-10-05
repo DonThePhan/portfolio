@@ -151,7 +151,12 @@ function AboutMe() {
           <div className='flex flex-row flex-wrap justify-around'>
             {Object.values(icons).map((link) => {
               return (
-                <img className='h-24 aspect-square object-contain' src={link} alt='logo' />
+                <img
+                  // className='m-4 h-20 aspect-square object-contain hover:h-28 hover:m-0 duration-300 ease-in-out'
+                  className='m-2 h-12 aspect-square object-contain '
+                  src={link}
+                  alt='logo'
+                />
               );
             })}
             {skills.map((skill) => (
