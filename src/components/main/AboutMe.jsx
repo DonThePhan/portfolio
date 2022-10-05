@@ -149,8 +149,10 @@ function AboutMe() {
         >
           <h1 className={h1Size}>Skills</h1>
           <div className='flex flex-row flex-wrap justify-around'>
-            {Object.values(icons).map((value) => {
-              return value;
+            {Object.values(icons).map((link) => {
+              return (
+                <img className='h-24 aspect-square object-contain' src={link} alt='logo' />
+              );
             })}
             {skills.map((skill) => (
               <div key={skill} className='px-4 pb-3'>
