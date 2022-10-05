@@ -1,6 +1,7 @@
 import React, { useState, useContext, useRef, useEffect } from 'react';
 import YouTube from 'react-youtube';
 import TailwindContext from '../store/tailwind-context';
+import icons from './icons';
 
 function AboutMe() {
   /** YouTube video Logic - START */
@@ -148,6 +149,9 @@ function AboutMe() {
         >
           <h1 className={h1Size}>Skills</h1>
           <div className='flex flex-row flex-wrap justify-around'>
+            {Object.values(icons).map((value) => {
+              return value;
+            })}
             {skills.map((skill) => (
               <div key={skill} className='px-4 pb-3'>
                 {skill}

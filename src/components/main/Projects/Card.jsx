@@ -33,6 +33,7 @@ function Card(props) {
           alt=''
         />
       </div>
+      
       <div className='grow flex flex-col'>
         <h2 className='text-2xl font-bold mt-6'>{title}</h2>
 
