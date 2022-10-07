@@ -89,8 +89,8 @@ function AboutMe() {
           className={`flex flex-col justify-center md:text-left aspect-square xs:aspect-auto text-center w-full ${sectionPaddingX} ${sectionPaddingY} xs:pt-24`}
         >
           <div className={h1Size}>
-            <p className='font-bold'>Hi! I'm Donny</p>
-            <p>I'm a Junior Web Developer</p>
+            <h1 className='font-bold'>Hi! I'm Donny</h1>
+            <h1>I'm a Junior Web Developer</h1>
           </div>
           <div className='w-full'>
             <p>Currently Learning TypeScript</p>
@@ -129,7 +129,7 @@ function AboutMe() {
         <div
           className={`flex flex-col justify-center items-center aspect-square xs:aspect-auto text-center w-full ${sectionPaddingX} ${sectionPaddingY}`}
         >
-          <h1 className={h1Size}>Skills</h1>
+          <h2 className={h1Size}>Skills</h2>
           <div className='flex flex-row flex-wrap justify-center'>
             {Object.entries(iconsObj).map(([key, link]) => {
               return <Icon keyName={key} link={link} />;
@@ -147,9 +147,9 @@ function AboutMe() {
         <div
           className={`flex flex-col justify-center items-center aspect-square xs:aspect-auto text-center w-full ${sectionPaddingX} ${sectionPaddingY}`}
         >
-          <h1 id='about' className={h1Size}>
+          <h2 id='about' className={h1Size}>
             About Me
-          </h1>
+          </h2>
           <div className='flex flex-col text-left'>
             <p className='pb-2'>
               A Full-Stack Web Developer coming from 9 years of experience in
