@@ -36,6 +36,7 @@ const Contact = () => {
               type='text'
               placeholder=''
               required
+              name='name'
             />
           </div>
           <div className='mt-8'>
@@ -47,6 +48,7 @@ const Contact = () => {
               type='email'
               formNoValidate
               required
+              name='email'
             />
           </div>
           <div className='mt-8'>
@@ -58,6 +60,7 @@ const Contact = () => {
               onChange={(e) => setMessage(e.target.value)}
               className='border border-bg-base-1 w-full h-32 bg-bg-base-3 text-text mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline'
               required
+              name='message'
             ></textarea>
           </div>
           <div className='mt-8'>
