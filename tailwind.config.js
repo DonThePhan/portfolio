@@ -28,6 +28,7 @@ module.exports = {
           },
           '100%': {
             'max-height': 0,
+            margin: 0,
           },
         },
       }),

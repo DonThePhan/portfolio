@@ -67,15 +67,6 @@ function AboutMe() {
       ref={homeDiv}
       className=' flex flex-col items-center justify-center w-full lg:text-lg'
     >
-      {!hideVideo && (
-        <YouTube
-          opts={opts}
-          videoId='4VcGzWd17SE'
-          className={`sm:my-12 ${videoPlayed ? 'opacity-0 animate-fade' : ''}`}
-          title='YouTube video player'
-          onStateChange={(state) => videoEnded(state)}
-        ></YouTube>
-      )}
       {/** HERO */}
       <div className='flex flex-col items-center sm:flex-row'>
         {/** IMAGE */}
@@ -123,7 +114,16 @@ function AboutMe() {
           </div>
         </div>
       </div>
-      <div className='divider xs:hidden py-0 my-0' />
+      {hideVideo && <div className='divider xs:hidden py-0 my-0' />}
+      {!hideVideo && (
+        <YouTube
+          opts={opts}
+          videoId='4VcGzWd17SE'
+          className={`sm:my-12 ${videoPlayed ? 'opacity-0 animate-fade' : ''}`}
+          title='YouTube video player'
+          onStateChange={(state) => videoEnded(state)}
+        ></YouTube>
+      )}
       <div>
         {/** { SKILLS} */}
         <div
