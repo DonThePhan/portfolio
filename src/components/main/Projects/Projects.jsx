@@ -34,7 +34,7 @@ function Projects() {
         <Card
           imgURL='images/store.png'
           gifURL='images/store.gif'
-          title='E-commerce'
+          title='E-Commerce'
           appLink='https://e-commerse-21d75.web.app/'
           gitHubLink='https://github.com/DonThePhan/E-Commerse'
           tech='React, Material UI, Firebase and Git/GitHub'

@@ -159,7 +159,7 @@ function AboutMe() {
             </p>
             <p className='py-2'>
               When I'm not developing, I'm off social dancing, biking or working
-              on a DIY
+              on a DIY.
             </p>
           </div>
         </div>
