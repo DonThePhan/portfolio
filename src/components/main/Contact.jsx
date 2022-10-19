@@ -3,22 +3,25 @@ import Button from '../UI/Button';
 import TailwindContext from '../store/tailwind-context';
 
 const Contact = () => {
-  const { h1Size } = useContext(TailwindContext);
+  const { h1Size, sectionPaddingY } = useContext(TailwindContext);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [message, setMessage] = useState('');
 
   return (
-    <div className='flex flex-col justify-center items-center min-w-full px-3'>
-      <div className='w-full my-24 px-8 grid gap-8 grid-cols-1 md:grid-cols-2 md:px-12 lg:px-16 xl:px-32 py-16 m-3 bg-bg-base-2 text-text rounded-xl shadow-lg'>
-        <div className='flex flex-col justify-between'>
-          <div>
-            <h2 id='contact' className={h1Size}>
-              Contact Me
-            </h2>
-          </div>
-          <div className='mt-8 text-center'></div>
+    <div
+      className={`flex flex-col mb-24 justify-center items-center min-w-full px-3 ${sectionPaddingY}`}
+    >
+      <h2 id='contact' className={h1Size}>
+        Contact Me
+      </h2>
+
+      <div className='w-full px-8 grid gap-8 grid-cols-1 md:grid-cols-2 md:px-12 lg:px-16 xl:px-32 py-16 m-3 bg-bg-base-2 text-text rounded-xl shadow-lg'>
+        <div className='md:flex md:flex-col justify-between hidden'>
+          <p>blah blah blah</p>
+          {/* <div></div>
+          <div className='mt-8 text-center'></div> */}
         </div>
         <form
           action='https://formsubmit.co/59cfcbf847d570a190d0c9ae45903fb3'
