@@ -88,29 +88,29 @@ function AboutMe() {
             <p>Based in Toronto</p>
             <p>Recent Graduate from Lighthouse Labs</p>
           </div>
-          <div className='w-full flex flex-row items-center justify-center md:justify-start'>
-            <button
-              className='border border-text rounded-full py-3 px-5 hover:py-5 hover:px-7 hover:m-2 hover:-ml-2 duration-150 hover:ease-in bg-bg-base-2 hover:bg-white m-4 ml-0 font-extrabold text-xl'
-              onClick={() =>
-                openInNewTab('https://resume.creddle.io/resume/6inw2moecgd')
-              }
-            >
-              Resume
-            </button>
-            <img
-              className='m-3 hover:m-1 h-10 hover:h-14 duration-300 ease-in-out cursor-pointer aspect-square object-contain'
-              onClick={() =>
-                openInNewTab('https://www.linkedin.com/in/donnyphanmeceng/')
-              }
-              src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Font_Awesome_5_brands_linkedin-in.svg/210px-Font_Awesome_5_brands_linkedin-in.svg.png'
-              alt=''
-            />
-            <img
-              className='m-3 hover:m-1 h-10 hover:h-14 duration-300 ease-in-out cursor-pointer aspect-square object-contain'
-              onClick={() => openInNewTab('https://github.com/DonThePhan')}
-              src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/240px-Octicons-mark-github.svg.png'
-              alt=''
-            />
+          <div className='pt-4 w-full flex items-center justify-center md:justify-start gap-6'>
+              <button
+                className='border border-text rounded-full py-4 px-5 hover:scale-125 duration-150 hover:ease-in bg-bg-base-2 hover:bg-white  font-extrabold text-xl'
+                onClick={() =>
+                  openInNewTab('https://resume.creddle.io/resume/6inw2moecgd')
+                }
+              >
+                Resume
+              </button>
+              <img
+                className='hover:scale-150 h-10 duration-300 ease-in-out cursor-pointer aspect-square object-contain'
+                onClick={() =>
+                  openInNewTab('https://www.linkedin.com/in/donnyphanmeceng/')
+                }
+                src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Font_Awesome_5_brands_linkedin-in.svg/210px-Font_Awesome_5_brands_linkedin-in.svg.png'
+                alt=''
+              />
+              <img
+                className='hover:scale-150 h-10 duration-300 ease-in-out cursor-pointer aspect-square object-contain'
+                onClick={() => openInNewTab('https://github.com/DonThePhan')}
+                src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/240px-Octicons-mark-github.svg.png'
+                alt=''
+              />
           </div>
         </div>
       </div>
