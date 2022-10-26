@@ -90,7 +90,7 @@ function AboutMe() {
           </div>
           <div className='pt-4 w-full flex items-center justify-center md:justify-start gap-6'>
               <button
-                className='border border-text rounded-full py-4 px-5 hover:scale-125 duration-150 hover:ease-in bg-bg-base-2 hover:bg-white  font-extrabold text-xl'
+                className='border border-text rounded-full py-4 px-5 hover:scale-125 duration-150 hover:ease-in bg-bg-base-2 hover:bg-white font-extrabold text-xl'
                 onClick={() =>
                   openInNewTab('https://resume.creddle.io/resume/6inw2moecgd')
                 }
@@ -98,7 +98,7 @@ function AboutMe() {
                 Resume
               </button>
               <img
-                className='hover:scale-150 h-10 duration-300 ease-in-out cursor-pointer aspect-square object-contain'
+                className='hover:scale-150 h-10 duration-300 ease-in-out cursor-pointer object-contain'
                 onClick={() =>
                   openInNewTab('https://www.linkedin.com/in/donnyphanmeceng/')
                 }
@@ -106,7 +106,7 @@ function AboutMe() {
                 alt=''
               />
               <img
-                className='hover:scale-150 h-10 duration-300 ease-in-out cursor-pointer aspect-square object-contain'
+                className='hover:scale-150 h-10 duration-300 ease-in-out cursor-pointer object-contain'
                 onClick={() => openInNewTab('https://github.com/DonThePhan')}
                 src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/240px-Octicons-mark-github.svg.png'
                 alt=''
