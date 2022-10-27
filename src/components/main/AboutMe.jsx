@@ -81,12 +81,12 @@ function AboutMe() {
         >
           <div className={h1Size}>
             <h1 className='font-bold'>Hi! I'm Donny</h1>
-            <h1>I'm a Junior Web Developer</h1>
+            <h1>I'm a Web Developer</h1>
           </div>
           <div className='w-full'>
-            <p>Currently Learning TypeScript</p>
             <p>Based in Toronto</p>
-            <p>Recent Graduate from Lighthouse Labs</p>
+            <p>Full Stack</p>
+            <p>Currently Learning TypeScript</p>
           </div>
           <div className='pt-4 w-full flex items-center justify-center md:justify-start gap-6'>
               <button
