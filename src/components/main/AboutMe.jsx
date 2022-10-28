@@ -89,28 +89,28 @@ function AboutMe() {
             <p>Currently Learning TypeScript</p>
           </div>
           <div className='pt-4 w-full flex items-center justify-center md:justify-start gap-6'>
-              <button
-                className='border border-text rounded-full py-4 px-5 hover:scale-125 duration-150 hover:ease-in bg-bg-base-2 hover:bg-white font-extrabold text-xl'
-                onClick={() =>
-                  openInNewTab('https://resume.creddle.io/resume/6inw2moecgd')
-                }
-              >
-                Resume
-              </button>
-              <img
-                className='hover:scale-150 h-10 duration-300 ease-in-out cursor-pointer object-contain'
-                onClick={() =>
-                  openInNewTab('https://www.linkedin.com/in/donnyphanmeceng/')
-                }
-                src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Font_Awesome_5_brands_linkedin-in.svg/210px-Font_Awesome_5_brands_linkedin-in.svg.png'
-                alt=''
-              />
-              <img
-                className='hover:scale-150 h-10 duration-300 ease-in-out cursor-pointer object-contain'
-                onClick={() => openInNewTab('https://github.com/DonThePhan')}
-                src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/240px-Octicons-mark-github.svg.png'
-                alt=''
-              />
+            <button
+              className='border border-text rounded-full py-4 px-5 hover:scale-125 duration-150 hover:ease-in bg-bg-base-2 hover:bg-white font-extrabold text-xl'
+              onClick={() =>
+                openInNewTab('https://resume.creddle.io/resume/6inw2moecgd')
+              }
+            >
+              Resume
+            </button>
+            <img
+              className='hover:scale-150 h-10 duration-300 ease-in-out cursor-pointer object-contain'
+              onClick={() =>
+                openInNewTab('https://www.linkedin.com/in/donnyphanmeceng/')
+              }
+              src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Font_Awesome_5_brands_linkedin-in.svg/210px-Font_Awesome_5_brands_linkedin-in.svg.png'
+              alt=''
+            />
+            <img
+              className='hover:scale-150 h-10 duration-300 ease-in-out cursor-pointer object-contain'
+              onClick={() => openInNewTab('https://github.com/DonThePhan')}
+              src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/240px-Octicons-mark-github.svg.png'
+              alt=''
+            />
           </div>
         </div>
       </div>
@@ -152,10 +152,10 @@ function AboutMe() {
           </h2>
           <div className='flex flex-col text-left'>
             <p className='pb-2'>
-              A Full-Stack Web Developer coming from 9 years of experience in
-              Industrial Design and Project Management. I’m looking to create
-              positive impacts via Coding, Art, Design, Animation, Music, Logic
-              and Problem solving.
+              A Full-Stack Web Developer coming from 10 years of experience in
+              Engineering, Design, Project Management and Marketing. I’m looking
+              to create positive impacts via Coding, Art, Design, Animation,
+              Music, Logic and Problem solving.
             </p>
             <p className='py-2'>
               When I'm not developing, I'm off social dancing, biking or working
