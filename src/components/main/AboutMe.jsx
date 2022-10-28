@@ -153,13 +153,14 @@ function AboutMe() {
           <div className='flex flex-col text-left'>
             <p className='pb-2'>
               A Full-Stack Web Developer coming from 10 years of experience in
-              Engineering, Design, Project Management and Marketing. I create
-              positive impacts via Coding, Art, Design, Animation, Music, Logic
-              and Problem solving. Open to relocation
+              Engineering, Design, Project Management and Marketing. I solve
+              real world problems and create positive impacts via Coding, Art,
+              Design, Animation, Music, Logic and Problem solving. Open to
+              relocation
             </p>
             <p className='py-2'>
-              When I'm not coding, I'm off social dancing, biking, doing something theatre related or working
-              on a DIY.
+              When I'm not coding, I'm off social dancing, biking, doing
+              something theatre related or working on a DIY.
             </p>
           </div>
         </div>
