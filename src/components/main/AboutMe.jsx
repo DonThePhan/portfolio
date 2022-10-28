@@ -158,7 +158,7 @@ function AboutMe() {
               and Problem solving. Open to relocation
             </p>
             <p className='py-2'>
-              When I'm not developing, I'm off social dancing, biking, doing something theatre related or working
+              When I'm not coding, I'm off social dancing, biking, doing something theatre related or working
               on a DIY.
             </p>
           </div>
