@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
-import Card from "./Card";
-import TailwindContext from "../../store/tailwind-context";
+import React, { useContext } from 'react';
+import Card from './Card';
+import TailwindContext from '../../store/tailwind-context';
 
 function Projects() {
   const { h1Size, sectionPaddingY } = useContext(TailwindContext);
@@ -10,7 +10,7 @@ function Projects() {
         Projects
       </h2>
       <div className='flex flex-col w-full items-center sm:flex-row sm:flex-wrap sm:justify-around'>
-        <Card
+        {/* <Card
           imgURL='images/story.png'
           gifURL='images/story.gif'
           title='StoryTime'
@@ -30,7 +30,7 @@ function Projects() {
         >
           This web app makes use of Edamam's recipe API. Front End with React
           with data & authentication backed up in Firebase.
-        </Card>
+        </Card> */}
         <Card
           imgURL='images/store.png'
           gifURL='images/store.gif'
@@ -45,7 +45,7 @@ function Projects() {
           imgURL='images/tweeter.png'
           gifURL='images/tweeter.gif'
           title='Tweeter'
-          appLink='https://tweeter-angry-bird.herokuapp.com/'
+          appLink='https://tweeter-angry-bird-7c2d38723431.herokuapp.com/'
           gitHubLink='https://github.com/DonThePhan/tweeter'
           tech='jQuery, AJAX, Node.js, Express, Firebase and Git/GitHub'
         >

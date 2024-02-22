@@ -92,7 +92,7 @@ function AboutMe() {
             <button
               className='border border-text rounded-full py-4 px-5 hover:scale-125 duration-150 hover:ease-in bg-bg-base-2 hover:bg-white font-extrabold text-xl'
               onClick={() =>
-                openInNewTab('https://resume.creddle.io/resume/6inw2moecgd')
+                openInNewTab('https://resume.creddle.io/resume/77jtaci2b61')
               }
             >
               Resume
@@ -152,11 +152,11 @@ function AboutMe() {
           </h2>
           <div className='flex flex-col text-left'>
             <p className='pb-2'>
-              A Full-Stack Web Developer with 10 years of cross-disciplinary
-              experience in Engineering, Design, Project Management and
-              Marketing. I solve real world problems and create positive impacts
-              via Coding, Art, Design, Animation, Music and Logic. Open to
-              relocation.
+              A Full-Stack Web Developer with 11 years of cross-disciplinary
+              experience in Web Development, Engineering, Design, Project
+              Management and Marketing. I solve real world problems and create
+              positive impacts via Coding, Art, Design, Animation, Music and
+              Logic. Open to relocation.
             </p>
             <p className='py-2'>
               When I'm not coding, I'm off social dancing, biking, doing

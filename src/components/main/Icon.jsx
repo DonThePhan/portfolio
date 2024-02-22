@@ -31,6 +31,12 @@ export const iconsObj = {
   Chai: 'https://www.geekandjob.com/uploads/wiki/3f95fb8c6af2f506f11b253ea05ba694.png',
   Figma:
     'https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Figma-logo.svg/160px-Figma-logo.svg.png',
+  GraphQL:
+    'https://upload.wikimedia.org/wikipedia/commons/1/17/GraphQL_Logo.svg',
+  Jenkins:
+    'https://upload.wikimedia.org/wikipedia/commons/e/e9/Jenkins_logo.svg',
+  AngularJS: 'https://material.angularjs.org/latest/img/logo.svg',
+  Jira: 'https://cdn.freelogovectors.net/wp-content/uploads/2023/09/jira-software_logo-freelogovectors.net_.png',
   // Canva:
   //   'https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/Canva_Logo.png/800px-Canva_Logo.png',
   // 'Next.js':
@@ -45,11 +51,17 @@ const Icon = ({ keyName, link }) => {
       onMouseOut={() => setHovering(false)}
     >
       <img
-        className='m-2 xs:m-4 hover:m-0 h-12 xs:h-16 hover:h-16 xs:hover:h-24 aspect-square object-contain duration-300 ease-in-out drop-shadow-[3px_3px_2px_rgba(0,0,0,.5)]'
+        className='hover:m-0 m-2 h-12 hover:h-16 xs:m-4 xs:h-20 xs:hover:h-28 aspect-square object-contain duration-300 ease-in-out drop-shadow-[3px_3px_2px_rgba(0,0,0,.5)]'
         src={link}
         alt='logo'
       />
-      <span className={`opacity-0 duration-500 ease-in-out ${hovering && 'opacity-100'}`}>{keyName}</span>
+      <span
+        className={`opacity-0 duration-500 ease-in-out ${
+          hovering && 'opacity-100'
+        }`}
+      >
+        {keyName}
+      </span>
     </div>
   );
 };
