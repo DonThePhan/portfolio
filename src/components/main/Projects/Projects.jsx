@@ -10,7 +10,7 @@ function Projects() {
         Projects
       </h2>
       <div className='flex flex-col w-full items-center sm:flex-row sm:flex-wrap sm:justify-around'>
-        {/* <Card
+        <Card
           imgURL='images/story.png'
           gifURL='images/story.gif'
           title='StoryTime'
@@ -20,7 +20,7 @@ function Projects() {
         >
           StoryTime connects readers with people who want to be read to.
         </Card>
-        <Card
+        {/* <Card
           imgURL='images/food.png'
           gifURL='images/food.gif'
           title='Food API'
