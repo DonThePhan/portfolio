@@ -86,7 +86,6 @@ function AboutMe() {
           <div className='w-full'>
             <p>Based in Toronto</p>
             <p>Full Stack</p>
-            <p>Currently Learning TypeScript</p>
           </div>
           <div className='pt-4 w-full flex items-center justify-center md:justify-start gap-6'>
             <button

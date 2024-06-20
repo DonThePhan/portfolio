@@ -6,6 +6,8 @@ export const iconsObj = {
   CSS: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/CSS3_logo_and_wordmark.svg/170px-CSS3_logo_and_wordmark.svg.png',
   JavaScript:
     'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/JavaScript-logo.png/240px-JavaScript-logo.png',
+  TypeScript:
+    'https://upload.wikimedia.org/wikipedia/commons/4/4c/Typescript_logo_2020.svg',
   React:
     'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/270px-React-icon.svg.png',
   jQuery:
