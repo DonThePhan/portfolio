@@ -20,6 +20,18 @@ function Projects() {
         >
           StoryTime connects readers with people who want to be read to.
         </Card>
+        <Card
+          imgURL='images/path.png'
+          gifURL='images/path.gif'
+          title='PathFinder'
+          appLink='https://path-finder-90df8.web.app/'
+          gitHubLink='https://github.com/DonThePhan/Grid-Path-Finder'
+          tech='React, Firebase and Git/GitHub'
+        >
+          Grid Path Finder instantly finds the shortest path using path finding
+          algorithms Dijkstra's and A*. Features include auto generating maze
+          algorithm, users can draw their own obstacles, and responsive design.
+        </Card>
         {/* <Card
           imgURL='images/food.png'
           gifURL='images/food.gif'
@@ -50,18 +62,6 @@ function Projects() {
           tech='jQuery, AJAX, Node.js, Express, Firebase and Git/GitHub'
         >
           Single-page Twitter clone.
-        </Card>
-        <Card
-          imgURL='images/path.png'
-          gifURL='images/path.gif'
-          title='PathFinder'
-          appLink='https://path-finder-90df8.web.app/'
-          gitHubLink='https://github.com/DonThePhan/Grid-Path-Finder'
-          tech='React, Firebase and Git/GitHub'
-        >
-          Grid Path Finder instantly finds the shortest path using path finding
-          algorithms Dijkstra's and A*. Features include auto generating maze
-          algorithm, users can draw their own obstacles, and responsive design.
         </Card>
         <Card
           imgURL='images/sudoku.png'
