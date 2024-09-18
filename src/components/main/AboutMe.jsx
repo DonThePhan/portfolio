@@ -151,7 +151,7 @@ function AboutMe() {
           </h2>
           <div className='flex flex-col text-left'>
             <p className='pb-2'>
-              A Full-Stack Web Developer with 11 years of cross-disciplinary
+              A Full-Stack Web Developer with 12 years of cross-disciplinary
               experience in Web Development, Engineering, Design, Project
               Management and Marketing. I solve real world problems and create
               positive impacts via Coding, Art, Design, Animation, Music and
