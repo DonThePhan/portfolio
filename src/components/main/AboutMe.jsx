@@ -81,7 +81,7 @@ function AboutMe() {
         >
           <div className={h1Size}>
             <h1 className='font-bold'>Hi! I'm Donny</h1>
-            <h1>I'm a Web Developer</h1>
+            <h1>I'm a Developer</h1>
           </div>
           <div className='w-full'>
             <p>Based in Toronto</p>
@@ -91,7 +91,9 @@ function AboutMe() {
             <button
               className='border border-text rounded-full py-4 px-5 hover:scale-125 duration-150 hover:ease-in bg-bg-base-2 hover:bg-white font-extrabold text-xl'
               onClick={() =>
-                openInNewTab('https://resume.creddle.io/resume/77jtaci2b61')
+                openInNewTab(
+                  'https://drive.google.com/file/d/1_Sxh4v8-xpxj-sjLcQSg4c4l_VIYRIME/view',
+                )
               }
             >
               Resume
@@ -151,11 +153,11 @@ function AboutMe() {
           </h2>
           <div className='flex flex-col text-left'>
             <p className='pb-2'>
-              A Full-Stack Web Developer with 12 years of cross-disciplinary
-              experience in Web Development, Engineering, Design, Project
-              Management and Marketing. I solve real world problems and create
-              positive impacts via Coding, Art, Design, Animation, Music and
-              Logic. Open to relocation.
+              Developer with 12 years of cross-disciplinary experience in
+              software, engineering, design, project management, and marketing.
+              I specialize in solving real-world problems and driving positive
+              outcomes by blending technical expertise with creative and
+              artistic skills. Open to relocation and remote work.
             </p>
             <p className='py-2'>
               When I'm not coding, I'm off social dancing, biking, doing
