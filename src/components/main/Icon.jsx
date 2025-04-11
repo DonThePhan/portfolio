@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 
 /** SOURCE: https://www.iconfinder.com/ */
 export const iconsObj = {
@@ -11,7 +11,7 @@ export const iconsObj = {
   React:
     'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/270px-React-icon.svg.png',
   jQuery:
-    'https://upload.wikimedia.org/wikipedia/en/thumb/9/9e/JQuery_logo.svg/320px-JQuery_logo.svg.png',
+    'https://miro.medium.com/v2/resize:fit:1400/format:webp/0*eFomJUFua8tuqe8g.png',
   Bootstrap:
     'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Bootstrap_logo.svg/301px-Bootstrap_logo.svg.png',
   Sass: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Sass_Logo_Color.svg/320px-Sass_Logo_Color.svg.png',
@@ -40,14 +40,14 @@ export const iconsObj = {
   Figma:
     'https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Figma-logo.svg/160px-Figma-logo.svg.png',
   'Node.js':
-    'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/320px-Node.js_logo.svg.png',
+    'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/320px-Node.js_logo.svg.png'
   // Canva:
   //   'https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/Canva_Logo.png/800px-Canva_Logo.png',
   // 'Next.js':
   //   'https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Next.js_Logotype_Light_Background.svg/320px-Next.js_Logotype_Light_Background.svg.png',
 };
 
-const Icon = ({ keyName, link }) => {
+const Icon = ({keyName, link}) => {
   const [hovering, setHovering] = useState(false);
   return (
     <div
