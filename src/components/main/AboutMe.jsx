@@ -71,7 +71,7 @@ function AboutMe() {
       <div className='flex flex-col items-center sm:flex-row'>
         {/** IMAGE */}
         <img
-          src='images/profile_pic.jpeg'
+          src='/images/profile_pic.jpeg'
           className='shadow-2xl w-full aspect-square md:rounded-full sm:max-w-xs md:my-8'
           alt='profile pic'
         />
