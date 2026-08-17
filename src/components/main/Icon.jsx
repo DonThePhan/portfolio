@@ -15,7 +15,6 @@ const WIKIMEDIA = 'https://upload.wikimedia.org/wikipedia/commons/';
 export const iconsObj = {
   Figma: `${WIKIMEDIA}3/33/Figma-logo.svg`,
   React: `${WIKIMEDIA}a/a7/React-icon.svg`,
-  TypeScript: `${WIKIMEDIA}4/4c/Typescript_logo_2020.svg`,
   JavaScript: `${WIKIMEDIA}6/6a/JavaScript-logo.png`,
   HTML: `${WIKIMEDIA}6/61/HTML5_logo_and_wordmark.svg`,
   CSS: `${WIKIMEDIA}d/d5/CSS3_logo_and_wordmark.svg`,

@@ -16,8 +16,8 @@ function Projects() {
           tech='React, Figma, GraphQL, design tokens and WCAG 2.1 AA'
         >
           A multi-agency transit platform serving 5,000 daily commuters across
-          Florida and Oregon. As sole designer and front-end engineer I designed
-          and built the entire fare management experience end to end — account
+          Florida and Oregon. As sole designer and front-end owner I took the
+          entire fare management experience from brief to shipped — account
           creation, transit card management, pass and stored-value purchasing,
           and activity history. Rebuilt around progressive disclosure so riders
           make one decision at a time. Now used by 70,000 registered riders and
@@ -28,7 +28,7 @@ function Projects() {
           title='Platform Design System'
           tech='React, design tokens, theming, accessibility and Figma'
         >
-          A shared, themeable React component library that I built and own.
+          A shared, themeable React component library that I designed and own.
           SunRail in Orlando and Cascades East Transit in Oregon run the same
           components under different brands, so a new agency is a theme rather
           than a fork. Contrast, focus states and semantics are enforced at the
@@ -40,12 +40,13 @@ function Projects() {
           title='TOMS — AngularJS to React'
           tech='React, AngularJS, Claude, Cursor and design direction'
         >
-          Led the modernization of the agency back-office platform as design
-          director and technical lead, directing Claude page by page and
-          steering the output rather than just accepting it. Every screen got a
-          design decision first — layout, hierarchy, interaction — then I drove
-          the generation against it and reviewed each result. 55 screens rebuilt
-          in three weeks, modernized rather than merely ported.
+          The clearest example of how I work. I led the modernization of the
+          agency back-office platform as design director and technical lead,
+          directing Claude page by page and steering the output rather than just
+          accepting it. Every screen got a design decision from me first —
+          layout, hierarchy, interaction — then I drove the generation against
+          it and reviewed and corrected each result. 55 screens rebuilt in three
+          weeks, modernized rather than merely ported.
         </Card>
         <Card
           icon='fa-solid fa-mobile-screen'

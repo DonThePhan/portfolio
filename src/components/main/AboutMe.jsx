@@ -87,7 +87,7 @@ function AboutMe() {
           </div>
           <div className='w-full'>
             <p>Based in Toronto</p>
-            <p>I design interfaces and build them in production</p>
+            <p>Figma to shipped React, without the handoff</p>
           </div>
           <div className='pt-4 w-full flex items-center justify-center md:justify-start gap-6'>
             <button
@@ -161,18 +161,25 @@ function AboutMe() {
           </h2>
           <div className='flex flex-col text-left'>
             <p className='pb-2'>
-              I'm a design engineer — I design interfaces and build them in
-              production. Not "a bit of both": for the last four years I've been
-              the sole designer and front-end engineer on Rider Web, a
-              multi-agency transit platform, owning it from CTO brief to Figma
-              prototype to deployed React.
+              I'm a design engineer — I own interfaces from brief to shipped.
+              For the last four years I've been the sole designer and front-end
+              owner on Rider Web, a multi-agency transit platform, taking it
+              from CTO brief to Figma prototype to deployed React.
+            </p>
+            <p className='py-2'>
+              I don't hand-write much of the implementation any more. I make the
+              design and technical calls, then direct AI to build against them,
+              reviewing and correcting every screen. On TOMS I rebuilt 55 legacy
+              screens in three weeks that way — art-directing each page before a
+              line was generated. The judgement is the job; the typing is the
+              fast part.
             </p>
             <p className='py-2'>
               What I care about most is the part between "it works" and "it
               feels good." I'll get the logic right, then keep going — tuning
               the interaction and detail until the thing is actually a pleasure
-              to use. That instinct is exactly why I build instead of handing
-              off: the feel is what gets lost in translation.
+              to use. That's exactly why I stay involved through implementation:
+              the feel is what gets lost in a handoff.
             </p>
             <p className='py-2'>
               Before software I spent seven years as a mechanical designer and
