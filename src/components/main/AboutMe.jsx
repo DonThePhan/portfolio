@@ -81,11 +81,13 @@ function AboutMe() {
         >
           <div className={h1Size}>
             <h1 className='font-bold'>Hi! I'm Donny</h1>
-            <h1>I'm a Developer</h1>
+            {/* A <p> rather than a second <h1>: sizing comes from the wrapper,
+                so this looks identical but leaves one h1 on the page. */}
+            <p>I'm a Design Engineer</p>
           </div>
           <div className='w-full'>
             <p>Based in Toronto</p>
-            <p>Full Stack</p>
+            <p>I design interfaces and build them in production</p>
           </div>
           <div className='pt-4 w-full flex items-center justify-center md:justify-start gap-6'>
             <button
@@ -98,20 +100,26 @@ function AboutMe() {
             >
               Resume
             </button>
-            <img
-              className='hover:scale-150 h-10 duration-300 ease-in-out cursor-pointer object-contain'
-              onClick={() =>
-                openInNewTab('https://www.linkedin.com/in/donnyphanmeceng/')
-              }
-              src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Font_Awesome_5_brands_linkedin-in.svg/210px-Font_Awesome_5_brands_linkedin-in.svg.png'
-              alt=''
-            />
-            <img
-              className='hover:scale-150 h-10 duration-300 ease-in-out cursor-pointer object-contain'
-              onClick={() => openInNewTab('https://github.com/DonThePhan')}
-              src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/240px-Octicons-mark-github.svg.png'
-              alt=''
-            />
+            {/* Font Awesome is already loaded for the nav, so these are glyphs
+                rather than the hotlinked images that were 400ing. */}
+            <a
+              href='https://www.linkedin.com/in/donthephan'
+              target='_blank'
+              rel='noopener noreferrer'
+              aria-label='LinkedIn'
+              className='hover:scale-150 h-10 flex items-center text-4xl duration-300 ease-in-out'
+            >
+              <i className='fa-brands fa-linkedin-in' aria-hidden='true' />
+            </a>
+            <a
+              href='https://github.com/DonThePhan'
+              target='_blank'
+              rel='noopener noreferrer'
+              aria-label='GitHub'
+              className='hover:scale-150 h-10 flex items-center text-4xl duration-300 ease-in-out'
+            >
+              <i className='fa-brands fa-github' aria-hidden='true' />
+            </a>
           </div>
         </div>
       </div>
@@ -133,7 +141,7 @@ function AboutMe() {
           <h2 className={h1Size}>Skills</h2>
           <div className='flex flex-row flex-wrap justify-center'>
             {Object.entries(iconsObj).map(([key, link]) => {
-              return <Icon keyName={key} link={link} />;
+              return <Icon key={key} keyName={key} link={link} />;
             })}
             {/* {skills.map((skill) => (
               <div key={skill} className='px-4 pb-3'>
@@ -153,11 +161,25 @@ function AboutMe() {
           </h2>
           <div className='flex flex-col text-left'>
             <p className='pb-2'>
-              Developer with 12 years of cross-disciplinary experience in
-              software, engineering, design, project management, and marketing.
-              I specialize in solving real-world problems and driving positive
-              outcomes by blending technical expertise with creative and
-              artistic skills. Open to relocation and remote work.
+              I'm a design engineer — I design interfaces and build them in
+              production. Not "a bit of both": for the last four years I've been
+              the sole designer and front-end engineer on Rider Web, a
+              multi-agency transit platform, owning it from CTO brief to Figma
+              prototype to deployed React.
+            </p>
+            <p className='py-2'>
+              What I care about most is the part between "it works" and "it
+              feels good." I'll get the logic right, then keep going — tuning
+              the interaction and detail until the thing is actually a pleasure
+              to use. That instinct is exactly why I build instead of handing
+              off: the feel is what gets lost in translation.
+            </p>
+            <p className='py-2'>
+              Before software I spent seven years as a mechanical designer and
+              project manager, which is why I think in systems and tolerances.
+              Open to remote Design Engineer, UX Engineer and Product Designer
+              roles with U.S. companies — Canadian resident, no visa sponsorship
+              required.
             </p>
             <p className='py-2'>
               When I'm not coding, I'm off social dancing, biking, doing
