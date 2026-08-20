@@ -7,7 +7,7 @@ function AboutMe() {
   /** YouTube video Logic - START */
   const homeDiv = useRef();
   const [opts, setOpts] = useState({});
-  const [hideVideo, setHideVideo] = useState(false);
+  const [hideVideo, setHideVideo] = useState(true); // Set to true when video updated
 
   // Whenever video container ('homeDiv') size changes, update video dims ('opts') to fit
   const [resizeObserver, setResizeObserver] = useState();
