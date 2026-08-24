@@ -14,6 +14,7 @@ function Projects() {
           icon='fa-solid fa-train-subway'
           videoURL='/videos/rider-web.mp4'
           posterURL='/videos/rider-web-poster.jpg'
+          appLink='https://sunrail-account.transitsherpa.com/'
           title='Rider Web — Fare Management'
           tech='React, Figma, GraphQL, design tokens and WCAG 2.1 AA'
         >
@@ -24,6 +25,15 @@ function Projects() {
           and activity history. Rebuilt around progressive disclosure so riders
           make one decision at a time. Now used by 70,000 registered riders and
           has processed $5.5M in fares.
+        </Card>
+        <Card
+          icon='fa-solid fa-mobile-screen'
+          title='CET Go'
+          tech='Figma, mobile UI and brand'
+        >
+          Graphic and interface design for the Cascades East Transit mobile app,
+          carrying the rider experience from the web platform onto a phone in
+          the agency's own brand.
         </Card>
         <Card
           icon='fa-solid fa-swatchbook'
@@ -39,6 +49,8 @@ function Projects() {
         </Card>
         <Card
           icon='fa-solid fa-arrows-rotate'
+          videoURL='/videos/toms.mp4'
+          posterURL='/videos/toms-poster.jpg'
           title='TOMS — AngularJS to React'
           tech='React, AngularJS, Claude, Cursor and design direction'
         >
@@ -49,15 +61,6 @@ function Projects() {
           layout, hierarchy, interaction — then I drove the generation against
           it and reviewed and corrected each result. 55 screens rebuilt in three
           weeks, modernized rather than merely ported.
-        </Card>
-        <Card
-          icon='fa-solid fa-mobile-screen'
-          title='CET Go'
-          tech='Figma, mobile UI and brand'
-        >
-          Graphic and interface design for the Cascades East Transit mobile app,
-          carrying the rider experience from the web platform onto a phone in
-          the agency's own brand.
         </Card>
       </div>
 
