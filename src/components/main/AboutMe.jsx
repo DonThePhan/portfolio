@@ -94,7 +94,7 @@ function AboutMe() {
               className='border border-text rounded-full py-4 px-5 hover:scale-125 duration-150 hover:ease-in bg-bg-base-2 hover:bg-white font-extrabold text-xl'
               onClick={() =>
                 openInNewTab(
-                  'https://drive.google.com/file/d/1_Sxh4v8-xpxj-sjLcQSg4c4l_VIYRIME/view',
+                  'https://drive.google.com/file/d/1C8buCgQRSxCCNuGe_Qz_mH2z1wOYvZSk/view',
                 )
               }
             >
