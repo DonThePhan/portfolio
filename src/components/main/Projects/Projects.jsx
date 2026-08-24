@@ -12,6 +12,8 @@ function Projects() {
       <div className='flex flex-col w-full items-center sm:flex-row sm:flex-wrap sm:justify-around'>
         <Card
           icon='fa-solid fa-train-subway'
+          videoURL='/videos/rider-web.mp4'
+          posterURL='/videos/rider-web-poster.jpg'
           title='Rider Web — Fare Management'
           tech='React, Figma, GraphQL, design tokens and WCAG 2.1 AA'
         >

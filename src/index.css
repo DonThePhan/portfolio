@@ -14,18 +14,6 @@
 
   --breakpoint-xs: 480px;
   --breakpoint-3xl: 1920px;
-
-  --animate-fade: fadeOut 1s forwards ease-in-out;
-
-  @keyframes fadeOut {
-    0% {
-      max-height: 200px;
-    }
-    100% {
-      max-height: 0;
-      margin: 0;
-    }
-  }
 }
 
 /* ---------------------------------------------------------------------------

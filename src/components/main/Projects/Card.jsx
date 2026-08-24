@@ -1,10 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Button from '../../UI/Button';
 
 function Card(props) {
-  const { imgURL, gifURL, icon, title, appLink, gitHubLink, children, tech } =
-    props;
+  const {
+    imgURL,
+    gifURL,
+    videoURL,
+    posterURL,
+    icon,
+    title,
+    appLink,
+    gitHubLink,
+    children,
+    tech,
+  } = props;
   const [hover, setHover] = useState(false);
+  const videoRef = useRef(null);
 
   const openInNewTab = (url) => {
     window.open(url, '_blank', 'noopener,noreferrer');
@@ -14,13 +25,43 @@ function Card(props) {
     setHover((prev) => !prev);
   };
 
+  // Mirrors the GIF cards' hover-to-animate behaviour. Controls stay on so
+  // touch devices, which have no hover state, can still press play manually.
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (hover) {
+      video.play().catch(() => {});
+    } else {
+      video.pause();
+      video.currentTime = 0;
+    }
+  }, [hover]);
+
   return (
     <div
       onMouseEnter={toggleHover}
       onMouseLeave={toggleHover}
       className='flex flex-col sm:w-2/5 grow m-3  shadow-md  bg-bg-base-2 hover:bg-transparent border border-transparent hover:border-text rounded-xl p-6 self-stretch duration-300'
     >
-      {imgURL ? (
+      {videoURL ? (
+        /* Client work that does have a recording gets a real player rather than
+           a hover-gif: these flows run minutes, not seconds, so the visitor
+           needs to be able to pause and scrub. preload='metadata' keeps the
+           page weight down until someone actually presses play. */
+        <video
+          ref={videoRef}
+          className='w-full rounded-xl drop-shadow-xl bg-bg-base-3'
+          src={videoURL}
+          poster={posterURL}
+          controls
+          muted
+          loop
+          playsInline
+          preload='metadata'
+          aria-label={`${title} walkthrough`}
+        />
+      ) : imgURL ? (
         <div className='relative'>
           <img
             className={`absolute w-full rounded-xl drop-shadow-xl border-base-100 z-10 transition-opacity duration-300 ${
