@@ -13,7 +13,12 @@ const Nav = () => {
       <NavButton section={section} setSection={setSection} heading='about'>
         <i className='fa-solid fa-user'></i>
       </NavButton>
-      <NavButton section={section} setSection={setSection} heading='projects'>
+      <NavButton
+        section={section}
+        setSection={setSection}
+        heading='work / personal projects'
+        target='projects'
+      >
         <i className='fa-solid fa-briefcase'></i>
       </NavButton>
       <NavButton section={section} setSection={setSection} heading='contact'>
@@ -25,14 +30,14 @@ const Nav = () => {
 
 export default Nav;
 
-const NavButton = ({ children, heading, section, setSection }) => {
+const NavButton = ({ children, heading, target, section, setSection }) => {
   return (
     <div
       className={`${classes.tooltip_custom} ${classes.tooltip_custom_media_query}`}
       data-tip={heading}
     >
       <Link
-        to={heading}
+        to={target ?? heading}
         spy={true}
         smooth={true}
         duration={500}

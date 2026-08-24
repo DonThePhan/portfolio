@@ -5,7 +5,36 @@ this first in a new session before doing anything else — it's more current
 than my own memory of the work.
 
 **Last updated:** 2026-08-24 (later session — TOMS video, card reorder, Rider
-Web app link)
+Web app link, Nav scroll-target bug fix)
+
+## Note on manual edits
+
+Some files (`Nav.jsx`, `AboutMe.jsx`, others) have been hand-edited directly
+outside this session since the last entries below were written — different
+border-radius values, a changed tooltip label, a different resume link, etc.
+Those are deliberate and current; don't treat older detail in this doc below
+as authoritative over what's actually in the files. Trust `git diff` /
+the files themselves over this doc's older prose when they disagree.
+
+## Bug fixed: floating nav "Work" link stopped scrolling
+
+`Nav.jsx`'s `NavButton` used a single `heading` prop for three different
+jobs: the tooltip text, the react-scroll `to` target, and the active-state
+comparison. That's fine as long as the label happens to equal the target
+section's `id` — which is how `home`/`about`/`contact` still work. When the
+Work link's tooltip was changed to `'work / personal projects'`, it broke:
+react-scroll went looking for an element matching that literal string
+instead of the actual target, `id='projects'` (set in `Projects.jsx`), and
+silently failed to scroll (logs `"target Element not found"` in the
+console).
+
+**Fix**: `NavButton` now takes an optional `target` prop, used as the
+react-scroll `to` when present (`to={target ?? heading}`), independent of
+the display label. `Nav.jsx`'s Work button now passes `target='projects'`.
+
+**Watch out for this again** if any nav label ever gets edited to something
+that isn't the literal section `id` — it'll fail exactly the same way,
+silently, with no visual error, only a console warning.
 
 ## The goal
 
