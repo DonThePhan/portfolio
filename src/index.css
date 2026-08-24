@@ -53,6 +53,20 @@
   }
 }
 
+/* Used by AboutMe's word-by-word reveal (mimics a streaming/generating-text
+   look) — referenced via the arbitrary-value animate-[word-fade-in_...]
+   utility on each word span. */
+@keyframes word-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

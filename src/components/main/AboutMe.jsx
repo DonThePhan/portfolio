@@ -3,6 +3,58 @@ import YouTube from 'react-youtube';
 import TailwindContext from '../store/tailwind-context';
 import Icon, { iconsObj } from './Icon';
 
+const WORD_STEP_MS = 10;
+const WORD_FADE_MS = 200;
+
+const ABOUT_PHILOSOPHY_TEXT =
+  'What I care about most is the part between "it works" and "it feels ' +
+  'good" — I\'ll get the logic right, then keep tuning the interaction ' +
+  "and detail until it's a pleasure to use. That's why I stay involved " +
+  'through implementation: the feel is what gets lost in a handoff.';
+
+const ABOUT_BACKGROUND_TEXT =
+  'Before software I spent seven years as a mechanical designer and ' +
+  'project manager, which is why I think in systems and tolerances. ' +
+  "I'm open to remote Design Engineer, UX Engineer and Product Designer " +
+  'roles with U.S. companies (Canadian resident, no visa sponsorship ' +
+  "required) — and when I'm not at the keyboard, I'm social dancing, " +
+  'photographing, biking, or working on a DIY.';
+
+// How long a FadeInWords block of this text takes to fully finish — used to
+// chain a second block so it starts after the first is done, rather than
+// both animating in parallel from the same start time.
+const wordsPlaytimeMs = (text) =>
+  text.split(' ').length * WORD_STEP_MS + WORD_FADE_MS;
+
+// Renders text as one span per word, each fading/sliding in with a small
+// stagger — reads like the word-by-word streaming look of an LLM response
+// rather than a plain instant reveal or block fade. Only meant to be mounted
+// at the moment it should play: the animation runs once on insertion, so if
+// this were left mounted (just hidden) the whole time, it would already have
+// finished by the time a visitor actually saw it. `startDelay` offsets every
+// word's delay so this block can begin after an earlier one has finished.
+const FadeInWords = ({ text, startDelay = 0 }) => (
+  <>
+    {text.split(' ').map((word, i) => (
+      // The space is a plain text node OUTSIDE the span, not trailing
+      // whitespace inside it — an inline-block establishes its own inline
+      // formatting context, so a trailing space inside one gets trimmed as
+      // if it were end-of-line, which ran every word together.
+      <React.Fragment key={i}>
+        <span
+          style={{
+            animationDelay: `${startDelay + i * WORD_STEP_MS}ms`,
+            animationDuration: `${WORD_FADE_MS}ms`,
+          }}
+          className='inline-block opacity-0 animate-[word-fade-in_0.4s_ease-out_forwards]'
+        >
+          {word}
+        </span>{' '}
+      </React.Fragment>
+    ))}
+  </>
+);
+
 function AboutMe() {
   /** YouTube video Logic - START */
   const homeDiv = useRef();
@@ -53,6 +105,8 @@ function AboutMe() {
   }, [videoPlayed]);
 
   /** YouTube video Logic - END */
+
+  const [aboutExpanded, setAboutExpanded] = useState(false);
 
   const { h1Size, sectionPaddingX, sectionPaddingY } =
     useContext(TailwindContext);
@@ -162,36 +216,57 @@ function AboutMe() {
           <div className='flex flex-col text-left'>
             <p className='pb-2'>
               I'm a design engineer — I own interfaces from brief to shipped.
-              For the last four years I've been the sole designer and front-end
-              owner on Rider Web, a multi-agency transit platform, taking it
-              from CTO brief to Figma prototype to deployed React.
+              For the last four years I've been sole designer and front-end
+              owner on Rider Web, a multi-agency transit platform, and I don't
+              hand-write most of the implementation any more: I make the
+              design and technical calls, then direct AI to build against
+              them, reviewing and correcting every screen. The judgement is
+              the job; the typing is the fast part.
             </p>
-            <p className='py-2'>
-              I don't hand-write much of the implementation any more. I make the
-              design and technical calls, then direct AI to build against them,
-              reviewing and correcting every screen. On TOMS I rebuilt 55 legacy
-              screens in three weeks that way — art-directing each page before a
-              line was generated. The judgement is the job; the typing is the
-              fast part.
-            </p>
-            <p className='py-2'>
-              What I care about most is the part between "it works" and "it
-              feels good." I'll get the logic right, then keep going — tuning
-              the interaction and detail until the thing is actually a pleasure
-              to use. That's exactly why I stay involved through implementation:
-              the feel is what gets lost in a handoff.
-            </p>
-            <p className='py-2'>
-              Before software I spent seven years as a mechanical designer and
-              project manager, which is why I think in systems and tolerances.
-              Open to remote Design Engineer, UX Engineer and Product Designer
-              roles with U.S. companies — Canadian resident, no visa sponsorship
-              required.
-            </p>
-            <p className='py-2'>
-              When I'm not coding, I'm off social dancing, biking, doing
-              something theatre related or working on a DIY.
-            </p>
+            {/* Collapsed state shows just enough of the next paragraph to
+                read as "this continues" rather than a generic "More" label —
+                clicking it (rather than a separate control) is what expands
+                the rest. */}
+            {!aboutExpanded && (
+              <button
+                type='button'
+                onClick={() => setAboutExpanded(true)}
+                aria-expanded={false}
+                aria-controls='about-more'
+                className='self-start text-left underline underline-offset-2 duration-150 hover:text-text/60'
+              >
+                What I care about most…
+              </button>
+            )}
+            {/* grid-rows-[0fr]→[1fr] on a grid track, with overflow-hidden on
+                the child, animates height smoothly without knowing the
+                content's height up front (a plain max-height guess would
+                either clip long content or leave a pause before collapse). */}
+            <div
+              id='about-more'
+              className={`grid transition-[grid-template-rows] duration-500 ease-out ${
+                aboutExpanded ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
+              }`}
+            >
+              <div className='overflow-hidden'>
+                {aboutExpanded && (
+                  <>
+                    <p className='py-2'>
+                      <FadeInWords text={ABOUT_PHILOSOPHY_TEXT} />
+                    </p>
+                    {/* Starts only once the paragraph above has fully
+                        finished fading in, rather than both paragraphs
+                        animating in parallel from the same start time. */}
+                    <p className='py-2'>
+                      <FadeInWords
+                        text={ABOUT_BACKGROUND_TEXT}
+                        startDelay={wordsPlaytimeMs(ABOUT_PHILOSOPHY_TEXT)}
+                      />
+                    </p>
+                  </>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </div>
