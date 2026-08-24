@@ -91,7 +91,7 @@ function AboutMe() {
           </div>
           <div className='pt-4 w-full flex items-center justify-center md:justify-start gap-6'>
             <button
-              className='border border-text rounded-xl py-4 px-5 hover:scale-125 duration-150 hover:ease-in bg-bg-base-2 hover:bg-white font-extrabold text-xl'
+              className='border border-text rounded-xl py-4 px-5 hover:scale-125 duration-150 hover:ease-[cubic-bezier(0.34,1.56,0.64,1)] bg-bg-base-2 hover:bg-bg-base-3 font-extrabold text-xl'
               onClick={() =>
                 openInNewTab(
                   'https://drive.google.com/file/d/1C8buCgQRSxCCNuGe_Qz_mH2z1wOYvZSk/view',
@@ -107,7 +107,7 @@ function AboutMe() {
               target='_blank'
               rel='noopener noreferrer'
               aria-label='LinkedIn'
-              className='hover:scale-150 h-10 flex items-center text-4xl duration-300 ease-in-out'
+              className='hover:scale-150 h-10 flex items-center text-4xl duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)]'
             >
               <i className='fa-brands fa-linkedin-in' aria-hidden='true' />
             </a>
@@ -116,7 +116,7 @@ function AboutMe() {
               target='_blank'
               rel='noopener noreferrer'
               aria-label='GitHub'
-              className='hover:scale-150 h-10 flex items-center text-4xl duration-300 ease-in-out'
+              className='hover:scale-150 h-10 flex items-center text-4xl duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)]'
             >
               <i className='fa-brands fa-github' aria-hidden='true' />
             </a>

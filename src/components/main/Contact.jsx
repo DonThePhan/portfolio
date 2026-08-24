@@ -37,7 +37,7 @@ const Contact = () => {
               target='_blank'
               rel='noopener noreferrer'
               aria-label='LinkedIn'
-              className='hover:scale-150 h-10 flex items-center text-4xl duration-300 ease-in-out'
+              className='hover:scale-150 h-10 flex items-center text-4xl duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)]'
             >
               <i className='fa-brands fa-linkedin-in' aria-hidden='true' />
             </a>
@@ -46,7 +46,7 @@ const Contact = () => {
               target='_blank'
               rel='noopener noreferrer'
               aria-label='GitHub'
-              className='hover:scale-150 h-10 flex items-center text-4xl duration-300 ease-in-out'
+              className='hover:scale-150 h-10 flex items-center text-4xl duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)]'
             >
               <i className='fa-brands fa-github' aria-hidden='true' />
             </a>

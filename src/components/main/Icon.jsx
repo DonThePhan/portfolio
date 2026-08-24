@@ -32,12 +32,18 @@ const Icon = ({ keyName, link }) => {
       onMouseOut={() => setHovering(false)}
     >
       <img
-        className='hover:m-0 m-2 h-12 hover:h-16 xs:m-4 xs:h-20 xs:hover:h-28 aspect-square object-contain duration-300 ease-in-out drop-shadow-[3px_3px_2px_rgba(0,0,0,.5)]'
+        /* Growing via a transform (rather than the old height/margin hover
+           swap) keeps this out of layout entirely — a size change on a real
+           box property, even one balanced by an equal-and-opposite margin
+           change, still nudges neighbours by a sub-pixel amount once an
+           overshooting easing curve is involved, which read as a left-right
+           shake in the row. transform: scale() never affects layout. */
+        className='m-2 h-12 hover:scale-[1.333] xs:m-4 xs:h-20 xs:hover:scale-[1.4] aspect-square object-contain duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] drop-shadow-[3px_3px_2px_rgba(0,0,0,.5)]'
         src={link}
         alt={keyName}
       />
       <span
-        className={`opacity-0 duration-500 ease-in-out ${
+        className={`opacity-0 duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${
           hovering && 'opacity-100'
         }`}
       >
