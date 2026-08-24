@@ -30,6 +30,7 @@ function Projects() {
           icon='fa-solid fa-mobile-screen'
           videoURL='/videos/cet.mp4'
           posterURL='/videos/cet-poster.jpg'
+          appLink='https://apps.apple.com/us/app/cet-go/id6755544747'
           portrait
           title='CET Go'
           tech='Figma, mobile UI and brand'

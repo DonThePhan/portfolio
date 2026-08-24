@@ -140,23 +140,44 @@ function Card(props) {
         </div>
       )}
 
-      <div
-        className={`grow flex flex-col transition-[filter] duration-500 ease-out ${
-          portrait && hover ? 'blur-[4px]' : ''
-        }`}
-      >
-        <h2
-          className={`text-2xl font-bold mt-6 ${portrait ? 'sm:mt-0' : ''}`}
+      <div className='grow flex flex-col'>
+        <div
+          className={`grow flex flex-col transition-[filter] duration-500 ease-out ${
+            portrait && hover ? 'blur-[4px]' : ''
+          }`}
         >
-          {title}
-        </h2>
+          <h2
+            className={`text-2xl font-bold mt-6 ${portrait ? 'sm:mt-0' : ''}`}
+          >
+            {title}
+          </h2>
 
-        <p>
-          <span className='font-bold my-4'>TECH USED: </span>
-          {tech}
-        </p>
-        <p className='my-4'>{children}</p>
-        <div className='flex justify-around mt-auto'>
+          <p>
+            <span className='font-bold my-4'>TECH USED: </span>
+            {tech}
+          </p>
+          <p className='my-4'>{children}</p>
+        </div>
+        {/* Kept out of the blurred group above so it stays sharp and
+            readable when the video pops forward. For a portrait card this
+            only appears on hover — same trigger as the pop — and sits at
+            the bottom of this column, i.e. centered in whatever width the
+            video (which grows over top of the rest of this column) hasn't
+            claimed, rather than centered across the whole card. A narrow
+            column can still wrap its text tall enough that this ends up
+            behind the video's bottom edge at some breakpoints — z-30 (above
+            the video's z-20) keeps it clickable either way. */}
+        <div
+          className={`flex justify-around mt-auto ${
+            portrait
+              ? `duration-300 ease-out ${
+                  hover
+                    ? 'opacity-100 z-30 relative'
+                    : 'opacity-0 pointer-events-none'
+                }`
+              : ''
+          }`}
+        >
           {gitHubLink && (
             <Button onClick={() => openInNewTab(gitHubLink)}>Repo Link</Button>
           )}
