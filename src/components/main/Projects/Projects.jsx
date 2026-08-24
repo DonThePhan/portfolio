@@ -28,6 +28,9 @@ function Projects() {
         </Card>
         <Card
           icon='fa-solid fa-mobile-screen'
+          videoURL='/videos/cet.mp4'
+          posterURL='/videos/cet-poster.jpg'
+          portrait
           title='CET Go'
           tech='Figma, mobile UI and brand'
         >
