@@ -91,7 +91,7 @@ function AboutMe() {
           </div>
           <div className='pt-4 w-full flex items-center justify-center md:justify-start gap-6'>
             <button
-              className='border border-text rounded-full py-4 px-5 hover:scale-125 duration-150 hover:ease-in bg-bg-base-2 hover:bg-white font-extrabold text-xl'
+              className='border border-text rounded-xl py-4 px-5 hover:scale-125 duration-150 hover:ease-in bg-bg-base-2 hover:bg-white font-extrabold text-xl'
               onClick={() =>
                 openInNewTab(
                   'https://drive.google.com/file/d/1C8buCgQRSxCCNuGe_Qz_mH2z1wOYvZSk/view',
