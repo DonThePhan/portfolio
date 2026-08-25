@@ -1,27 +1,24 @@
 import React, { useState } from 'react';
 
-const WIKIMEDIA = 'https://upload.wikimedia.org/wikipedia/commons/';
-
 /**
  * Curated for design engineering — the design tools and front-end stack I
  * actually reach for, rather than everything I have ever touched.
  *
- * These are the original file URLs, NOT the /thumb/ variants the site used to
- * use: Wikimedia now answers those with a 400, which had quietly broken every
- * logo on the live site. The list also no longer pulls from Medium,
- * iconfinder or one-off CDNs. Worth self-hosting these at some point so the
- * page does not depend on a third party at all.
+ * Self-hosted under public/images/skills/ rather than hotlinked from
+ * Wikimedia — the old /thumb/ URLs started 400ing and quietly broke every
+ * logo on the live site. No longer depends on a third party staying up or
+ * keeping a URL stable.
  */
 export const iconsObj = {
-  Figma: `${WIKIMEDIA}3/33/Figma-logo.svg`,
-  React: `${WIKIMEDIA}a/a7/React-icon.svg`,
-  JavaScript: `${WIKIMEDIA}6/6a/JavaScript-logo.png`,
-  HTML: `${WIKIMEDIA}6/61/HTML5_logo_and_wordmark.svg`,
-  CSS: `${WIKIMEDIA}d/d5/CSS3_logo_and_wordmark.svg`,
-  'Tailwind CSS': `${WIKIMEDIA}d/d5/Tailwind_CSS_Logo.svg`,
-  GraphQL: `${WIKIMEDIA}1/17/GraphQL_Logo.svg`,
-  'Node.js': `${WIKIMEDIA}d/d9/Node.js_logo.svg`,
-  git: `${WIKIMEDIA}3/3f/Git_icon.svg`,
+  Figma: '/images/skills/figma.svg',
+  React: '/images/skills/react.svg',
+  JavaScript: '/images/skills/javascript.png',
+  HTML: '/images/skills/html5.svg',
+  CSS: '/images/skills/css3.svg',
+  'Tailwind CSS': '/images/skills/tailwind.svg',
+  GraphQL: '/images/skills/graphql.svg',
+  'Node.js': '/images/skills/nodejs.svg',
+  git: '/images/skills/git.svg',
 };
 
 const Icon = ({ keyName, link }) => {
