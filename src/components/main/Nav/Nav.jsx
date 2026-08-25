@@ -6,7 +6,7 @@ const Nav = () => {
   const [section, setSection] = useState('home');
 
   return (
-    <div className='flex sm:flex-col border p-1 rounded-xl fixed bottom-8 sm:bottom-1/2 sm:translate-y-1/2 sm:right-8 md:right-auto md:left-8 backdrop-blur-sm z-20 bg-bg-base-3 bg-opacity-50 gap-2'>
+    <div className='flex sm:flex-col border p-1 rounded-xl fixed bottom-8 sm:bottom-1/2 sm:translate-y-1/2 sm:right-8 md:right-auto md:left-8 backdrop-blur-[4px] z-20 bg-bg-base-3/50 gap-2'>
       <NavButton section={section} setSection={setSection} heading='home'>
         <i className='fa-solid fa-house'></i>
       </NavButton>
