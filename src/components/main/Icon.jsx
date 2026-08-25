@@ -43,7 +43,7 @@ const Icon = ({ keyName, link }) => {
         alt={keyName}
       />
       <span
-        className={`opacity-0 duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${
+        className={`block py-2 opacity-0 duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${
           hovering && 'opacity-100'
         }`}
       >

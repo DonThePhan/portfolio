@@ -15,6 +15,7 @@ function Projects() {
           videoURL='/videos/rider-web.mp4'
           posterURL='/videos/rider-web-poster.jpg'
           appLink='https://sunrail-account.transitsherpa.com/'
+          wide
           title='Rider Web — Fare Management'
           tech='React, Figma, GraphQL, design tokens and WCAG 2.1 AA'
         >
@@ -32,15 +33,20 @@ function Projects() {
           posterURL='/videos/cet-poster.jpg'
           appLink='https://apps.apple.com/us/app/cet-go/id6755544747'
           portrait
+          wide
           title='CET Go'
-          tech='Figma, mobile UI and brand'
+          tech='Figma, Inkscape, OpenArt AI'
         >
-          Graphic and interface design for the Cascades East Transit mobile app,
-          carrying the rider experience from the web platform onto a phone in
-          the agency's own brand.
+          A multi-agency mobile app for transit fare and pass management —
+          this example is Cascades East Transit's branded instance, hence the
+          name CET Go. I did the full UX/UI design and brand graphics: riders
+          add payment methods, load stored value, purchase passes, and scan
+          or activate their pass on and off the train.
         </Card>
+        {/* Hidden for now — bring back once there's more to show for it.
         <Card
           icon='fa-solid fa-swatchbook'
+          wide
           title='Platform Design System'
           tech='React, design tokens, theming, accessibility and Figma'
         >
@@ -51,10 +57,12 @@ function Projects() {
           component level, which keeps both deployments WCAG-accessible by
           default.
         </Card>
+        */}
         <Card
           icon='fa-solid fa-arrows-rotate'
           videoURL='/videos/toms.mp4'
           posterURL='/videos/toms-poster.jpg'
+          wide
           title='TOMS — AngularJS to React'
           tech='React, AngularJS, Claude, Cursor and design direction'
         >
@@ -70,6 +78,7 @@ function Projects() {
 
       <h2 className={`${h1Size} mt-16`}>Personal Projects</h2>
       <div className='flex flex-col w-full items-center sm:flex-row sm:flex-wrap sm:justify-around'>
+        {/* Hidden for now.
         <Card
           imgURL='/images/story.png'
           gifURL='/images/story.gif'
@@ -80,6 +89,7 @@ function Projects() {
         >
           StoryTime connects readers with people who want to be read to.
         </Card>
+        */}
         <Card
           imgURL='/images/path.png'
           gifURL='/images/path.gif'
@@ -88,10 +98,13 @@ function Projects() {
           gitHubLink='https://github.com/DonThePhan/Grid-Path-Finder'
           tech='React, Firebase and Git/GitHub'
         >
-          Grid Path Finder instantly finds the shortest path using path finding
-          algorithms Dijkstra's and A*. Features include auto generating maze
-          algorithm, users can draw their own obstacles, and responsive design.
+          A pre-AI project, hand-coded start to finish. Grid Path Finder
+          instantly finds the shortest path using pathfinding algorithms
+          Dijkstra's and A*. Features include an auto-generating maze
+          algorithm, letting users draw their own obstacles, and responsive
+          design.
         </Card>
+        {/* Hidden for now.
         <Card
           imgURL='/images/sudoku.png'
           gifURL='/images/sudoku.gif'
@@ -104,6 +117,7 @@ function Projects() {
           spend hours trying to solve it like a human when you can get
           technology to just try every possible combination in under a second?
         </Card>
+        */}
         <Card
           imgURL='/images/tetris.png'
           gifURL='/images/tetris.gif'
@@ -111,8 +125,9 @@ function Projects() {
           gitHubLink='https://github.com/DonThePhan/Tetris'
           tech='Python, Pygame'
         >
-          Combines Object Oriented Programming, GUI interface, game logic and
-          matrix manipulation.
+          A pre-AI project, hand-coded start to finish. Combines Object
+          Oriented Programming, GUI interface, game logic and matrix
+          manipulation.
         </Card>
       </div>
     </div>
