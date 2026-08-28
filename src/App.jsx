@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 
 import NotFound from "./components/NotFound";
 import Main from "./components/Main";
+import RiderWeb from "./components/CaseStudy/RiderWeb";
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <div className='w-full md:w-4/5 lg:w-2/3 xl:w-3/5 text-text'>
         <Routes>
           <Route path='/' element={<Main />} />
+          <Route path='/case-study/rider-web' element={<RiderWeb />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
       </div>

@@ -15,6 +15,7 @@ function Projects() {
           videoURL='/videos/rider-web.mp4'
           posterURL='/videos/rider-web-poster.jpg'
           appLink='https://sunrail-account.transitsherpa.com/'
+          caseStudyLink='/case-study/rider-web'
           wide
           title='Rider Web — Fare Management'
           tech='React, Figma, GraphQL, design tokens and WCAG 2.1 AA'

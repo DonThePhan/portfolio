@@ -4,8 +4,7 @@ Control doc for the repositioning work happening on the `2026` branch. Read
 this first in a new session before doing anything else — it's more current
 than my own memory of the work.
 
-**Last updated:** 2026-08-24 (later session still — CET Go video, portrait
-card layout, pop-forward hover)
+**Last updated:** 2026-08-28 (Rider Web case study page added)
 
 ## Note on manual edits
 
@@ -251,35 +250,131 @@ grep -c "YouTube\|hideVideo\|homeDiv" src/components/main/AboutMe.jsx   # → 15
 grep youtube package.json                                              # → "react-youtube": "^10.1.0"
 ```
 
+## Catch-up: 6 commits that landed between sessions, undocumented
+
+Between the pop-forward-hover entry above and this one, six commits landed
+that this doc never covered (`38cf625` through `79966b3`, all Aug 24–25):
+bezier easing added to the remaining About Me/Contact/Icon items, an
+expandable word-fade-in effect for About Me, a CET Go app-link button, a
+round of UI tweaks + text rephrasing (touched Contact/Icon/Card/Projects),
+skill icons self-hosted under `public/images/skills/` instead of hotlinked
+from Wikimedia, and the navbar made semi-transparent again after the
+Tailwind changes. Also worth noting: `Card.jsx`'s hover-pop-forward
+transform/z-index machinery documented above for portrait cards **is gone**
+— the "UI tweaks" commit (`aefdcc1`) rewrote `Card.jsx` and that effect
+didn't survive. Confirmed with Donny that this batch is all intentional,
+nothing here needs revisiting.
+
+Also confirmed resolved: nav overlap at ~800px is intentional, not a bug.
+CET Go's app-link button position is fine as-is. Resume link is current and
+points at the right file.
+
+## Rider Web case study page added
+
+Ask: put a real case-study writeup behind the Rider Web card, sourced from
+`rider-web-case-study-short.md` (Donny's own draft, dropped at repo root
+untracked). Link it from the card like a button — "View Case Study" with an
+arrow, reading as "leads to another page" rather than the external-link
+buttons.
+
+- **New route**: `/case-study/rider-web` → `src/components/CaseStudy/RiderWeb.jsx`,
+  registered in `App.jsx`. First internal (in-app) navigation on the site —
+  `react-router-dom` was already a dependency but only `BrowserRouter` +
+  the `/` and `*` routes existed before this.
+- **`Card.jsx`** gained a `caseStudyLink` prop: renders a `react-router`
+  `Link` styled to match `Button` (border/uppercase/hover-invert) rather
+  than reusing `Button` itself, since `Button` always renders a `<button>`
+  with `onClick`-driven `window.open` — this needs real in-app navigation,
+  not a new tab. Arrow icon (`fa-arrow-right`) signals it leaves the card
+  for another page. Wired into the Rider Web card only, via `Projects.jsx`.
+- **`RiderWeb.jsx` content**: hand-written JSX (not a markdown renderer),
+  matching how every other section on the site is authored — this is a
+  one-off page, so a generic content-schema/markdown pipeline would be
+  more machinery than the task needs. Reuses the site's existing look:
+  `h1Size`/`sectionPaddingX/Y` from `TailwindContext`, the shared
+  `.divider` class, Font Awesome icons, no new color tokens except finally
+  putting the long-unused `--color-bg-base-4` teal to work (string literals
+  in the code block).
+- **Code block** (the multi-agency config object) is hand-tokenized with a
+  small local regex highlighter in `RiderWeb.jsx` — real syntax-highlighted
+  text, not a screenshot, per the source doc's own instruction — rather
+  than pulling in a syntax-highlighting dependency for one static block.
+- **Image placeholders**: every `> [IMAGE — ...]` note in the source doc
+  became a dashed-border placeholder box with the original note as its
+  caption, so Donny knows exactly what to drop in later. The auto-load
+  section (explicitly called out as "a sequence, not a single screenshot")
+  became six placeholder frames in a horizontal scroller, one per the six
+  states enumerated just above it in the text. The "What stayed" section's
+  "2–3 new screens" note became three placeholder cards, each with its own
+  editable one-line-caption placeholder underneath.
+- **Excluded on purpose**: the source doc's own "Notes to self — delete
+  before publishing" section (redact reminders, the CTO-clearance note, the
+  word-count note) — never rendered on the page, per its own instruction.
+  The `.md` file itself was left untouched at repo root; nothing asked for
+  it to be moved or deleted.
+- `useEffect` scrolls to top and sets `document.title` on mount (and
+  restores the previous title on unmount) — needed because React Router
+  doesn't scroll on route change, and the Rider Web card this links from
+  can sit far down the home page's scroll position.
+- **Dev server fix, while verifying this in the browser preview**: the
+  Node-18-vs-22 issue noted below under "Node version mismatch" was hitting
+  the preview tooling directly (`vite` needs the `node:util` `styleText`
+  export Node 18 doesn't have). Fixed `.claude/launch.json` to point
+  `runtimeExecutable` at the Node 22.23.2 binary under nvm directly
+  (`~/.nvm/versions/node/v22.23.2/bin/node`) running `node_modules/.bin/vite`
+  rather than `npm run dev` — `npm`'s own shebang was still resolving Node
+  from `PATH` (18) even when pointed at the v22 npm binary, so it had to
+  bypass npm entirely. Also added `"autoPort": true` since port 3000 was
+  already in use by something else on this machine — not something this
+  project needs fixed to 3000. Verified via a real click-through in the
+  browser preview.
+
+**Not yet done — needs Donny before this goes live:** the source doc's own
+notes-to-self flag two things that this session had no way to act on:
+redacting a client ID GUID and an internal staging hostname (only relevant
+once the actual annotated-config screenshot is dropped in), and **getting
+CTO clearance before publishing** — specifically on naming SunRail, CET,
+and NIC by name, quoting their requirements, and showing screenshots. The
+page as built does name all three. Don't merge `2026` to `main` (which is
+what deploys) with this page live until that's been checked.
+
 ## Loose ends / open questions
 
-- **Raw video sources sit untracked at repo root** — masters, kept in case
-  any recording needs re-encoding differently: `Rider Web.mp4` (4.6 MB),
-  `TOMS.webm` (5.4 MB, first TOMS recording — likely stale, the card now
-  uses the second recording), `TOMS-v2.webm` (6.4 MB, current TOMS), and now
-  `CET Go.mp4` (44.8 MB, current CET Go source). Never resolved — either
-  gitignore them or move them out of the repo entirely. Ask before deleting
-  `TOMS.webm` (v1) even though it looks superseded.
-- **Node version mismatch** — `.nvmrc` pins `22.23.2`, shell was on
-  `20.18.1`. Vite 8 warns about it but still builds. Not repo-breaking, just
-  do `nvm use` before starting work.
-- **One of four client cards still has no imagery** — Platform Design
-  System falls back to the grey icon placeholder in `Card.jsx`. Rider Web,
-  CET Go, and TOMS now have real video. Given the positioning is "design
-  engineer," worth closing the gap — a screenshot or short clip.
+- **Raw video sources previously sat untracked at repo root** (masters kept
+  in case a recording needed re-encoding) — they're gone from the working
+  tree as of this update (confirmed via `find` — no `.mp4`/`.webm`/`.mov` at
+  repo root). Never tracked in git, so there's no history of the removal;
+  presumably moved or deleted outside this session. Worth confirming with
+  Donny that this was deliberate before assuming the masters are gone for
+  good.
+- **Node version mismatch** — `.nvmrc` pins `22.23.2`, default shell node is
+  `18.20.5`. Vite 8 needs 22 to run at all (Node 18 throws on
+  `node:util`'s missing `styleText` export) — not just a warning. `nvm use
+  22.23.2` before running `npm run dev` by hand. The browser-preview dev
+  server (`.claude/launch.json`) now points its `runtimeExecutable` straight
+  at the Node 22.23.2 binary so this doesn't need `nvm use` when previewing
+  through that tool specifically — see the case-study section above.
+- **Platform Design System card is fully commented out** in `Projects.jsx`,
+  not just missing imagery — corrected from an earlier, inaccurate note
+  here that said it renders with a grey icon placeholder. It won't appear
+  on the site at all until it's uncommented, which presumably wants real
+  imagery first. Rider Web, CET Go, and TOMS all have real video now.
 - **Personal-project GIFs are heavy** — StoryTime/PathFinder/Sudoku/Tetris
   GIFs total ~9.2 MB, loaded eagerly, uncompressed relative to how the video
   was handled.
-- **Skill icons are hotlinked from Wikimedia** — flagged in a code comment in
-  `Icon.jsx` as worth self-hosting; site currently depends on a third party
-  for every skill logo.
-- **Resume** — hero button links to a Google Drive URL; there's also a
-  tracked `Donny - Resume.pdf` in the repo root dated Feb 2024 that doesn't
-  appear to be linked from anywhere currently. Worth checking which is
-  current and whether the untracked one is even the right one anymore.
-- **Nav overlap flagged but not re-verified** — at ~800px width the floating
-  nav appeared to sit on top of card text. Noted early in this session,
-  never confirmed after later changes or fixed.
+- **Rider Web case study hero image landed** — `landing_page.png` (1920×934,
+  the SunRail sign-in/create-account screen) was dropped at repo root and
+  wired in as the hero, replacing that one placeholder. Processed to
+  `public/images/case-study/rider-web/hero.webp` (resized to 1600px wide,
+  converted PNG→WebP at q90: 254 KB → 69 KB, no visible quality loss on the
+  UI text). The original `landing_page.png` was left untracked at repo
+  root rather than deleted — same "keep the raw master, ask before
+  deleting" pattern as the video sources above. Every other `[IMAGE]` slot
+  is still a labeled placeholder; Donny is providing the rest.
+- **CTO clearance not yet obtained** for publishing the case study naming
+  SunRail, CET, and NIC — flagged in the source doc's own notes, not
+  resolved this session. Don't ship `2026` to `main` with this page live
+  until that's checked. See the case-study section above.
 - **Not yet decided**: whether this is "content is done, ship it" or whether
   a deeper visual redesign is still on the table — that question was raised
   and deferred in favor of landing the video first.
@@ -293,8 +388,9 @@ grep youtube package.json                                              # → "re
 2. If a new hero video has landed since, the YouTube machinery in
    `AboutMe.jsx` can finally come out (see that section) — otherwise leave
    it alone
-3. Decide the next priority from "Loose ends" — imagery for the remaining
-   two cards (Platform Design System, CET Go) is probably the
-   highest-leverage next step given the positioning
+3. Decide the next priority from "Loose ends" — real images for the Rider
+   Web case study page (Donny is providing these) and CTO clearance on
+   naming SunRail/CET/NIC publicly are probably the highest-leverage next
+   steps before this ships to `main`
 4. This file should be updated (or deleted, if everything's shipped) as
    things get resolved — it's a working doc, not permanent documentation

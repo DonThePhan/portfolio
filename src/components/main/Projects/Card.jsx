@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Button from '../../UI/Button';
 
 function Card(props) {
@@ -13,6 +14,7 @@ function Card(props) {
     title,
     appLink,
     gitHubLink,
+    caseStudyLink,
     children,
     tech,
   } = props;
@@ -110,7 +112,21 @@ function Card(props) {
           {tech}
         </p>
         <p className='my-4'>{children}</p>
-        <div className='flex justify-around mt-auto'>
+        <div className='flex flex-wrap justify-around gap-3 mt-auto'>
+          {caseStudyLink && (
+            // Internal route rather than an external one, so this is a
+            // router Link, not the open-in-new-tab Button the other links
+            // use — but styled to match Button so it still reads as one of
+            // the row's buttons. The arrow signals "leads to another page"
+            // the way the external links don't need to.
+            <Link
+              to={caseStudyLink}
+              className='inline-flex items-center gap-2 border border-text text-text uppercase text-sm font-bold tracking-wide p-3 rounded-lg focus:outline-none focus:shadow-outline text-center cursor-pointer hover:bg-text hover:text-bg-base-2 duration-150 hover:ease-in'
+            >
+              View Case Study
+              <i className='fa-solid fa-arrow-right' aria-hidden='true' />
+            </Link>
+          )}
           {gitHubLink && (
             <Button onClick={() => openInNewTab(gitHubLink)}>Repo Link</Button>
           )}
