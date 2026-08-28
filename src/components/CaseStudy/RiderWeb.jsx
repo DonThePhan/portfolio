@@ -2,44 +2,105 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import TailwindContext from '../store/tailwind-context';
 
-const CODE_LINES = [
-  "const locales = ['en', 'es'];",
-  "const processor = 'nic';",
-  'const autoReplenish = true;',
-  'const oneTimePayment = true;',
-  'const riderTypeSelect = true;',
-  'const fareCapping = false;',
-  'const promotions = false;',
-  'const registrationFields = {',
-  "  name: 'optional',",
-  "  mobile: 'optional',",
-  "  address: 'optional',",
-  "  city: 'optional',",
-  "  state: 'optional',",
-  "  zipCode: 'optional'",
-  '};',
+// Real production config for both agencies, with two fields redacted:
+// `baseUrl` to an `.example` domain (IANA-reserved for docs/placeholders,
+// so it reads as obviously illustrative rather than a real address), and
+// SunRail's `googleAnalyticsId` to an all-X placeholder in the same
+// "G-XXXXXXXXXX" shape as a real GA4 measurement id. `scope` is left real:
+// it's an internal tenant key, not a resolvable address.
+const SUNRAIL_CODE_LINES = [
+  '{',
+  '  "baseUrl": "https://mobility-app-sunrail.example/rider/graphql/",',
+  '  "scope": "sunrail-prod",',
+  '  "processor": "nic",',
+  '  "googleAnalyticsId": "G-XXXXXXXXXX",',
+  '  "autoReplenish": true,',
+  '  "oneTimePayment": true,',
+  '  "riderTypeSelect": true,',
+  '  "migration": true,',
+  '  "fareCapping": false,',
+  '  "registrationFields": {',
+  '    "name": "optional",',
+  '    "mobile": "optional",',
+  '    "address": "optional",',
+  '    "city": "optional",',
+  '    "state": "optional",',
+  '    "zipCode": "optional"',
+  '  }',
+  '}',
+];
+
+const CET_CODE_LINES = [
+  '{',
+  '  "baseUrl": "https://mobility-app-cascades-east.example/rider/graphql/",',
+  '  "scope": "cascades-east-prod",',
+  '  "processor": "braintree",',
+  '  "googleAnalyticsId": "DISABLED",',
+  '  "autoReplenish": false,',
+  '  "oneTimePayment": false,',
+  '  "riderTypeSelect": false,',
+  '  "migration": false,',
+  '  "fareCapping": true,',
+  '  "registrationFields": {',
+  '    "name": "required",',
+  '    "mobile": "required",',
+  '    "address": false,',
+  '    "city": false,',
+  '    "state": false,',
+  '    "zipCode": false',
+  '  }',
+  '}',
 ];
 
 // Fixed, small source — hand-tokenizing rather than pulling in a syntax
-// highlighting dependency for one code block.
-const TOKEN_RE =
-  /('[^']*')|(\btrue\b|\bfalse\b)|(\bconst\b)|([{}[\];,:])|([A-Za-z_$][\w$]*)|(\s+)/g;
+// highlighting dependency for one code block. JSON has no keyword to key
+// off of to distinguish an object key from a string value (unlike the
+// `const` declarations this replaced), so a matched string checks what
+// follows it — a colon (ignoring whitespace) means it's a key.
+const TOKEN_RE = /("[^"]*")|(\btrue\b|\bfalse\b)|([{}[\],:])|(\s+)/g;
 
+// Dark-on-light everywhere else on the site; this block deliberately
+// inverts to a dark code-editor look, reusing the existing palette tokens
+// rather than introducing new colors — `text` becomes the background,
+// `bg-base-3`/`bg-base-1`/`bg-base-4` (cream/tan/teal) become the syntax
+// colors.
 const highlightLine = (line) => {
   const tokens = [];
   let match;
   TOKEN_RE.lastIndex = 0;
   while ((match = TOKEN_RE.exec(line))) {
-    const [text, str, bool, kw, punct] = match;
-    let cls = 'text-text';
-    if (str) cls = 'text-bg-base-4';
-    else if (bool) cls = 'text-text/70 font-semibold';
-    else if (kw) cls = 'font-bold';
-    else if (punct) cls = 'text-text/40';
+    const [text, str, bool, punct] = match;
+    let cls = 'text-bg-base-3';
+    if (str) {
+      const isKey = /^\s*:/.test(line.slice(TOKEN_RE.lastIndex));
+      cls = isKey ? 'font-bold text-bg-base-3' : 'text-bg-base-4';
+    } else if (bool) cls = 'text-bg-base-1 font-semibold';
+    else if (punct) cls = 'text-bg-base-3/40';
     tokens.push({ text, cls });
   }
   return tokens;
 };
+
+const CodeBlock = ({ label, lines }) => (
+  <div className='flex flex-col gap-2'>
+    <p className='text-sm font-bold uppercase tracking-wide text-text/60'>
+      {label}
+    </p>
+    <pre className='overflow-x-auto rounded-xl bg-text border border-bg-base-3/10 p-4 text-sm leading-relaxed'>
+      <code>
+        {lines.map((line, i) => (
+          <div key={i}>
+            {highlightLine(line).map((token, j) => (
+              <span key={j} className={token.cls}>
+                {token.text}
+              </span>
+            ))}
+          </div>
+        ))}
+      </code>
+    </pre>
+  </div>
+);
 
 const AUTO_LOAD_STATES = [
   'Disabled by config',
@@ -337,19 +398,10 @@ function RiderWeb() {
             system. Agency differences arrive from the backend as a config
             object:
           </p>
-          <pre className='overflow-x-auto rounded-xl bg-bg-base-3 border border-text/10 p-4 text-sm leading-relaxed'>
-            <code>
-              {CODE_LINES.map((line, i) => (
-                <div key={i}>
-                  {highlightLine(line).map((token, j) => (
-                    <span key={j} className={token.cls}>
-                      {token.text}
-                    </span>
-                  ))}
-                </div>
-              ))}
-            </code>
-          </pre>
+          <div className='grid gap-4 sm:grid-cols-2'>
+            <CodeBlock label='SunRail' lines={SUNRAIL_CODE_LINES} />
+            <CodeBlock label='Cascades East' lines={CET_CODE_LINES} />
+          </div>
           <p className='italic font-medium'>
             So I wasn't designing screens. I was designing the range of
             screens a configuration could produce.
