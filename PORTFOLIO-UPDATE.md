@@ -335,8 +335,19 @@ redacting a client ID GUID and an internal staging hostname (only relevant
 once the actual annotated-config screenshot is dropped in), and **getting
 CTO clearance before publishing** — specifically on naming SunRail, CET,
 and NIC by name, quoting their requirements, and showing screenshots. The
-page as built does name all three. Don't merge `2026` to `main` (which is
-what deploys) with this page live until that's been checked.
+page as built does name all three.
+
+**2026-08-28: `main` deployed, case study held back.** When asked to deploy
+`2026` to `donthephan.com`, this clearance was still outstanding, so rather
+than blocking the whole deploy, the Rider Web card's `caseStudyLink` prop
+was commented out in `Projects.jsx` — the "View Case Study" button no
+longer renders, so there's no path to the page from the live site. The
+route (`/case-study/rider-web`) and the page itself are still in the
+deployed bundle and reachable by anyone who has or guesses the direct URL —
+nothing was done to block that (no `noindex`, no route removal), since
+nothing links to it and that wasn't asked for. Once clearance comes
+through, re-enable the prop in `Projects.jsx` (the line is left in place,
+just commented, with a note pointing back here) and redeploy.
 
 ## Loose ends / open questions
 
