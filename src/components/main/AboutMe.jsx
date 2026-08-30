@@ -13,7 +13,7 @@ const ABOUT_PHILOSOPHY_TEXT =
   'through implementation: the feel is what gets lost in a handoff.';
 
 const ABOUT_BACKGROUND_TEXT =
-  'Before software I spent seven years as a mechanical designer and ' +
+  'Before software I spent eight years as a mechanical designer and ' +
   'project manager, which is why I think in systems and tolerances. ' +
   "I'm open to remote Design Engineer, UX Engineer and Product Designer " +
   'roles with U.S. companies (Canadian resident, no visa sponsorship ' +
@@ -215,13 +215,13 @@ function AboutMe() {
           </h2>
           <div className='flex flex-col text-left'>
             <p className='pb-2'>
-              I'm a design engineer — I own interfaces from brief to shipped.
-              For the last four years I've been sole designer and front-end
-              owner on Rider Web, a multi-agency transit platform, and I don't
-              hand-write most of the implementation any more: I make the
-              design and technical calls, then direct AI to build against
-              them, reviewing and correcting every screen. The judgement is
-              the job; the typing is the fast part.
+              I'm a design engineer — I own interfaces from brief to shipped,
+              Figma to React, without the handoff. For the last two years
+              I've been sole designer and front-end owner on Rider Web, a
+              multi-agency transit platform. I also direct AI page-by-page on
+              legacy-to-React modernization work, reviewing and correcting
+              every screen — the judgement is the job; the typing is the fast
+              part.
             </p>
             {/* Collapsed state shows just enough of the next paragraph to
                 read as "this continues" rather than a generic "More" label —

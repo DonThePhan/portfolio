@@ -18,15 +18,15 @@ function Projects() {
           // caseStudyLink='/case-study/rider-web' — re-enable once SunRail/CET/NIC naming is cleared for publishing (see PORTFOLIO-UPDATE.md)
           wide
           title='Rider Web — Fare Management'
-          tech='React, Figma, GraphQL, design tokens and WCAG 2.1 AA'
+          tech='React, Figma, GraphQL and design tokens'
         >
-          A multi-agency transit platform serving 5,000 daily commuters across
+          A multi-agency transit platform serving 5,000 daily riders across
           Florida and Oregon. As sole designer and front-end owner I took the
           entire fare management experience from brief to shipped — account
           creation, transit card management, pass and stored-value purchasing,
-          and activity history. Rebuilt around progressive disclosure so riders
-          make one decision at a time. Now used by 70,000 registered riders and
-          has processed $5.5M in fares.
+          and activity history. Two years to build the system; six weeks to
+          onboard the second agency. 70,000+ registered riders, $5.5M in fares
+          processed as of June 2026.
         </Card>
         <Card
           icon='fa-solid fa-mobile-screen'
@@ -38,11 +38,11 @@ function Projects() {
           title='CET Go'
           tech='Figma, Inkscape, OpenArt AI'
         >
-          A multi-agency mobile app for transit fare and pass management —
+          The mobile counterpart to Rider Web, running on the same backend —
           this example is Cascades East Transit's branded instance, hence the
-          name CET Go. I did the full UX/UI design and brand graphics: riders
-          add payment methods, load stored value, purchase passes, and scan
-          or activate their pass on and off the train.
+          name CET Go. My contribution was theme and graphics: riders add
+          payment methods, load stored value, purchase passes, and scan or
+          activate their pass on and off the train.
         </Card>
         {/* Hidden for now — bring back once there's more to show for it.
         <Card
