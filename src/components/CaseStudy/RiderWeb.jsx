@@ -60,23 +60,40 @@ const CET_CODE_LINES = [
 const TOKEN_RE = /("[^"]*")|(\btrue\b|\bfalse\b)|([{}[\],:])|(\s+)/g;
 
 // Dark-on-light everywhere else on the site; this block deliberately
-// inverts to a dark code-editor look, reusing the existing palette tokens
-// rather than introducing new colors — `text` becomes the background,
-// `bg-base-3`/`bg-base-1`/`bg-base-4` (cream/tan/teal) become the syntax
-// colors.
+// inverts to a dark code-editor look, reusing the site's existing palette
+// hex values (cream/tan/teal) rather than introducing new colors. Applied
+// as inline styles rather than Tailwind utility classes derived from the
+// `--color-bg-base-*` theme variables — those utilities render correctly
+// in this session's own checks, but proved unreliable in the wild (text
+// came through invisible), and inline hex sidesteps whatever in the CSS
+// pipeline was dropping them.
+const CODE_COLORS = {
+  bg: '#282425', // --color-text
+  key: '#fffbf0', // --color-bg-base-3 (cream)
+  string: '#71c9ce', // --color-bg-base-4 (teal)
+  bool: '#d2c59d', // --color-bg-base-1 (tan)
+  punct: 'rgba(255, 251, 240, 0.7)', // dimmed cream
+};
+
 const highlightLine = (line) => {
   const tokens = [];
   let match;
   TOKEN_RE.lastIndex = 0;
   while ((match = TOKEN_RE.exec(line))) {
     const [text, str, bool, punct] = match;
-    let cls = 'text-bg-base-3';
+    let color = CODE_COLORS.key;
+    let bold = false;
     if (str) {
       const isKey = /^\s*:/.test(line.slice(TOKEN_RE.lastIndex));
-      cls = isKey ? 'font-bold text-bg-base-3' : 'text-bg-base-4';
-    } else if (bool) cls = 'text-bg-base-1 font-semibold';
-    else if (punct) cls = 'text-bg-base-3/40';
-    tokens.push({ text, cls });
+      color = isKey ? CODE_COLORS.key : CODE_COLORS.string;
+      bold = isKey;
+    } else if (bool) {
+      color = CODE_COLORS.bool;
+      bold = true;
+    } else if (punct) {
+      color = CODE_COLORS.punct;
+    }
+    tokens.push({ text, color, bold });
   }
   return tokens;
 };
@@ -86,12 +103,24 @@ const CodeBlock = ({ label, lines }) => (
     <p className='text-sm font-bold uppercase tracking-wide text-text/60'>
       {label}
     </p>
-    <pre className='overflow-x-auto rounded-xl bg-text border border-bg-base-3/10 p-4 text-sm leading-relaxed'>
+    <pre
+      className='overflow-x-auto rounded-xl p-4 text-sm leading-relaxed whitespace-pre'
+      style={{
+        backgroundColor: CODE_COLORS.bg,
+        border: '1px solid rgba(255, 251, 240, 0.1)',
+      }}
+    >
       <code>
         {lines.map((line, i) => (
-          <div key={i}>
+          <div key={i} className='whitespace-pre'>
             {highlightLine(line).map((token, j) => (
-              <span key={j} className={token.cls}>
+              <span
+                key={j}
+                style={{
+                  color: token.color,
+                  fontWeight: token.bold ? 700 : 400,
+                }}
+              >
                 {token.text}
               </span>
             ))}
@@ -237,7 +266,7 @@ function RiderWeb() {
       <header className='mb-10 flex flex-col gap-4'>
         <h1 className={h1Size}>Rider Web</h1>
         <p className='text-sm sm:text-base font-bold uppercase tracking-wide text-text/70 -mt-4'>
-          Design Engineer · Strategic Mapping · 2024–2025 ·{' '}
+          Design Engineer · Strategic Mapping · 2023–2025 ·{' '}
           <a
             href='https://sunrail-account.transitsherpa.com/'
             target='_blank'
@@ -250,11 +279,12 @@ function RiderWeb() {
         <p className='text-lg leading-relaxed'>
           SunRail needed a fare-collection portal. We had a mobile-ticketing
           companion. I was the only frontend developer, and the platform
-          we'd have built it on had reached end of life — so I designed the
-          new product in Figma with the client, then argued for rebuilding
-          the foundation underneath it in React. Five pages became eleven.
-          Eighteen months later, onboarding the second agency took six
-          weeks.
+          we'd have built it on had reached end of life — so I argued for
+          rebuilding the foundation in React, then designed and built the
+          new product on it, working directly with SunRail through six
+          months of requirements and product demos. Five pages became
+          eleven. Two years to build the system; six weeks to onboard the
+          second agency.
         </p>
       </header>
 
@@ -295,10 +325,13 @@ function RiderWeb() {
 
         <Divider />
 
-        <Section title='Designing it first'>
+        <Section title='Design and build, in parallel'>
           <p>
-            I started with the design, working through four months of
-            requirements back-and-forth with SunRail.
+            Requirements and design documentation with SunRail ran through
+            the whole project — about six months of it, cumulative. It was
+            never a phase that finished before the build started: build a
+            piece of Rider Web, return to the design docs, update them in
+            Figma, build again.
           </p>
           <p>
             The team's client design documents were being assembled in
@@ -326,8 +359,8 @@ function RiderWeb() {
 
         <Section title='The turn'>
           <p>
-            With the design settled, I spent a week inside the existing
-            AngularJS codebase planning the build.
+            Early on, I spent a week inside the existing AngularJS codebase
+            planning the build.
           </p>
           <p>
             State moved badly. It lived in scopes and services rather than
@@ -341,7 +374,8 @@ function RiderWeb() {
             Then I looked at the framework rather than the code. AngularJS
             reached end of life in December 2021 — final release, repository
             archived, no further patches of any kind including security. By
-            the time we started, it had been unsupported for three years.
+            the time we started, it had been unsupported for about two
+            years.
             Rider Web is public-facing software operated by government
             transit agencies, and any vulnerability disclosed from that
             point forward had no official fix.
@@ -409,8 +443,8 @@ function RiderWeb() {
           <p>
             The account creation page carries this hardest. Two fields are
             fixed for every agency — email and password. Everything else is
-            configurable: first name, last name, phone, two address lines,
-            city, state, zip. Each can be required, optional, or absent. The
+            configurable: name, mobile, address, city, state, zip. Each can
+            be required, optional, or absent. The
             form has to read as intentional at both ends of that range,
             whether an agency asks for two fields or ten, and it can't look
             like a template with holes in it when they choose the short
@@ -520,16 +554,23 @@ function RiderWeb() {
 
         <Section title='Where it landed'>
           <p>
-            Four months of design, then just over a year of build —{' '}
-            <strong>eighteen months</strong> in all. Bringing Cascades East
-            onto the finished platform took <strong>six weeks</strong>.
+            <strong>Two years</strong> to build the system, including
+            testing. Bringing Cascades East onto the finished platform took{' '}
+            <strong>six weeks</strong>.
           </p>
           <p>
             Those aren't measuring the same thing, and that's the point —
-            the first includes building the system, the second is what it
-            costs to use it. The year bought a platform where adding an
-            agency is a configuration problem rather than a development
-            project.
+            the first two years includes building the system: the
+            foundation replacement, the AFC product, the configuration
+            layer, testing. The six weeks is what it now costs to add an
+            agency. The build bought a platform where onboarding is a
+            configuration problem rather than a development project.
+          </p>
+          <p>
+            Rider Web now serves <strong>70,000+</strong> registered riders
+            across both agencies, with roughly <strong>5,000</strong>{' '}
+            riders using it daily. It has processed <strong>$5.5M</strong>{' '}
+            in fares as of June 2026.
           </p>
         </Section>
       </div>

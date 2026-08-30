@@ -4,7 +4,8 @@ Control doc for the repositioning work happening on the `2026` branch. Read
 this first in a new session before doing anything else — it's more current
 than my own memory of the work.
 
-**Last updated:** 2026-08-28 (Rider Web case study page added)
+**Last updated:** 2026-08-30 (Rider Web case study corrected against
+`strategic-mapping-facts.md`)
 
 ## Note on manual edits
 
@@ -348,6 +349,67 @@ nothing was done to block that (no `noindex`, no route removal), since
 nothing links to it and that wasn't asked for. Once clearance comes
 through, re-enable the prop in `Projects.jsx` (the line is left in place,
 just commented, with a note pointing back here) and redeploy.
+
+## Case study corrected against strategic-mapping-facts.md
+
+Donny dropped `strategic-mapping-facts.md` at repo root (untracked, single
+source of truth for résumé/LinkedIn/GitHub/portfolio/case studies) and
+asked to bring `RiderWeb.jsx` in line with it. The file's own §8 flagged
+the case study as *the* outdated artifact — it had 2024–2025 dates, an
+eighteen-month duration, a "four months of design, then the build"
+framing, and no scale metrics.
+
+Fixed in `src/components/CaseStudy/RiderWeb.jsx`:
+- Header date `2024–2025` → `2023–2025`
+- Removed "eighteen months" everywhere; project is **two years**,
+  including testing
+- **Sequencing fix** (the doc's top-priority item): the "Designing it
+  first" section stated design as a phase completed before the build
+  started, which the facts doc explicitly says is wrong — it was
+  interleaved (build a piece, return to Figma, update, build again) with
+  ~6 months of requirements/design cumulative across the project.
+  Retitled to "Design and build, in parallel" and reworded. Also softened
+  "With the design settled, I spent a week..." in "The turn" to "Early on,
+  I spent a week..." since that section's framework read-through likely
+  happened near the start, not after design wrapped.
+- "Unsupported for three years" → "about two years" (AngularJS EOL Dec
+  2021, project start 2023)
+- Account-creation field list in "Designing for a configuration" was
+  listing fields (first/last name, phone, two address lines) that don't
+  match the `registrationFields` actually shown in the code block just
+  above it (`name`, `mobile`, `address`, `city`, `state`, `zipCode`) —
+  corrected the prose to match the code, since the two were contradicting
+  each other on the same page. Not something the facts doc called out
+  directly, just an internal inconsistency caught while reading closely.
+- "Where it landed" rewritten: leads with the two-year/six-week contrast
+  per the facts doc's explicit rule (page counts and duration numbers are
+  scope markers, not achievements — don't bury the real closing metric
+  under them), and now includes the scale metrics (70,000+ registered
+  riders, ~5,000 daily, $5.5M in fares) that previously lived only in the
+  README/LinkedIn — the facts doc's §8 open item 2 said adding them here
+  is what makes all three artifacts agree. Fares figure is dated ("as of
+  June 2026") per the doc's instruction that an undated number goes stale
+  silently.
+- Intro paragraph also reworded to lead with the two-year/six-week metric
+  rather than page count, and to name the six months of client-facing
+  work/demos (facts doc: this is "client requirements and demos," never
+  "CTO brief").
+
+**Not touched / left alone:** the placeholder images, the redact-before-
+publish note on the config screenshot, the CTO-clearance gate on
+`caseStudyLink` (still commented out in `Projects.jsx`) — none of that
+was in scope for this pass, which was a copy/facts correction only, not
+a design or publishing-readiness change.
+
+**Environment note, unrelated to the content fix:** `.claude/launch.json`
+pointed `runtimeExecutable` at `/Users/donny/.nvm/...` (missing the `phan`
+in the home directory) and Node 22.23.2 wasn't installed under this
+user's nvm at all (only up to 20.20.2) — both presumably fine on whatever
+machine this was last verified on, but broken here. Installed 22.23.2 via
+`nvm install 22.23.2` and fixed the path in `launch.json` to
+`/Users/donnyphan/.nvm/versions/node/v22.23.2/bin/node` so the browser
+preview tooling works again. Verified the corrected page renders with no
+console errors via the fixed preview.
 
 ## Loose ends / open questions
 
