@@ -75,6 +75,53 @@ const LOAD_FUNDS_IMAGES = [
   },
 ];
 
+const BEFORE_AFTER_IMAGES = [
+  {
+    src: '/images/case-study/rider-web/landing-old.webp',
+    alt: 'The old Rider Web landing page — a simple mobile-ticketing account access page with a phone mockup, a Buy Tickets button, and a sign-in panel',
+  },
+  {
+    src: '/images/case-study/rider-web/hero.webp',
+    alt: 'The new Rider Web landing page — SunRail sign-in and account creation, rebuilt as the Automated Fare Collection portal',
+  },
+];
+
+// Six real pages that didn't exist before the rebuild. Titles name what
+// each screen is; the caption under each is still a placeholder — Donny's
+// adding the "problem it solves" line for each afterward.
+const NEW_SCREEN_IMAGES = [
+  {
+    title: 'Usage History',
+    src: '/images/case-study/rider-web/new-screen-usage-history.webp',
+    alt: 'Usage History page showing a single ticket record — description, SunCard, activation and expiry times, and a scan log with location and amount',
+  },
+  {
+    title: 'Account Report',
+    src: '/images/case-study/rider-web/new-screen-account-report.webp',
+    alt: 'Account Report page listing orders and transactions with dates, order numbers, amounts, and tap locations',
+  },
+  {
+    title: 'Order History Detail',
+    src: '/images/case-study/rider-web/new-screen-order-history-detail.webp',
+    alt: 'Printable single order history detail — order date, order number, payment method, and line-item pricing',
+  },
+  {
+    title: 'Account Migration',
+    src: '/images/case-study/rider-web/new-screen-account-migration.webp',
+    alt: 'System Migration page asking a rider for their previous account username, email, and card number to migrate to the new system',
+  },
+  {
+    title: 'Manage Cards',
+    src: '/images/case-study/rider-web/new-screen-manage-cards.webp',
+    alt: 'Manage Cards page listing every SunCard on an account, with card info, fare products, and usage history for the selected card',
+  },
+  {
+    title: 'Load Funds',
+    src: '/images/case-study/rider-web/new-screen-load-funds.webp',
+    alt: 'Load Funds page with a funded balance, a saved payment method, and Auto Load fully configured and enabled',
+  },
+];
+
 // "Toggled on" and "Toggled on, unsaved" collapse into one card — the two
 // states are visually identical (the difference only surfaces on logout),
 // so one photo honestly represents both rather than repeating a frame.
@@ -120,17 +167,8 @@ const Section = ({ title, children }) => (
   </section>
 );
 
-const ImagePlaceholder = ({ label, className = '' }) => (
-  <div
-    className={`flex flex-col items-center justify-center gap-2 min-h-48 rounded-xl border-2 border-dashed border-text/25 bg-bg-base-2/60 p-6 text-center ${className}`}
-  >
-    <i className='fa-solid fa-image text-3xl text-text/40' aria-hidden='true' />
-    <p className='text-sm italic text-text/50'>{label}</p>
-  </div>
-);
-
-// Real (non-placeholder) images open fullscreen on click rather than just
-// linking to the raw file. `onOpen` is a plain click handler — the caller
+// Images open fullscreen on click rather than just linking to the raw
+// file. `onOpen` is a plain click handler — the caller
 // already knows which image set and index this one belongs to, so it just
 // closes over that rather than this component needing to know anything
 // about sets at all.
@@ -651,6 +689,20 @@ function RiderWeb() {
             family: recognizably Rider Web, reorganized, with a great deal
             more in it.
           </p>
+          <div className='grid gap-4 sm:grid-cols-2'>
+            <LabeledScreenshot
+              label='Before'
+              src={BEFORE_AFTER_IMAGES[0].src}
+              alt={BEFORE_AFTER_IMAGES[0].alt}
+              onOpen={() => openLightbox(BEFORE_AFTER_IMAGES, 0)}
+            />
+            <LabeledScreenshot
+              label='After'
+              src={BEFORE_AFTER_IMAGES[1].src}
+              alt={BEFORE_AFTER_IMAGES[1].alt}
+              onOpen={() => openLightbox(BEFORE_AFTER_IMAGES, 1)}
+            />
+          </div>
           <p>
             That constraint shaped the new work. Six pages that had never
             existed had to feel like they always had, which meant extending
@@ -658,9 +710,14 @@ function RiderWeb() {
             than a clean slate, not easier.
           </p>
           <div className='grid gap-4 sm:grid-cols-3'>
-            {[1, 2, 3].map((n) => (
-              <div key={n} className='flex flex-col gap-2'>
-                <ImagePlaceholder label={`New screen ${n}`} />
+            {NEW_SCREEN_IMAGES.map((screen, i) => (
+              <div key={screen.src} className='flex flex-col gap-2'>
+                <LabeledScreenshot
+                  label={screen.title}
+                  src={screen.src}
+                  alt={screen.alt}
+                  onOpen={() => openLightbox(NEW_SCREEN_IMAGES, i)}
+                />
                 <p className='text-sm italic text-text/50 text-center'>
                   One-line caption — the problem it solves
                 </p>
