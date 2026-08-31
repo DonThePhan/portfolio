@@ -2,132 +2,28 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import TailwindContext from '../store/tailwind-context';
 
-// Real production config for both agencies, with two fields redacted:
-// `baseUrl` to an `.example` domain (IANA-reserved for docs/placeholders,
-// so it reads as obviously illustrative rather than a real address), and
-// SunRail's `googleAnalyticsId` to an all-X placeholder in the same
-// "G-XXXXXXXXXX" shape as a real GA4 measurement id. `scope` is left real:
-// it's an internal tenant key, not a resolvable address.
-const SUNRAIL_CODE_LINES = [
-  '{',
-  '  "baseUrl": "https://mobility-app-sunrail.example/rider/graphql/",',
-  '  "scope": "sunrail-prod",',
-  '  "processor": "nic",',
-  '  "googleAnalyticsId": "G-XXXXXXXXXX",',
-  '  "autoReplenish": true,',
-  '  "oneTimePayment": true,',
-  '  "riderTypeSelect": true,',
-  '  "migration": true,',
-  '  "fareCapping": false,',
-  '  "registrationFields": {',
-  '    "name": "optional",',
-  '    "mobile": "optional",',
-  '    "address": "optional",',
-  '    "city": "optional",',
-  '    "state": "optional",',
-  '    "zipCode": "optional"',
-  '  }',
-  '}',
-];
-
-const CET_CODE_LINES = [
-  '{',
-  '  "baseUrl": "https://mobility-app-cascades-east.example/rider/graphql/",',
-  '  "scope": "cascades-east-prod",',
-  '  "processor": "braintree",',
-  '  "googleAnalyticsId": "DISABLED",',
-  '  "autoReplenish": false,',
-  '  "oneTimePayment": false,',
-  '  "riderTypeSelect": false,',
-  '  "migration": false,',
-  '  "fareCapping": true,',
-  '  "registrationFields": {',
-  '    "name": "required",',
-  '    "mobile": "required",',
-  '    "address": false,',
-  '    "city": false,',
-  '    "state": false,',
-  '    "zipCode": false',
-  '  }',
-  '}',
-];
-
-// Fixed, small source — hand-tokenizing rather than pulling in a syntax
-// highlighting dependency for one code block. JSON has no keyword to key
-// off of to distinguish an object key from a string value (unlike the
-// `const` declarations this replaced), so a matched string checks what
-// follows it — a colon (ignoring whitespace) means it's a key.
-const TOKEN_RE = /("[^"]*")|(\btrue\b|\bfalse\b)|([{}[\],:])|(\s+)/g;
-
-// Dark-on-light everywhere else on the site; this block deliberately
-// inverts to a dark code-editor look, reusing the site's existing palette
-// hex values (cream/tan/teal) rather than introducing new colors. Applied
-// as inline styles rather than Tailwind utility classes derived from the
-// `--color-bg-base-*` theme variables — those utilities render correctly
-// in this session's own checks, but proved unreliable in the wild (text
-// came through invisible), and inline hex sidesteps whatever in the CSS
-// pipeline was dropping them.
-const CODE_COLORS = {
-  bg: '#282425', // --color-text
-  key: '#fffbf0', // --color-bg-base-3 (cream)
-  string: '#71c9ce', // --color-bg-base-4 (teal)
-  bool: '#d2c59d', // --color-bg-base-1 (tan)
-  punct: 'rgba(255, 251, 240, 0.7)', // dimmed cream
-};
-
-const highlightLine = (line) => {
-  const tokens = [];
-  let match;
-  TOKEN_RE.lastIndex = 0;
-  while ((match = TOKEN_RE.exec(line))) {
-    const [text, str, bool, punct] = match;
-    let color = CODE_COLORS.key;
-    let bold = false;
-    if (str) {
-      const isKey = /^\s*:/.test(line.slice(TOKEN_RE.lastIndex));
-      color = isKey ? CODE_COLORS.key : CODE_COLORS.string;
-      bold = isKey;
-    } else if (bool) {
-      color = CODE_COLORS.bool;
-      bold = true;
-    } else if (punct) {
-      color = CODE_COLORS.punct;
-    }
-    tokens.push({ text, color, bold });
-  }
-  return tokens;
-};
-
-const CodeBlock = ({ label, lines }) => (
+// Rendered as static images rather than live-highlighted markup — the JS
+// syntax highlighter this replaced was verifiably correct (checked its
+// output down to React's own fiber tree) but rendered as invisible/broken
+// text in the wild regardless, for reasons that pointed at a corrupted
+// browser-level cache rather than anything fixable in this file. A plain
+// screenshot has no such failure mode. Real production config for both
+// agencies, with two fields redacted: `baseUrl` to an `.example` domain
+// (IANA-reserved for docs/placeholders, so it reads as obviously
+// illustrative rather than a real address), and SunRail's
+// `googleAnalyticsId` to an all-X placeholder in the same "G-XXXXXXXXXX"
+// shape as a real GA4 measurement id. `scope` is left real: it's an
+// internal tenant key, not a resolvable address.
+const CodeImage = ({ label, src, alt }) => (
   <div className='flex flex-col gap-2'>
     <p className='text-sm font-bold uppercase tracking-wide text-text/60'>
       {label}
     </p>
-    <pre
-      className='overflow-x-auto rounded-xl p-4 text-sm leading-relaxed whitespace-pre'
-      style={{
-        backgroundColor: CODE_COLORS.bg,
-        border: '1px solid rgba(255, 251, 240, 0.1)',
-      }}
-    >
-      <code>
-        {lines.map((line, i) => (
-          <div key={i} className='whitespace-pre'>
-            {highlightLine(line).map((token, j) => (
-              <span
-                key={j}
-                style={{
-                  color: token.color,
-                  fontWeight: token.bold ? 700 : 400,
-                }}
-              >
-                {token.text}
-              </span>
-            ))}
-          </div>
-        ))}
-      </code>
-    </pre>
+    <img
+      src={src}
+      alt={alt}
+      className='w-full rounded-xl border border-bg-base-3/10'
+    />
   </div>
 );
 
@@ -171,6 +67,24 @@ const ClickableImage = ({ src, alt, className = '', onOpen }) => (
     onClick={() => onOpen({ src, alt })}
     className={`cursor-zoom-in ${className}`}
   />
+);
+
+// Same label-above-media shape as CodeImage, but for real screenshots
+// rather than the dark JSON blocks — light border/shadow to match the
+// hero and Figma-library images elsewhere on the page, and click-to-zoom
+// since these are photographic content worth seeing at full size.
+const LabeledScreenshot = ({ label, src, alt, onOpen }) => (
+  <div className='flex flex-col gap-2'>
+    <p className='text-sm font-bold uppercase tracking-wide text-text/60'>
+      {label}
+    </p>
+    <ClickableImage
+      src={src}
+      alt={alt}
+      className='w-full rounded-xl border border-text/10 drop-shadow-xl'
+      onOpen={onOpen}
+    />
+  </div>
 );
 
 const LIGHTBOX_TRANSITION_MS = 200;
@@ -433,8 +347,16 @@ function RiderWeb() {
             object:
           </p>
           <div className='grid gap-4 sm:grid-cols-2'>
-            <CodeBlock label='SunRail' lines={SUNRAIL_CODE_LINES} />
-            <CodeBlock label='Cascades East' lines={CET_CODE_LINES} />
+            <CodeImage
+              label='SunRail'
+              src='/images/case-study/rider-web/sunrail-config.webp'
+              alt='SunRail agency config object — NIC payment processor, auto-replenish and one-time payment enabled, all registration fields optional'
+            />
+            <CodeImage
+              label='Cascades East'
+              src='/images/case-study/rider-web/cascades-east-config.webp'
+              alt='Cascades East Transit agency config object — Braintree payment processor, fare capping enabled, name and mobile required at registration'
+            />
           </div>
           <p className='italic font-medium'>
             So I wasn't designing screens. I was designing the range of
@@ -457,10 +379,33 @@ function RiderWeb() {
             ran taller and buttons grew to fit. SunRail shipped with an
             English/Spanish toggle in the header and no layout changes.
           </p>
-          <div className='grid gap-4 sm:grid-cols-3'>
-            <ImagePlaceholder label='The annotated config, 4–5 callouts. Anchor image of the page. Redact the client ID and internal hostname.' />
-            <ImagePlaceholder label='The account creation form resolving under two different agency configs.' />
-            <ImagePlaceholder label='The same screen for SunRail and Cascades East.' />
+          <div className='grid gap-4 sm:grid-cols-2'>
+            <LabeledScreenshot
+              label='SunRail'
+              src='/images/case-study/rider-web/sunrail-create-account.webp'
+              alt='SunRail account creation form, annotated with callouts tying the name and mobile/address/city/state/zip field groups to their optional registrationFields config entries'
+              onOpen={setLightboxImage}
+            />
+            <LabeledScreenshot
+              label='Cascades East'
+              src='/images/case-study/rider-web/cascades-east-create-account.webp'
+              alt='Cascades East Transit account creation form, annotated with callouts tying the name and mobile field groups to their required registrationFields config entries — no address fields present'
+              onOpen={setLightboxImage}
+            />
+          </div>
+          <div className='grid gap-4 sm:grid-cols-2'>
+            <LabeledScreenshot
+              label='SunRail'
+              src='/images/case-study/rider-web/sunrail-load-funds.webp'
+              alt='SunRail Load Funds screen, annotated with callouts tying the Auto Load section and One Time Payment option to autoReplenish and oneTimePayment enabled in config'
+              onOpen={setLightboxImage}
+            />
+            <LabeledScreenshot
+              label='Cascades East'
+              src='/images/case-study/rider-web/cascades-east-load-funds.webp'
+              alt='Cascades East Transit Load Funds screen with no Auto Load or One Time Payment options present, annotated with a config overlay showing autoReplenish and oneTimePayment both disabled'
+              onOpen={setLightboxImage}
+            />
           </div>
         </Section>
 
