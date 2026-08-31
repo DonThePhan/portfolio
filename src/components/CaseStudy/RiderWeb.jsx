@@ -44,10 +44,12 @@ const FIGMA_LIBRARY_IMAGE = [
 
 const CONFIG_IMAGES = [
   {
+    title: 'SunRail',
     src: '/images/case-study/rider-web/sunrail-config.webp',
     alt: 'SunRail agency config object — NIC payment processor, auto-replenish and one-time payment enabled, all registration fields optional',
   },
   {
+    title: 'Cascades East',
     src: '/images/case-study/rider-web/cascades-east-config.webp',
     alt: 'Cascades East Transit agency config object — Braintree payment processor, fare capping enabled, name and mobile required at registration',
   },
@@ -55,10 +57,12 @@ const CONFIG_IMAGES = [
 
 const CREATE_ACCOUNT_IMAGES = [
   {
+    title: 'SunRail',
     src: '/images/case-study/rider-web/sunrail-create-account.webp',
     alt: 'SunRail account creation form, annotated with callouts tying the name and mobile/address/city/state/zip field groups to their optional registrationFields config entries',
   },
   {
+    title: 'Cascades East',
     src: '/images/case-study/rider-web/cascades-east-create-account.webp',
     alt: 'Cascades East Transit account creation form, annotated with callouts tying the name and mobile field groups to their required registrationFields config entries — no address fields present',
   },
@@ -66,10 +70,12 @@ const CREATE_ACCOUNT_IMAGES = [
 
 const LOAD_FUNDS_IMAGES = [
   {
+    title: 'SunRail',
     src: '/images/case-study/rider-web/sunrail-load-funds.webp',
     alt: 'SunRail Load Funds screen, annotated with callouts tying the Auto Load section and One Time Payment option to autoReplenish and oneTimePayment enabled in config',
   },
   {
+    title: 'Cascades East',
     src: '/images/case-study/rider-web/cascades-east-load-funds.webp',
     alt: 'Cascades East Transit Load Funds screen with no Auto Load or One Time Payment options present, annotated with a config overlay showing autoReplenish and oneTimePayment both disabled',
   },
@@ -77,10 +83,12 @@ const LOAD_FUNDS_IMAGES = [
 
 const BEFORE_AFTER_IMAGES = [
   {
+    title: 'Before',
     src: '/images/case-study/rider-web/landing-old.webp',
     alt: 'The old Rider Web landing page — a simple mobile-ticketing account access page with a phone mockup, a Buy Tickets button, and a sign-in panel',
   },
   {
+    title: 'After',
     src: '/images/case-study/rider-web/hero.webp',
     alt: 'The new Rider Web landing page — SunRail sign-in and account creation, rebuilt as the Automated Fare Collection portal',
   },
@@ -159,6 +167,7 @@ const AUTO_LOAD_STATES = [
 ];
 
 const AUTO_LOAD_IMAGES = AUTO_LOAD_STATES.map((state) => ({
+  title: state.label,
   src: state.src,
   alt: `Auto-load state: ${state.label}`,
 }));
@@ -333,19 +342,33 @@ const Lightbox = ({ lightbox, onClose, onPrev, onNext }) => {
           <i className='fa-solid fa-chevron-right' aria-hidden='true' />
         </button>
       )}
-      {hasMultiple && (
+      {(current.title || current.caption || hasMultiple) && (
         <div
-          className='fixed bottom-6 left-1/2 -translate-x-1/2 flex gap-1.5'
+          className='fixed bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 max-w-lg px-4'
           onClick={(e) => e.stopPropagation()}
         >
-          {images.map((img, i) => (
-            <span
-              key={img.src}
-              className={`w-1.5 h-1.5 rounded-full duration-150 ${
-                i === index ? 'bg-bg-base-3' : 'bg-bg-base-3/30'
-              }`}
-            />
-          ))}
+          {(current.title || current.caption) && (
+            <div className='text-center'>
+              {current.title && (
+                <p className='font-bold text-bg-base-3'>{current.title}</p>
+              )}
+              {current.caption && (
+                <p className='text-sm text-bg-base-3/80 mt-1'>{current.caption}</p>
+              )}
+            </div>
+          )}
+          {hasMultiple && (
+            <div className='flex gap-1.5'>
+              {images.map((img, i) => (
+                <span
+                  key={img.src}
+                  className={`w-1.5 h-1.5 rounded-full duration-150 ${
+                    i === index ? 'bg-bg-base-3' : 'bg-bg-base-3/30'
+                  }`}
+                />
+              ))}
+            </div>
+          )}
         </div>
       )}
     </div>
@@ -659,9 +682,9 @@ function RiderWeb() {
             of them. The work was making sure the ones they land in never
             feel like a fragment of something larger.
           </p>
-          <div className='flex gap-3 overflow-x-auto pb-2'>
+          <div className='grid gap-3 grid-cols-[repeat(auto-fit,minmax(130px,1fr))]'>
             {AUTO_LOAD_STATES.map((state, i) => (
-              <div key={state.label} className='shrink-0 w-40 flex flex-col gap-2'>
+              <div key={state.label} className='flex flex-col gap-2'>
                 <ClickableImage
                   src={state.src}
                   alt={AUTO_LOAD_IMAGES[i].alt}

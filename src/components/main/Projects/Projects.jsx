@@ -15,7 +15,7 @@ function Projects() {
           videoURL='/videos/rider-web.mp4'
           posterURL='/videos/rider-web-poster.jpg'
           appLink='https://sunrail-account.transitsherpa.com/'
-          // caseStudyLink='/case-study/rider-web' — re-enable once SunRail/CET/NIC naming is cleared for publishing (see PORTFOLIO-UPDATE.md)
+          caseStudyLink='/case-study/rider-web'
           wide
           title='Rider Web — Fare Management'
           tech='React, Figma, GraphQL and design tokens'
