@@ -275,8 +275,8 @@ But note what changed. At **3 weeks** the number carried the bullet alone. At **
 When a fact changes here, update:
 
 - [x] Portfolio case study — donthephan.com/case-study/rider-web (2026-08-30: dates, duration, sequencing, and scale metrics corrected in `src/components/CaseStudy/RiderWeb.jsx`, not yet deployed to `main`)
-- [ ] Portfolio homepage + metadata
-- [ ] LinkedIn — About section
-- [ ] LinkedIn — Strategic Mapping experience entry
-- [ ] GitHub profile README
-- [ ] Design Engineer Resume
+- [x] Portfolio homepage + metadata
+- [x] LinkedIn — About section
+- [x] LinkedIn — Strategic Mapping experience entry
+- [x] GitHub profile README
+- [x] Design Engineer Resume
