@@ -14,27 +14,100 @@ import TailwindContext from '../store/tailwind-context';
 // `googleAnalyticsId` to an all-X placeholder in the same "G-XXXXXXXXXX"
 // shape as a real GA4 measurement id. `scope` is left real: it's an
 // internal tenant key, not a resolvable address.
-const CodeImage = ({ label, src, alt }) => (
+const CodeImage = ({ label, src, alt, onOpen }) => (
   <div className='flex flex-col gap-2'>
     <p className='text-sm font-bold uppercase tracking-wide text-text/60'>
       {label}
     </p>
-    <img
+    <ClickableImage
       src={src}
       alt={alt}
       className='w-full rounded-xl border border-bg-base-3/10'
+      onOpen={onOpen}
     />
   </div>
 );
 
-const AUTO_LOAD_STATES = [
-  'Disabled by config',
-  'Enabled, no payment method',
-  'Payment method connected',
-  'Toggled on',
-  'Toggled on, unsaved',
-  'Saved',
+const HERO_IMAGE = [
+  {
+    src: '/images/case-study/rider-web/hero.webp',
+    alt: 'SunRail Rider Web sign-in and account creation landing screen',
+  },
 ];
+
+const FIGMA_LIBRARY_IMAGE = [
+  {
+    src: '/images/case-study/rider-web/figma-library.webp',
+    alt: 'Figma file showing the Rider Web component library, a typography scale, and a Create Account form built from those components',
+  },
+];
+
+const CONFIG_IMAGES = [
+  {
+    src: '/images/case-study/rider-web/sunrail-config.webp',
+    alt: 'SunRail agency config object — NIC payment processor, auto-replenish and one-time payment enabled, all registration fields optional',
+  },
+  {
+    src: '/images/case-study/rider-web/cascades-east-config.webp',
+    alt: 'Cascades East Transit agency config object — Braintree payment processor, fare capping enabled, name and mobile required at registration',
+  },
+];
+
+const CREATE_ACCOUNT_IMAGES = [
+  {
+    src: '/images/case-study/rider-web/sunrail-create-account.webp',
+    alt: 'SunRail account creation form, annotated with callouts tying the name and mobile/address/city/state/zip field groups to their optional registrationFields config entries',
+  },
+  {
+    src: '/images/case-study/rider-web/cascades-east-create-account.webp',
+    alt: 'Cascades East Transit account creation form, annotated with callouts tying the name and mobile field groups to their required registrationFields config entries — no address fields present',
+  },
+];
+
+const LOAD_FUNDS_IMAGES = [
+  {
+    src: '/images/case-study/rider-web/sunrail-load-funds.webp',
+    alt: 'SunRail Load Funds screen, annotated with callouts tying the Auto Load section and One Time Payment option to autoReplenish and oneTimePayment enabled in config',
+  },
+  {
+    src: '/images/case-study/rider-web/cascades-east-load-funds.webp',
+    alt: 'Cascades East Transit Load Funds screen with no Auto Load or One Time Payment options present, annotated with a config overlay showing autoReplenish and oneTimePayment both disabled',
+  },
+];
+
+// "Toggled on" and "Toggled on, unsaved" collapse into one card — the two
+// states are visually identical (the difference only surfaces on logout),
+// so one photo honestly represents both rather than repeating a frame.
+// "Payment method connected" and "Disabled by config" sit side by side
+// since both screenshots happen to show a payment method already on file,
+// contrasting what that looks like with the feature on vs. off.
+const AUTO_LOAD_STATES = [
+  {
+    label: 'Enabled, no payment method',
+    src: '/images/case-study/rider-web/autoload-no-payment-method.webp',
+  },
+  {
+    label: 'Payment method connected',
+    src: '/images/case-study/rider-web/autoload-payment-connected.webp',
+  },
+  {
+    label: 'Disabled by config',
+    src: '/images/case-study/rider-web/autoload-disabled.webp',
+  },
+  {
+    label: 'Toggled on, unsaved',
+    src: '/images/case-study/rider-web/autoload-toggled-on.webp',
+  },
+  {
+    label: 'Saved',
+    src: '/images/case-study/rider-web/autoload-saved.webp',
+  },
+];
+
+const AUTO_LOAD_IMAGES = AUTO_LOAD_STATES.map((state) => ({
+  src: state.src,
+  alt: `Auto-load state: ${state.label}`,
+}));
 
 const Divider = () => <div className='divider my-10 w-full' />;
 
@@ -57,14 +130,15 @@ const ImagePlaceholder = ({ label, className = '' }) => (
 );
 
 // Real (non-placeholder) images open fullscreen on click rather than just
-// linking to the raw file — `onOpen` is wired to a single piece of state
-// lifted to the page so only one lightbox instance exists no matter how
-// many images the page grows to.
+// linking to the raw file. `onOpen` is a plain click handler — the caller
+// already knows which image set and index this one belongs to, so it just
+// closes over that rather than this component needing to know anything
+// about sets at all.
 const ClickableImage = ({ src, alt, className = '', onOpen }) => (
   <img
     src={src}
     alt={alt}
-    onClick={() => onOpen({ src, alt })}
+    onClick={onOpen}
     className={`cursor-zoom-in ${className}`}
   />
 );
@@ -89,23 +163,28 @@ const LabeledScreenshot = ({ label, src, alt, onOpen }) => (
 
 const LIGHTBOX_TRANSITION_MS = 200;
 
-const Lightbox = ({ image, onClose }) => {
-  // `rendered` lags one step behind `image` on close, so the overlay stays
-  // mounted (and the image src stays put) through the closing transition
-  // instead of vanishing the instant the parent nulls the state out.
-  const [rendered, setRendered] = useState(image);
+// `lightbox` is `{ images, index } | null` — one lightbox instance handles
+// every image set on the page. `images.length > 1` is what turns on the
+// IG-Stories-style chevrons, dots, and arrow-key paging; a lone image (the
+// hero, the Figma file) just gets the plain zoomed view with no nav chrome.
+const Lightbox = ({ lightbox, onClose, onPrev, onNext }) => {
+  // `rendered` lags one step behind `lightbox` on close, so the overlay
+  // stays mounted (and the image src stays put) through the closing
+  // transition instead of vanishing the instant the parent nulls the
+  // state out.
+  const [rendered, setRendered] = useState(lightbox);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    if (image) {
-      setRendered(image);
+    if (lightbox) {
+      setRendered(lightbox);
       const raf = requestAnimationFrame(() => setVisible(true));
       return () => cancelAnimationFrame(raf);
     }
     setVisible(false);
     const timeout = setTimeout(() => setRendered(null), LIGHTBOX_TRANSITION_MS);
     return () => clearTimeout(timeout);
-  }, [image]);
+  }, [lightbox]);
 
   useEffect(() => {
     if (!rendered) return;
@@ -113,15 +192,26 @@ const Lightbox = ({ image, onClose }) => {
     document.body.style.overflow = 'hidden';
     const onKeyDown = (e) => {
       if (e.key === 'Escape') onClose();
+      else if (e.key === 'ArrowLeft') onPrev();
+      else if (e.key === 'ArrowRight') onNext();
     };
     window.addEventListener('keydown', onKeyDown);
     return () => {
       document.body.style.overflow = prevOverflow;
       window.removeEventListener('keydown', onKeyDown);
     };
-  }, [rendered, onClose]);
+  }, [rendered, onClose, onPrev, onNext]);
 
   if (!rendered) return null;
+
+  const { images, index } = rendered;
+  const current = images[index];
+  const hasMultiple = images.length > 1;
+
+  const stopAnd = (fn) => (e) => {
+    e.stopPropagation();
+    fn();
+  };
 
   return (
     <div
@@ -138,14 +228,49 @@ const Lightbox = ({ image, onClose }) => {
       >
         <i className='fa-solid fa-xmark' aria-hidden='true' />
       </button>
+      {hasMultiple && (
+        <button
+          type='button'
+          onClick={stopAnd(onPrev)}
+          aria-label='Previous image'
+          className='fixed left-4 sm:left-6 top-1/2 -translate-y-1/2 flex items-center justify-center w-12 h-12 rounded-full border border-bg-base-3 text-bg-base-3 text-xl hover:bg-bg-base-3 hover:text-text duration-150'
+        >
+          <i className='fa-solid fa-chevron-left' aria-hidden='true' />
+        </button>
+      )}
       <img
-        src={rendered.src}
-        alt={rendered.alt}
+        src={current.src}
+        alt={current.alt}
         onClick={(e) => e.stopPropagation()}
         className={`max-w-full max-h-full object-contain rounded-lg cursor-default transition-transform duration-200 ease-out ${
           visible ? 'scale-100' : 'scale-90'
         }`}
       />
+      {hasMultiple && (
+        <button
+          type='button'
+          onClick={stopAnd(onNext)}
+          aria-label='Next image'
+          className='fixed right-4 sm:right-6 top-1/2 -translate-y-1/2 flex items-center justify-center w-12 h-12 rounded-full border border-bg-base-3 text-bg-base-3 text-xl hover:bg-bg-base-3 hover:text-text duration-150'
+        >
+          <i className='fa-solid fa-chevron-right' aria-hidden='true' />
+        </button>
+      )}
+      {hasMultiple && (
+        <div
+          className='fixed bottom-6 left-1/2 -translate-x-1/2 flex gap-1.5'
+          onClick={(e) => e.stopPropagation()}
+        >
+          {images.map((img, i) => (
+            <span
+              key={img.src}
+              className={`w-1.5 h-1.5 rounded-full duration-150 ${
+                i === index ? 'bg-bg-base-3' : 'bg-bg-base-3/30'
+              }`}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
@@ -153,7 +278,15 @@ const Lightbox = ({ image, onClose }) => {
 function RiderWeb() {
   const { h1Size, sectionPaddingX, sectionPaddingY } =
     useContext(TailwindContext);
-  const [lightboxImage, setLightboxImage] = useState(null);
+  const [lightbox, setLightbox] = useState(null);
+  const openLightbox = (images, index) => setLightbox({ images, index });
+  const closeLightbox = () => setLightbox(null);
+  const showPrevImage = () =>
+    setLightbox((l) =>
+      l ? { ...l, index: (l.index - 1 + l.images.length) % l.images.length } : l,
+    );
+  const showNextImage = () =>
+    setLightbox((l) => (l ? { ...l, index: (l.index + 1) % l.images.length } : l));
 
   // Arriving here is a route change from a Card that can sit far down the
   // home page's scroll — without this the page can open mid-scroll instead
@@ -203,10 +336,10 @@ function RiderWeb() {
       </header>
 
       <ClickableImage
-        src='/images/case-study/rider-web/hero.webp'
-        alt='SunRail Rider Web sign-in and account creation landing screen'
+        src={HERO_IMAGE[0].src}
+        alt={HERO_IMAGE[0].alt}
         className='w-full rounded-xl border border-text/10 drop-shadow-xl mb-12'
-        onOpen={setLightboxImage}
+        onOpen={() => openLightbox(HERO_IMAGE, 0)}
       />
 
       <div className='flex flex-col gap-10'>
@@ -262,10 +395,10 @@ function RiderWeb() {
             component boundaries in Figma and later in React.
           </p>
           <ClickableImage
-            src='/images/case-study/rider-web/figma-library.webp'
-            alt='Figma file showing the Rider Web component library, a typography scale, and a Create Account form built from those components'
+            src={FIGMA_LIBRARY_IMAGE[0].src}
+            alt={FIGMA_LIBRARY_IMAGE[0].alt}
             className='w-full rounded-xl border border-text/10 drop-shadow-xl'
-            onOpen={setLightboxImage}
+            onOpen={() => openLightbox(FIGMA_LIBRARY_IMAGE, 0)}
           />
         </Section>
 
@@ -349,13 +482,15 @@ function RiderWeb() {
           <div className='grid gap-4 sm:grid-cols-2'>
             <CodeImage
               label='SunRail'
-              src='/images/case-study/rider-web/sunrail-config.webp'
-              alt='SunRail agency config object — NIC payment processor, auto-replenish and one-time payment enabled, all registration fields optional'
+              src={CONFIG_IMAGES[0].src}
+              alt={CONFIG_IMAGES[0].alt}
+              onOpen={() => openLightbox(CONFIG_IMAGES, 0)}
             />
             <CodeImage
               label='Cascades East'
-              src='/images/case-study/rider-web/cascades-east-config.webp'
-              alt='Cascades East Transit agency config object — Braintree payment processor, fare capping enabled, name and mobile required at registration'
+              src={CONFIG_IMAGES[1].src}
+              alt={CONFIG_IMAGES[1].alt}
+              onOpen={() => openLightbox(CONFIG_IMAGES, 1)}
             />
           </div>
           <p className='italic font-medium'>
@@ -382,29 +517,29 @@ function RiderWeb() {
           <div className='grid gap-4 sm:grid-cols-2'>
             <LabeledScreenshot
               label='SunRail'
-              src='/images/case-study/rider-web/sunrail-create-account.webp'
-              alt='SunRail account creation form, annotated with callouts tying the name and mobile/address/city/state/zip field groups to their optional registrationFields config entries'
-              onOpen={setLightboxImage}
+              src={CREATE_ACCOUNT_IMAGES[0].src}
+              alt={CREATE_ACCOUNT_IMAGES[0].alt}
+              onOpen={() => openLightbox(CREATE_ACCOUNT_IMAGES, 0)}
             />
             <LabeledScreenshot
               label='Cascades East'
-              src='/images/case-study/rider-web/cascades-east-create-account.webp'
-              alt='Cascades East Transit account creation form, annotated with callouts tying the name and mobile field groups to their required registrationFields config entries — no address fields present'
-              onOpen={setLightboxImage}
+              src={CREATE_ACCOUNT_IMAGES[1].src}
+              alt={CREATE_ACCOUNT_IMAGES[1].alt}
+              onOpen={() => openLightbox(CREATE_ACCOUNT_IMAGES, 1)}
             />
           </div>
           <div className='grid gap-4 sm:grid-cols-2'>
             <LabeledScreenshot
               label='SunRail'
-              src='/images/case-study/rider-web/sunrail-load-funds.webp'
-              alt='SunRail Load Funds screen, annotated with callouts tying the Auto Load section and One Time Payment option to autoReplenish and oneTimePayment enabled in config'
-              onOpen={setLightboxImage}
+              src={LOAD_FUNDS_IMAGES[0].src}
+              alt={LOAD_FUNDS_IMAGES[0].alt}
+              onOpen={() => openLightbox(LOAD_FUNDS_IMAGES, 0)}
             />
             <LabeledScreenshot
               label='Cascades East'
-              src='/images/case-study/rider-web/cascades-east-load-funds.webp'
-              alt='Cascades East Transit Load Funds screen with no Auto Load or One Time Payment options present, annotated with a config overlay showing autoReplenish and oneTimePayment both disabled'
-              onOpen={setLightboxImage}
+              src={LOAD_FUNDS_IMAGES[1].src}
+              alt={LOAD_FUNDS_IMAGES[1].alt}
+              onOpen={() => openLightbox(LOAD_FUNDS_IMAGES, 1)}
             />
           </div>
         </Section>
@@ -447,9 +582,15 @@ function RiderWeb() {
             feel like a fragment of something larger.
           </p>
           <div className='flex gap-3 overflow-x-auto pb-2'>
-            {AUTO_LOAD_STATES.map((label) => (
-              <div key={label} className='shrink-0 w-40'>
-                <ImagePlaceholder label={label} className='min-h-56' />
+            {AUTO_LOAD_STATES.map((state, i) => (
+              <div key={state.label} className='shrink-0 w-40 flex flex-col gap-2'>
+                <ClickableImage
+                  src={state.src}
+                  alt={AUTO_LOAD_IMAGES[i].alt}
+                  className='w-full rounded-lg border border-text/10'
+                  onOpen={() => openLightbox(AUTO_LOAD_IMAGES, i)}
+                />
+                <p className='text-xs text-center text-text/60'>{state.label}</p>
               </div>
             ))}
           </div>
@@ -530,7 +671,12 @@ function RiderWeb() {
         Back to portfolio
       </Link>
 
-      <Lightbox image={lightboxImage} onClose={() => setLightboxImage(null)} />
+      <Lightbox
+        lightbox={lightbox}
+        onClose={closeLightbox}
+        onPrev={showPrevImage}
+        onNext={showNextImage}
+      />
     </article>
   );
 }
