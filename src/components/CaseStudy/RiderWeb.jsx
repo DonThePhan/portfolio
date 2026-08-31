@@ -86,39 +86,46 @@ const BEFORE_AFTER_IMAGES = [
   },
 ];
 
-// Six real pages that didn't exist before the rebuild. Titles name what
-// each screen is; the caption under each is still a placeholder — Donny's
-// adding the "problem it solves" line for each afterward.
+// Six real pages that didn't exist before the rebuild.
 const NEW_SCREEN_IMAGES = [
   {
-    title: 'Usage History',
-    src: '/images/case-study/rider-web/new-screen-usage-history.webp',
-    alt: 'Usage History page showing a single ticket record — description, SunCard, activation and expiry times, and a scan log with location and amount',
-  },
-  {
-    title: 'Account Report',
-    src: '/images/case-study/rider-web/new-screen-account-report.webp',
-    alt: 'Account Report page listing orders and transactions with dates, order numbers, amounts, and tap locations',
-  },
-  {
-    title: 'Order History Detail',
-    src: '/images/case-study/rider-web/new-screen-order-history-detail.webp',
-    alt: 'Printable single order history detail — order date, order number, payment method, and line-item pricing',
-  },
-  {
-    title: 'Account Migration',
-    src: '/images/case-study/rider-web/new-screen-account-migration.webp',
-    alt: 'System Migration page asking a rider for their previous account username, email, and card number to migrate to the new system',
+    title: 'Load Funds',
+    caption: 'Adding stored value to an account balance.',
+    src: '/images/case-study/rider-web/new-screen-load-funds.webp',
+    alt: 'Load Funds page with a funded balance, a saved payment method, and Auto Load fully configured and enabled',
   },
   {
     title: 'Manage Cards',
     src: '/images/case-study/rider-web/new-screen-manage-cards.webp',
     alt: 'Manage Cards page listing every SunCard on an account, with card info, fare products, and usage history for the selected card',
+    caption:
+      'Registering a physical SunCard to an account so it can carry value and passes.',
   },
   {
-    title: 'Load Funds',
-    src: '/images/case-study/rider-web/new-screen-load-funds.webp',
-    alt: 'Load Funds page with a funded balance, a saved payment method, and Auto Load fully configured and enabled',
+    title: 'Account Report',
+    src: '/images/case-study/rider-web/new-screen-account-report.webp',
+    alt: 'Account Report page listing orders and transactions with dates, order numbers, amounts, and tap locations',
+    caption: 'The full account-wide financial history, not just a balance.',
+  },
+  {
+    title: 'Account Migration',
+    src: '/images/case-study/rider-web/new-screen-account-migration.webp',
+    alt: 'System Migration page asking a rider for their previous account username, email, and card number to migrate to the new system',
+    caption:
+      "Reclaiming a rider's balance and passes from the old system so the switch feels seamless — recognizably Rider Web, just bigger and more capable.",
+  },
+  {
+    title: 'Usage History',
+    src: '/images/case-study/rider-web/new-screen-usage-history.webp',
+    alt: 'Usage History page showing a single ticket record — description, SunCard, activation and expiry times, and a scan log with location and amount',
+    caption:
+    'Tap-level history for one card — every tap on and off, and what each trip cost.',
+  },
+  {
+    title: 'Order History Detail',
+    src: '/images/case-study/rider-web/new-screen-order-history-detail.webp',
+    alt: 'Printable single order history detail — order date, order number, payment method, and line-item pricing',
+    caption: 'An itemized, printable receipt for a single order.',
   },
 ];
 
@@ -719,7 +726,7 @@ function RiderWeb() {
                   onOpen={() => openLightbox(NEW_SCREEN_IMAGES, i)}
                 />
                 <p className='text-sm italic text-text/50 text-center'>
-                  One-line caption — the problem it solves
+                  {screen.caption}
                 </p>
               </div>
             ))}
