@@ -162,6 +162,12 @@ const LabeledScreenshot = ({ label, src, alt, onOpen }) => (
 );
 
 const LIGHTBOX_TRANSITION_MS = 200;
+const SLIDE_TRANSITION_MS = 350;
+// How far a neighbor sits from center, as a percentage of its OWN width —
+// percentage translate is relative to the element's own box, so this stays
+// consistent regardless of each photo's actual pixel size.
+const NEIGHBOR_OFFSET_PERCENT = 62;
+const NEIGHBOR_SCALE = 0.72;
 
 // `lightbox` is `{ images, index } | null` — one lightbox instance handles
 // every image set on the page. `images.length > 1` is what turns on the
@@ -207,6 +213,8 @@ const Lightbox = ({ lightbox, onClose, onPrev, onNext }) => {
   const { images, index } = rendered;
   const current = images[index];
   const hasMultiple = images.length > 1;
+  const hasPrev = index > 0;
+  const hasNext = index < images.length - 1;
 
   const stopAnd = (fn) => (e) => {
     e.stopPropagation();
@@ -228,7 +236,7 @@ const Lightbox = ({ lightbox, onClose, onPrev, onNext }) => {
       >
         <i className='fa-solid fa-xmark' aria-hidden='true' />
       </button>
-      {hasMultiple && (
+      {hasPrev && (
         <button
           type='button'
           onClick={stopAnd(onPrev)}
@@ -238,15 +246,39 @@ const Lightbox = ({ lightbox, onClose, onPrev, onNext }) => {
           <i className='fa-solid fa-chevron-left' aria-hidden='true' />
         </button>
       )}
-      <img
-        src={current.src}
-        alt={current.alt}
-        onClick={(e) => e.stopPropagation()}
-        className={`max-w-full max-h-full object-contain rounded-lg cursor-default transition-transform duration-200 ease-out ${
-          visible ? 'scale-100' : 'scale-90'
-        }`}
-      />
-      {hasMultiple && (
+      <div className='relative w-full h-full'>
+        {images.map((img, i) => {
+          const offset = i - index;
+          const isCenter = offset === 0;
+          // Only the center and its immediate neighbors are ever visible —
+          // anything farther out sits at the same spot as its nearer
+          // sibling, invisible, so it's already in place (no pop-in) by
+          // the time a run of clicks brings it within one step of center.
+          const opacity = Math.abs(offset) <= 1 ? (isCenter ? 1 : 0.5) : 0;
+          const clampedOffset = Math.max(-1, Math.min(1, offset));
+          const openScale = isCenter && !visible ? 0.9 : 1;
+          return (
+            <img
+              key={img.src}
+              src={img.src}
+              alt={isCenter ? img.alt : ''}
+              aria-hidden={!isCenter}
+              onClick={isCenter ? (e) => e.stopPropagation() : undefined}
+              className='absolute top-1/2 left-1/2 max-w-[75vw] max-h-[75vh] object-contain rounded-lg cursor-default transition-[transform,opacity] ease-out'
+              style={{
+                transitionDuration: `${SLIDE_TRANSITION_MS}ms`,
+                transform: `translate(-50%, -50%) translateX(${
+                  clampedOffset * NEIGHBOR_OFFSET_PERCENT
+                }%) scale(${(isCenter ? 1 : NEIGHBOR_SCALE) * openScale})`,
+                opacity,
+                zIndex: isCenter ? 10 : 5,
+                pointerEvents: isCenter ? 'auto' : 'none',
+              }}
+            />
+          );
+        })}
+      </div>
+      {hasNext && (
         <button
           type='button'
           onClick={stopAnd(onNext)}
@@ -281,12 +313,13 @@ function RiderWeb() {
   const [lightbox, setLightbox] = useState(null);
   const openLightbox = (images, index) => setLightbox({ images, index });
   const closeLightbox = () => setLightbox(null);
+  // Clamped, not wrapped — the last image doesn't loop back to the first.
   const showPrevImage = () =>
-    setLightbox((l) =>
-      l ? { ...l, index: (l.index - 1 + l.images.length) % l.images.length } : l,
-    );
+    setLightbox((l) => (l ? { ...l, index: Math.max(0, l.index - 1) } : l));
   const showNextImage = () =>
-    setLightbox((l) => (l ? { ...l, index: (l.index + 1) % l.images.length } : l));
+    setLightbox((l) =>
+      l ? { ...l, index: Math.min(l.images.length - 1, l.index + 1) } : l,
+    );
 
   // Arriving here is a route change from a Card that can sit far down the
   // home page's scroll — without this the page can open mid-scroll instead
